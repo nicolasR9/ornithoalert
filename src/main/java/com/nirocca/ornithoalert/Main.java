@@ -22,13 +22,16 @@ public class Main {
     
     private static final String URL_PAGING_END = "&mp_item_per_page=60&mp_current_page=1";
     private static final Set<String> SPECIES_TO_EXCLUDE = new HashSet<>(Arrays.asList(
+            "Keine Art",
+            "Hausente",
             "Bauml\u00e4ufer, unbestimmt",
             "Gimpel (ssp. pyrrhula), Trompetergimpel",
             "Bl\u00e4ss- / Saatg\u00e4nse",
             "Tundrasaatg\u00e4nse",
+            "Waldsaatg\u00e4nse",
             "Anser-G\u00e4nse, unbestimmt",
             "M\u00f6we, unbestimmt, unbestimmt",
-            "Möwen, unbestimmt",
+            "M\u00f6wen, unbestimmt",
             "Gro\u00dfm\u00f6wen, unbestimmt",
             "Gro\u00dfm\u00f6we, unbestimmt",
             "Silber-oderMittelmeer-oderSteppenm\u00f6we",
