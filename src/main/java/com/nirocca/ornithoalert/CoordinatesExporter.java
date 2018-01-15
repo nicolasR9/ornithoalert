@@ -24,7 +24,7 @@ public class CoordinatesExporter {
     
     static {
         LATIN_NAME_TO_COLOR.put("Aythya marila", "lightgreen"); //Bergente
-        LATIN_NAME_TO_COLOR.put("Fringilla montifringilla", "darkgreen"); //Berfink
+        LATIN_NAME_TO_COLOR.put("Fringilla montifringilla", "darkgreen"); //Bergfink
         LATIN_NAME_TO_COLOR.put("Anthus spinoletta", "lightblue"); //Bergpieper
         LATIN_NAME_TO_COLOR.put("Carduelis cannabina", "darkblue"); //Bluthaenfling
         LATIN_NAME_TO_COLOR.put("Loxia curvirostra", "yellow"); //Fichtenkreuzschnabel
@@ -38,8 +38,8 @@ public class CoordinatesExporter {
         LATIN_NAME_TO_COLOR.put("Buteo lagopus", "sandybrown"); //Raufussbussard
         LATIN_NAME_TO_COLOR.put("Anas acuta", "salmon"); //Spiessente
         LATIN_NAME_TO_COLOR.put("Certhia familiaris", "orange"); //Waldbaumlaeufer
-        LATIN_NAME_TO_COLOR.put("Parus montanus", "coral"); //Weidenmeise
         LATIN_NAME_TO_COLOR.put("Branta leucopsis", "beige"); //Weisswangengans
+        //open to use: coral
     }
 
     public void printCoordinates(List<Sighting> sightings) throws IOException {
