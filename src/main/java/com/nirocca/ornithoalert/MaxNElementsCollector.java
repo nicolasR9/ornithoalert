@@ -22,7 +22,7 @@ public class MaxNElementsCollector<T> {
         countMap.entrySet().stream()
                 .forEach(e -> list.add(new ElementWithCount<T>(e.getKey(), e.getValue())));
         Collections.sort(list, Collections.reverseOrder());
-        return list.subList(0, count);
+        return list.subList(0, Math.min(count, list.size()));
     }
     
     public static final class ElementWithCount<T> implements Comparable<ElementWithCount<T>>{

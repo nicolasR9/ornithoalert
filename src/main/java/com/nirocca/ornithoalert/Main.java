@@ -43,7 +43,8 @@ public class Main {
             "Birkenzeisig (ssp. cabaret), Alpenbirkenzeisig",
             "Birkenzeisig (ssp. flammea), Taigabirkenzeisig",
             "Schwanzmeisen (ssp. caudatus)",
-            "Schwanzmeise (ssp. caudatus)"
+            "Schwanzmeise (ssp. caudatus)",
+            "Stockenten Bastard fehlfarben"
             ));
     private static String url;
     private static SortBy sortBy;
