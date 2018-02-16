@@ -1,5 +1,6 @@
 package com.nirocca.ornithoalert;
 
+import com.nirocca.ornithoalert.Constants.SortBy;
 import com.nirocca.ornithoalert.model.LatinComparedSpecies;
 import com.nirocca.ornithoalert.model.Sighting;
 import org.apache.commons.cli.CommandLine;
@@ -13,39 +14,13 @@ import org.apache.commons.cli.ParseException;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Main {
     
     private static final String URL_PAGING_END = "&mp_item_per_page=60&mp_current_page=1";
-    private static final Set<String> SPECIES_TO_EXCLUDE = new HashSet<>(Arrays.asList(
-            "Keine Art",
-            "Hausente",
-            "Bauml\u00e4ufer, unbestimmt",
-            "Gimpel (ssp. pyrrhula), Trompetergimpel",
-            "Bl\u00e4ss- / Saatg\u00e4nse",
-            "Tundrasaatg\u00e4nse",
-            "Waldsaatg\u00e4nse",
-            "Anser-G\u00e4nse, unbestimmt",
-            "M\u00f6we, unbestimmt, unbestimmt",
-            "M\u00f6wen, unbestimmt",
-            "Gro\u00dfm\u00f6wen, unbestimmt",
-            "Gro\u00dfm\u00f6we, unbestimmt",
-            "Silber-oderMittelmeer-oderSteppenm\u00f6we",
-            "Silber-_oder_Mittelmeer-_oder_Steppenm\u00f6we",
-            "Silber- / Mittelmeer- / Steppenm\u00f6wen",
-            "Stockente, Bastard, fehlfarben",
-            "Taigabirkenzeisige",
-            "Alpenbirkenzeisige",
-            "Birkenzeisig (ssp. cabaret), Alpenbirkenzeisig",
-            "Birkenzeisig (ssp. flammea), Taigabirkenzeisig",
-            "Schwanzmeisen (ssp. caudatus)",
-            "Schwanzmeise (ssp. caudatus)",
-            "Stockenten Bastard fehlfarben"
-            ));
+
     private static String url;
     private static SortBy sortBy;
     
@@ -62,7 +37,7 @@ public class Main {
         lastSightings = sort(lastSightings, sortBy);
         
         lastSightings = lastSightings.stream()
-                .filter(a->!SPECIES_TO_EXCLUDE.contains(a.getGermanNamePlural()))
+                .filter(a->!Constants.SPECIES_TO_EXCLUDE.contains(a.getGermanNamePlural()))
                 .filter(a->!mySightedSpeciesLatin.contains(a.getLatinName()))
                 .collect(Collectors.toList());
 
@@ -100,7 +75,7 @@ public class Main {
             System.exit(0);
         }
         
-        url = commandLine.getOptionValue("url", OrnithoUrl.GROSSRAUM_LAST_15_DAYS.name());
+        url = commandLine.getOptionValue("url", Constants.DEFAULT_URL.name());
         try {
             OrnithoUrl urlEnum = OrnithoUrl.valueOf(url);
             url = urlEnum.getUrl();
@@ -113,7 +88,7 @@ public class Main {
             System.out.println("using URL: " + url);
         }
         
-        sortBy = SortBy.valueOf(commandLine.getOptionValue("sort", SortBy.TIME.name()));
+        sortBy = SortBy.valueOf(commandLine.getOptionValue("sort", Constants.DEFAULT_SORT_ORDER.name()));
         
         System.out.println("using SORT: " + sortBy);
     }
@@ -134,11 +109,7 @@ public class Main {
         return lastSightings.stream().sorted(comparator).collect(Collectors.toList());
     }
     
-    private static enum SortBy {
-        TIME,
-        REGION,
-        SPECIES
-    }
+
     
 
 }
