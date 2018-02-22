@@ -40,22 +40,25 @@ public class Constants {
     
     public static final Map<String, String> LATIN_NAME_TO_COLOR = new HashMap<>();
     
+    // see https://www.w3schools.com/colors/colors_names.asp
     static {
         LATIN_NAME_TO_COLOR.put("Aythya marila", "lightgreen"); //Bergente
         LATIN_NAME_TO_COLOR.put("Fringilla montifringilla", "darkgreen"); //Bergfink
         LATIN_NAME_TO_COLOR.put("Anthus spinoletta", "lightblue"); //Bergpieper
         LATIN_NAME_TO_COLOR.put("Carduelis cannabina", "darkblue"); //Bluthaenfling
         LATIN_NAME_TO_COLOR.put("Columba oenas", "yellow"); //Hohltaube
-        LATIN_NAME_TO_COLOR.put("Larus cachinnans", "aquamarine"); //Steppenmoewe
-        LATIN_NAME_TO_COLOR.put("Rallus aquaticus", "darkgrey"); //Wasserralle
-        LATIN_NAME_TO_COLOR.put("Anthus pratensis", "wheat"); //Wiesenpieper
-        LATIN_NAME_TO_COLOR.put("Cygnus bewickii", "violet"); //Zwergschwan
-        LATIN_NAME_TO_COLOR.put("Larus canus", "teal"); //Sturmmoewe
         LATIN_NAME_TO_COLOR.put("Buteo lagopus", "sandybrown"); //Raufussbussard
+        LATIN_NAME_TO_COLOR.put("Melanitta fusca", "coral"); //Samtente
+        LATIN_NAME_TO_COLOR.put("Podiceps nigricollis", "sienna"); //Schwarzhalstaucher
+        LATIN_NAME_TO_COLOR.put("Larus cachinnans", "aquamarine"); //Steppenmoewe
+        LATIN_NAME_TO_COLOR.put("Larus canus", "teal"); //Sturmmoewe
         LATIN_NAME_TO_COLOR.put("Anas acuta", "salmon"); //Spiessente
         LATIN_NAME_TO_COLOR.put("Certhia familiaris", "orange"); //Waldbaumlaeufer
+        LATIN_NAME_TO_COLOR.put("Cinclus cinclus cinclus", "black"); //Wasseramsel
+        LATIN_NAME_TO_COLOR.put("Rallus aquaticus", "darkgrey"); //Wasserralle
         LATIN_NAME_TO_COLOR.put("Branta leucopsis", "beige"); //Weisswangengans
-        //open to use: coral, sienna
+        LATIN_NAME_TO_COLOR.put("Anthus pratensis", "wheat"); //Wiesenpieper
+        LATIN_NAME_TO_COLOR.put("Cygnus bewickii", "violet"); //Zwergschwan
     }
     
     public static enum SortBy {
