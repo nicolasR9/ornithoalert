@@ -1,58 +1,57 @@
 package com.nirocca.ornithoalert.model;
 
+import gov.nasa.worldwind.geom.Angle;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Coordinates {
-    private String latitude;
-    private String longitude;
+    private double latitude;
+    private double longitude;
     
     public Coordinates(String latitude, String longitude) {
-        this.latitude = latitude;
-        this.longitude = longitude;
+        this.latitude = toDecimal(latitude);
+        this.longitude = toDecimal(longitude);
     }
     
-    public String getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
     
-    public String getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
     
-    public void shiftABit() {
-        Pattern p = Pattern.compile("(\\d+)\u00B0(\\d+)'(\\d+)(.\\d+'' N)");
-        Matcher m = p.matcher(latitude);
-        if (!m.matches()) {
-            throw new RuntimeException("unexpected coordinate format");
-        }
-        
-        int degrees = Integer.parseInt(m.group(1));
-        int minutes = Integer.parseInt(m.group(2));
-        int seconds = Integer.parseInt(m.group(3));
-        
-        int offset = 5;
-        seconds += offset;
-        if (seconds > 59) {
-            ++minutes;
-            seconds -= 60;
-        }
-        
-        if (minutes > 59) {
-            ++degrees;
-            minutes -= 60;
-        }
-        
-        latitude = String.format("%d\u00B0%02d'%02d%s", degrees, minutes, seconds, m.group(4));
-    }
+    private double toDecimal(String coordinate) {
+        try {
+            return Double.parseDouble(coordinate);
+        } catch (NumberFormatException ex) {
+            Pattern p = Pattern.compile("(\\d+)\u00B0(\\d+)'(\\d+)\\.\\d+'' [EN]");
+            Matcher m = p.matcher(coordinate);
+            if (!m.matches()) {
+                throw new RuntimeException("unexpected coordinate format: " + coordinate);
+            }
+            int degrees = Integer.parseInt(m.group(1));
+            int minutes = Integer.parseInt(m.group(2));
+            int seconds = Integer.parseInt(m.group(3));
 
+            return Angle.fromDMS(degrees, minutes, seconds).getDegrees();
+        }
+    }
+    
+    public void shiftABit() {
+        latitude -= 0.0004;
+    }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((latitude == null) ? 0 : latitude.hashCode());
-        result = prime * result + ((longitude == null) ? 0 : longitude.hashCode());
+        long temp;
+        temp = Double.doubleToLongBits(latitude);
+        result = prime * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(longitude);
+        result = prime * result + (int) (temp ^ (temp >>> 32));
         return result;
     }
 
@@ -65,18 +64,10 @@ public class Coordinates {
         if (getClass() != obj.getClass())
             return false;
         Coordinates other = (Coordinates) obj;
-        if (latitude == null) {
-            if (other.latitude != null)
-                return false;
-        } else if (!latitude.equals(other.latitude))
+        if (Double.doubleToLongBits(latitude) != Double.doubleToLongBits(other.latitude))
             return false;
-        if (longitude == null) {
-            if (other.longitude != null)
-                return false;
-        } else if (!longitude.equals(other.longitude))
+        if (Double.doubleToLongBits(longitude) != Double.doubleToLongBits(other.longitude))
             return false;
         return true;
     }
-    
-    
 }

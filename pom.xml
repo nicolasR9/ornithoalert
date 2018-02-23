@@ -34,6 +34,14 @@
             <version>1.4</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.rgi-corp/ww-geo-coords -->
+        <dependency>
+            <groupId>com.rgi-corp</groupId>
+            <artifactId>ww-geo-coords</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+
         <!-- https://mvnrepository.com/artifact/junit/junit -->
         <dependency>
             <groupId>junit</groupId>
