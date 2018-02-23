@@ -65,6 +65,14 @@ public class CoordinatesExporter {
 
     private Coordinates getCoordinates(String detailsUrl) throws IOException {
         String html = ornithoPageReader.getHtmlForPage(detailsUrl);
+        // for sightings with exact locations, the coordinates are directly on this page
+        Pattern pattern = Pattern.compile(".*openlayerMap.addMovingMarker\\((\\d+\\.\\d+),(\\d+\\.\\d+).*", Pattern.DOTALL);
+        Matcher matcher = pattern.matcher(html);
+        if (matcher.matches()) {
+            return new Coordinates(matcher.group(1), matcher.group(2));
+        }
+        
+        // for sightings without exact locations, call the subpage for the location
         Document doc = Jsoup.parse(html);
         Element topElement = doc.getElementById("detail-summary-container");
         
@@ -73,8 +81,8 @@ public class CoordinatesExporter {
         html = ornithoPageReader.getHtmlForPage(locationPageUrl);
         doc = Jsoup.parse(html);
         String coordText = doc.getElementById("td-main-table").select("td[class='box']").get(1).ownText();
-        Pattern pattern = Pattern.compile("(.* E) / (.*'' N).*");
-        Matcher matcher = pattern.matcher(coordText);
+        pattern = Pattern.compile("(.* E) / (.*'' N).*");
+        matcher = pattern.matcher(coordText);
         if (!matcher.matches()) {
             System.err.println("unexpected coord format: " + coordText);
         }
