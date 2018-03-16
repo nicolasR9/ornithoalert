@@ -14,6 +14,14 @@ public class Constants {
     public static final Set<String> SPECIES_TO_EXCLUDE = new HashSet<>(Arrays.asList(
             "Keine Art",
             "Hausente",
+            "Greifvogel, unbestimmt",
+            "Meisen, unbestimmt",
+            "Enten, unbestimmt",
+            "Pieper, unbestimmt",
+            "Schw\u00e4ne, unbestimmt",
+            "Raben-_x_Nebelkr\u00e4he",
+            "G\u00e4nsehybrid, unbestimmt",
+            "G\u00e4nse (Anser / Branta), unbestimmt",
             "Bauml\u00e4ufer, unbestimmt",
             "Gimpel (ssp. pyrrhula), Trompetergimpel",
             "Bl\u00e4ss- / Saatg\u00e4nse",
@@ -35,7 +43,7 @@ public class Constants {
             "Schwanzmeisen (ssp. caudatus)",
             "Schwanzmeise (ssp. caudatus)",
             "Stockenten Bastard fehlfarben",
-            "Goldh\u00e4hnchen unbestimmt"
+            "Goldh\u00e4hnchen, unbestimmt"
             ));
     
     public static final Map<String, String> LATIN_NAME_TO_COLOR = new HashMap<>();
@@ -46,16 +54,15 @@ public class Constants {
         LATIN_NAME_TO_COLOR.put("Fringilla montifringilla", "darkgreen"); //Bergfink
         LATIN_NAME_TO_COLOR.put("Anthus spinoletta", "lightblue"); //Bergpieper
         LATIN_NAME_TO_COLOR.put("Carduelis cannabina", "darkblue"); //Bluthaenfling
+        LATIN_NAME_TO_COLOR.put("Lullula arborea", "teal"); //Heidelerche
         LATIN_NAME_TO_COLOR.put("Columba oenas", "yellow"); //Hohltaube
         LATIN_NAME_TO_COLOR.put("Buteo lagopus", "sandybrown"); //Raufussbussard
-        LATIN_NAME_TO_COLOR.put("Melanitta fusca", "coral"); //Samtente
         LATIN_NAME_TO_COLOR.put("Podiceps nigricollis", "sienna"); //Schwarzhalstaucher
         LATIN_NAME_TO_COLOR.put("Larus cachinnans", "aquamarine"); //Steppenmoewe
-        LATIN_NAME_TO_COLOR.put("Larus canus", "teal"); //Sturmmoewe
         LATIN_NAME_TO_COLOR.put("Anas acuta", "salmon"); //Spiessente
         LATIN_NAME_TO_COLOR.put("Certhia familiaris", "orange"); //Waldbaumlaeufer
         LATIN_NAME_TO_COLOR.put("Cinclus cinclus cinclus", "black"); //Wasseramsel
-        LATIN_NAME_TO_COLOR.put("Rallus aquaticus", "darkgrey"); //Wasserralle
+        LATIN_NAME_TO_COLOR.put("Rallus aquaticus", "coral"); //Wasserralle
         LATIN_NAME_TO_COLOR.put("Branta leucopsis", "beige"); //Weisswangengans
         LATIN_NAME_TO_COLOR.put("Anthus pratensis", "wheat"); //Wiesenpieper
         LATIN_NAME_TO_COLOR.put("Cygnus bewickii", "violet"); //Zwergschwan
