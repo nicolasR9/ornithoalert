@@ -40,7 +40,7 @@ public class Coordinates {
     }
     
     public void shiftABit() {
-        latitude -= 0.0004;
+        latitude -= 0.0006;
     }
 
     @Override
