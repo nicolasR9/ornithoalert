@@ -36,6 +36,7 @@ public class Constants {
             "Silber-_oder_Mittelmeer-_oder_Steppenm\u00f6we",
             "Silber- / Mittelmeer- / Steppenm\u00f6wen",
             "Stockente, Bastard, fehlfarben",
+            "Stockenten, Bastard, fehlfarben",
             "Taigabirkenzeisige",
             "Alpenbirkenzeisige",
             "Birkenzeisig (ssp. cabaret), Alpenbirkenzeisig",
@@ -54,16 +55,16 @@ public class Constants {
         LATIN_NAME_TO_COLOR.put("Fringilla montifringilla", "darkgreen"); //Bergfink
         LATIN_NAME_TO_COLOR.put("Anthus spinoletta", "lightblue"); //Bergpieper
         LATIN_NAME_TO_COLOR.put("Carduelis cannabina", "darkblue"); //Bluthaenfling
+        LATIN_NAME_TO_COLOR.put("Lullula arborea", "salmon"); //Haubenlaerche
         LATIN_NAME_TO_COLOR.put("Lullula arborea", "teal"); //Heidelerche
         LATIN_NAME_TO_COLOR.put("Columba oenas", "yellow"); //Hohltaube
         LATIN_NAME_TO_COLOR.put("Buteo lagopus", "sandybrown"); //Raufussbussard
         LATIN_NAME_TO_COLOR.put("Podiceps nigricollis", "sienna"); //Schwarzhalstaucher
         LATIN_NAME_TO_COLOR.put("Larus cachinnans", "aquamarine"); //Steppenmoewe
-        LATIN_NAME_TO_COLOR.put("Anas acuta", "salmon"); //Spiessente
         LATIN_NAME_TO_COLOR.put("Certhia familiaris", "orange"); //Waldbaumlaeufer
+        LATIN_NAME_TO_COLOR.put("Scolopax rusticola", "beige"); //Waldschnaepfe
         LATIN_NAME_TO_COLOR.put("Cinclus cinclus cinclus", "black"); //Wasseramsel
         LATIN_NAME_TO_COLOR.put("Rallus aquaticus", "coral"); //Wasserralle
-        LATIN_NAME_TO_COLOR.put("Branta leucopsis", "beige"); //Weisswangengans
         LATIN_NAME_TO_COLOR.put("Anthus pratensis", "wheat"); //Wiesenpieper
         LATIN_NAME_TO_COLOR.put("Cygnus bewickii", "violet"); //Zwergschwan
     }
