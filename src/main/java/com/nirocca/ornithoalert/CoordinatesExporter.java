@@ -21,6 +21,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CoordinatesExporter {
+    private static final String PATH_TO_COORDS_FILE = "C:/Users/Nicki/Documents/coord.txt";
     
     private static OrnithoPageReader ornithoPageReader = new OrnithoPageReader();
 
@@ -45,7 +46,7 @@ public class CoordinatesExporter {
     }
 
     private OutputStream createOutputStream() throws FileNotFoundException {
-        File file = new File(Constants.PATH_TO_COORDS_FILE);
+        File file = new File(PATH_TO_COORDS_FILE);
         if (file.getParentFile().exists()) {
             FileOutputStream fileOut = new FileOutputStream(file);
             return new TeeOutputStream(System.out, fileOut);
