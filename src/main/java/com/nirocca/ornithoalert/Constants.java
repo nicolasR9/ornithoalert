@@ -9,8 +9,7 @@ import java.util.Set;
 public class Constants {
     public static final SortBy DEFAULT_SORT_ORDER = SortBy.SPECIES;
     public static final OrnithoUrl DEFAULT_URL = OrnithoUrl.GROSSRAUM_LAST_8_DAYS;
-    public static final String PATH_TO_COORDS_FILE = "C:/Users/Nicki/Documents/coord.txt";
-    
+   
     public static final Set<String> SPECIES_TO_EXCLUDE = new HashSet<>(Arrays.asList(
             "Keine Art",
             "Hausente",
