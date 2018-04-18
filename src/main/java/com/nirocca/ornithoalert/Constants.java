@@ -57,14 +57,14 @@ public class Constants {
         LATIN_NAME_TO_COLOR.put("Lullula arborea", "salmon"); //Haubenlaerche
         LATIN_NAME_TO_COLOR.put("Columba oenas", "yellow"); //Hohltaube
         LATIN_NAME_TO_COLOR.put("Anas querquedula", "teal"); //Knaeckente
-        LATIN_NAME_TO_COLOR.put("Buteo lagopus", "sandybrown"); //Raufussbussard
+        LATIN_NAME_TO_COLOR.put("Locustella luscinioides", "violet"); //Rohrschwirl
+        LATIN_NAME_TO_COLOR.put("Oenanthe oenanthe", "sandybrown"); //Steinschmaetzer
         LATIN_NAME_TO_COLOR.put("Larus cachinnans", "aquamarine"); //Steppenmoewe
         LATIN_NAME_TO_COLOR.put("Certhia familiaris", "orange"); //Waldbaumlaeufer
         LATIN_NAME_TO_COLOR.put("Scolopax rusticola", "beige"); //Waldschnaepfe
-        LATIN_NAME_TO_COLOR.put("Cinclus cinclus cinclus", "black"); //Wasseramsel
         LATIN_NAME_TO_COLOR.put("Rallus aquaticus", "coral"); //Wasserralle
         LATIN_NAME_TO_COLOR.put("Anthus pratensis", "wheat"); //Wiesenpieper
-        LATIN_NAME_TO_COLOR.put("Cygnus bewickii", "violet"); //Zwergschwan
+        LATIN_NAME_TO_COLOR.put("Motacilla flava flava", "black"); //Wiesenschafstelze
         
         //free:  darkgreen
     }
