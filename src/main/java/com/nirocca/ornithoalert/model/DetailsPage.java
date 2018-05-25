@@ -11,7 +11,7 @@ public class DetailsPage {
     }
 
     public String parseLocationUrl() {
-        return pageElement.selectFirst("a[href~=http://www.ornitho.de/index.php\\?m_id=52.*]").attr("href");
+        return pageElement.selectFirst("a[href~=https://www.ornitho.de/index.php\\?m_id=52.*]").attr("href");
     }
 
 }
