@@ -18,7 +18,7 @@ public final class Observation {
     }
     
     public String parseUrl() {
-        //<a href="http://www.ornitho.de/index.php?m_id=54&id=28889469">
-        return observationElement.selectFirst("a[href~=http://www.ornitho.de/index.php\\?m_id=54.*]").attr("href");
+        //<a href="https://www.ornitho.de/index.php?m_id=54&id=28889469">
+        return observationElement.selectFirst("a[href~=https://www.ornitho.de/index.php\\?m_id=54.*]").attr("href");
     }
 }

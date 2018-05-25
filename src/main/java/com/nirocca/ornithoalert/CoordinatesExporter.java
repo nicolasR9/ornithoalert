@@ -77,7 +77,7 @@ public class CoordinatesExporter {
         Document doc = Jsoup.parse(html);
         Element topElement = doc.getElementById("detail-summary-container");
         
-        String locationPageUrl = topElement.selectFirst("a[href~=http://www.ornitho.de/index.php\\?m_id=52.*]").attr("href");
+        String locationPageUrl = topElement.selectFirst("a[href~=https://www.ornitho.de/index.php\\?m_id=52.*]").attr("href");
         
         html = ornithoPageReader.getHtmlForPage(locationPageUrl);
         doc = Jsoup.parse(html);
