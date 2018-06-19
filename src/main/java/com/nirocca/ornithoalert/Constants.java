@@ -51,8 +51,7 @@ public class Constants {
     // see https://www.w3schools.com/colors/colors_names.asp
     static {
         LATIN_NAME_TO_COLOR.put("Remiz pendulinus", "sienna"); //Beutelmeise
-        LATIN_NAME_TO_COLOR.put("Locustella naevia", "wheat"); //Feldschwirl
-        LATIN_NAME_TO_COLOR.put("Hippolais icterina", "yellow"); //Gelbspoetter
+        LATIN_NAME_TO_COLOR.put("Locustella naevia", "yellow"); //Feldschwirl
         LATIN_NAME_TO_COLOR.put("Lullula arborea", "salmon"); //Haubenlaerche
         LATIN_NAME_TO_COLOR.put("Columba oenas", "lightgreen"); //Hohltaube
         LATIN_NAME_TO_COLOR.put("Emberiza hortulana", "sandybrown"); //Ortolan
@@ -61,10 +60,11 @@ public class Constants {
         LATIN_NAME_TO_COLOR.put("Larus cachinnans", "aquamarine"); //Steppenmoewe
         LATIN_NAME_TO_COLOR.put("Chlidonias niger", "black"); //Trauerseeschwalbe
         LATIN_NAME_TO_COLOR.put("Riparia riparia", "beige"); //Uferschwalbe
+        LATIN_NAME_TO_COLOR.put("Coturnix coturnix", "violet"); //Wachtel
         LATIN_NAME_TO_COLOR.put("Certhia familiaris", "orange"); //Waldbaumlaeufer
-        LATIN_NAME_TO_COLOR.put("Rallus aquaticus", "coral"); //Wasserralle
+        LATIN_NAME_TO_COLOR.put("Rallus aquaticus", "lightblue"); //Wasserralle
         
-        //free: teal, darkgreen, lightblue, violet
+        //free: darkgreen
     }
     
     public static enum SortBy {
