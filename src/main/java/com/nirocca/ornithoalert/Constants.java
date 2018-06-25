@@ -58,13 +58,11 @@ public class Constants {
         LATIN_NAME_TO_COLOR.put("Botaurus stellaris", "darkblue"); //Rohrdommel
         LATIN_NAME_TO_COLOR.put("Sylvia nisoria", "teal"); //Sperbergrasmuecke
         LATIN_NAME_TO_COLOR.put("Larus cachinnans", "aquamarine"); //Steppenmoewe
-        LATIN_NAME_TO_COLOR.put("Chlidonias niger", "black"); //Trauerseeschwalbe
-        LATIN_NAME_TO_COLOR.put("Riparia riparia", "beige"); //Uferschwalbe
         LATIN_NAME_TO_COLOR.put("Coturnix coturnix", "violet"); //Wachtel
         LATIN_NAME_TO_COLOR.put("Certhia familiaris", "orange"); //Waldbaumlaeufer
         LATIN_NAME_TO_COLOR.put("Rallus aquaticus", "lightblue"); //Wasserralle
         
-        //free: darkgreen
+        //free: darkgreen, black, beige
     }
     
     public static enum SortBy {
