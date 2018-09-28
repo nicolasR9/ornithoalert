@@ -53,19 +53,31 @@ public class Constants {
         LATIN_NAME_TO_COLOR.put("Remiz pendulinus", "sienna"); //Beutelmeise
         LATIN_NAME_TO_COLOR.put("Locustella naevia", "yellow"); //Feldschwirl
         LATIN_NAME_TO_COLOR.put("Lullula arborea", "salmon"); //Haubenlaerche
-        LATIN_NAME_TO_COLOR.put("Columba oenas", "lightgreen"); //Hohltaube
+        LATIN_NAME_TO_COLOR.put("Falco columbarius", "black"); //Merlin
         LATIN_NAME_TO_COLOR.put("Emberiza hortulana", "sandybrown"); //Ortolan
+        LATIN_NAME_TO_COLOR.put("Buteo lagopus", "darkgreen"); //Raufußbussard
         LATIN_NAME_TO_COLOR.put("Botaurus stellaris", "darkblue"); //Rohrdommel
         LATIN_NAME_TO_COLOR.put("Sylvia nisoria", "teal"); //Sperbergrasmuecke
         LATIN_NAME_TO_COLOR.put("Larus cachinnans", "aquamarine"); //Steppenmoewe
         LATIN_NAME_TO_COLOR.put("Coturnix coturnix", "violet"); //Wachtel
         LATIN_NAME_TO_COLOR.put("Certhia familiaris", "orange"); //Waldbaumlaeufer
         LATIN_NAME_TO_COLOR.put("Rallus aquaticus", "lightblue"); //Wasserralle
-        
-        //free: darkgreen, black, beige
+        LATIN_NAME_TO_COLOR.put("Anthus pratensis", "lightgreen"); //Wiesenpieper
+
+        //Limikolen
+        LATIN_NAME_TO_COLOR.put("Calidris alpina", "beige"); //Alpenstrandlaeufer
+        LATIN_NAME_TO_COLOR.put("Numenius arquata", "beige"); //Brachvogel
+        LATIN_NAME_TO_COLOR.put("Tringa erythropus", "beige"); //Dunkler Wasserlaeufer
+        LATIN_NAME_TO_COLOR.put("Actitis hypoleucos", "beige"); //Flussuferläufer
+        LATIN_NAME_TO_COLOR.put("Pluvialis squatarola", "beige"); //Kiebitzregenpfeifer
+        LATIN_NAME_TO_COLOR.put("Charadrius hiaticula", "beige"); //Sandregenpfeifer
+        LATIN_NAME_TO_COLOR.put("Tringa ochropus", "beige"); //Waldwasserlaeufer
+        LATIN_NAME_TO_COLOR.put("Calidris minuta", "beige"); //Zwergstrandläufer
+
+        //free:
     }
     
-    public static enum SortBy {
+    public enum SortBy {
         TIME,
         REGION,
         SPECIES
