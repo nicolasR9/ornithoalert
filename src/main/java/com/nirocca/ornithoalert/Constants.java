@@ -58,14 +58,12 @@ public class Constants {
         LATIN_NAME_TO_COLOR.put("Buteo lagopus", "darkgreen"); //Raufußbussard
         LATIN_NAME_TO_COLOR.put("Botaurus stellaris", "darkblue"); //Rohrdommel
         LATIN_NAME_TO_COLOR.put("Sylvia nisoria", "teal"); //Sperbergrasmuecke
-        LATIN_NAME_TO_COLOR.put("Larus cachinnans", "aquamarine"); //Steppenmoewe
         LATIN_NAME_TO_COLOR.put("Coturnix coturnix", "violet"); //Wachtel
         LATIN_NAME_TO_COLOR.put("Certhia familiaris", "orange"); //Waldbaumlaeufer
         LATIN_NAME_TO_COLOR.put("Rallus aquaticus", "lightblue"); //Wasserralle
         LATIN_NAME_TO_COLOR.put("Anthus pratensis", "lightgreen"); //Wiesenpieper
 
         //Limikolen
-        LATIN_NAME_TO_COLOR.put("Calidris alpina", "beige"); //Alpenstrandlaeufer
         LATIN_NAME_TO_COLOR.put("Numenius arquata", "beige"); //Brachvogel
         LATIN_NAME_TO_COLOR.put("Tringa erythropus", "beige"); //Dunkler Wasserlaeufer
         LATIN_NAME_TO_COLOR.put("Actitis hypoleucos", "beige"); //Flussuferläufer
@@ -74,7 +72,7 @@ public class Constants {
         LATIN_NAME_TO_COLOR.put("Tringa ochropus", "beige"); //Waldwasserlaeufer
         LATIN_NAME_TO_COLOR.put("Calidris minuta", "beige"); //Zwergstrandläufer
 
-        //free:
+        //free: aquamarine
     }
     
     public enum SortBy {
