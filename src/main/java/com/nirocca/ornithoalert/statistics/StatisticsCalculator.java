@@ -27,33 +27,38 @@ public class StatisticsCalculator {
     private Sighting parseSighting(DateFormat df, String line) {
         String[] parts = line.split("\\t");
         try {
-            return new Sighting(Integer.parseInt(parts[1]), parts[2], df.parse(parts[8]));
+            return new Sighting(new Species(Integer.parseInt(parts[1]), parts[2]), df.parse(parts[7]));
         } catch (NumberFormatException e) {
-            throw new RuntimeException("Unparsable line: " + line);
+            throw new RuntimeException("Unparsable number: " + parts[1]);
         } catch (ParseException e) {
             throw new RuntimeException("Unparsable line: " + line);
         }
     }
 
     private long calcSpeciesCount(int year, List<Sighting> sightings) {
-        return getSpeciesIdsForYear(sightings, year).size();
+        return getSpeciesForYear(sightings, year).size();
     }
     
     private long calcSpeciesCountFirstSighting(int year, List<Sighting> sightings) {
-        Set<Integer> speciesSightedInPreviousYears = new HashSet<Integer>();
-        for (int i = MY_FIRST_SIGHTING_YEAR; i < year; i++) {
-            speciesSightedInPreviousYears.addAll(getSpeciesIdsForYear(sightings, i));
-        }
-        Set<Integer> speciesIdsForYear = getSpeciesIdsForYear(sightings, year);
-        speciesIdsForYear.removeAll(speciesSightedInPreviousYears);
-        return speciesIdsForYear.size();
+        Set<Species> speciesSightedInPreviousYears = getSpeciesUpToYear(sightings, year);
+        Set<Species> speciesForYear = getSpeciesForYear(sightings, year);
+        speciesForYear.removeAll(speciesSightedInPreviousYears);
+        return speciesForYear.size();
     }
 
-    private Set<Integer> getSpeciesIdsForYear(List<Sighting> sightings, final int year) {
+    private Set<Species> getSpeciesUpToYear(List<Sighting> sightings, int lastYearExclusive) {
+        Set<Species> speciesSightedInPreviousYears = new HashSet<>();
+        for (int i = MY_FIRST_SIGHTING_YEAR; i < lastYearExclusive; i++) {
+            speciesSightedInPreviousYears.addAll(getSpeciesForYear(sightings, i));
+        }
+        return speciesSightedInPreviousYears;
+    }
+
+    private Set<Species> getSpeciesForYear(List<Sighting> sightings, final int year) {
         return sightings
         .stream()
         .filter(sighting -> yearMatches(year, sighting))
-        .map(sighting -> sighting.getSpeciesId()).collect(Collectors.toSet());
+        .map(Sighting::getSpecies).collect(Collectors.toSet());
     }
     
 
@@ -61,6 +66,16 @@ public class StatisticsCalculator {
         Calendar cal = Calendar.getInstance();
         cal.setTime(sighting.getSightingDate());
         return cal.get(Calendar.YEAR) == year;
+    }
+
+    private Set<Species> calcPreviouslySightesSpeciesNotSightedInTheCurrentYear(List<Sighting> sightings) {
+
+        int thisYear = Calendar.getInstance().get(Calendar.YEAR);
+        Set<Species> previousSpecies = getSpeciesUpToYear(sightings, thisYear);
+        Set<Species> speciesThisYear = getSpeciesForYear(sightings, thisYear);
+
+        previousSpecies.removeAll(speciesThisYear);
+        return previousSpecies;
     }
 
     public static void main(String[] args) throws IOException {
@@ -72,6 +87,13 @@ public class StatisticsCalculator {
             System.out.println("\ttotal species: " + calculator.calcSpeciesCount(year, sightings));
             System.out.println("\tfirst time s.: " + calculator.calcSpeciesCountFirstSighting(year, sightings));
         }
+
+        System.out.println("\nPreviously sighted species not sighted this year:");
+
+        calculator.calcPreviouslySightesSpeciesNotSightedInTheCurrentYear(sightings).
+            forEach(x->System.out.println(x.getSpeciesName()));
     }
+
+
 
 }
