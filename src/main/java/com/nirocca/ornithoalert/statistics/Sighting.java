@@ -2,27 +2,21 @@ package com.nirocca.ornithoalert.statistics;
 
 import java.util.Date;
 
-public class Sighting {
-    private int speciesId;
-    private String speciesName;
+class Sighting {
+    private Species species;
     private Date sightingDate;
     
     
-    public Sighting(int speciesId, String speciesName, Date sightingDate) {
-        this.speciesId = speciesId;
-        this.speciesName = speciesName;
+    Sighting(Species species, Date sightingDate) {
+        this.species = species;
         this.sightingDate = sightingDate;
     }
 
-    public int getSpeciesId() {
-        return speciesId;
-    }
-
-    public String getSpeciesName() {
-        return speciesName;
-    }
-
-    public Date getSightingDate() {
+    Date getSightingDate() {
         return sightingDate;
+    }
+
+    Species getSpecies() {
+        return species;
     }
 }
