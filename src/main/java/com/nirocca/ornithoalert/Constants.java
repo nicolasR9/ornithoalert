@@ -55,7 +55,6 @@ public class Constants {
         LATIN_NAME_TO_COLOR.put("Lullula arborea", "salmon"); //Haubenlaerche
         LATIN_NAME_TO_COLOR.put("Falco columbarius", "black"); //Merlin
         LATIN_NAME_TO_COLOR.put("Emberiza hortulana", "sandybrown"); //Ortolan
-        LATIN_NAME_TO_COLOR.put("Buteo lagopus", "darkgreen"); //Raufußbussard
         LATIN_NAME_TO_COLOR.put("Botaurus stellaris", "darkblue"); //Rohrdommel
         LATIN_NAME_TO_COLOR.put("Sylvia nisoria", "teal"); //Sperbergrasmuecke
         LATIN_NAME_TO_COLOR.put("Coturnix coturnix", "violet"); //Wachtel
@@ -72,7 +71,7 @@ public class Constants {
         LATIN_NAME_TO_COLOR.put("Tringa ochropus", "beige"); //Waldwasserlaeufer
         LATIN_NAME_TO_COLOR.put("Calidris minuta", "beige"); //Zwergstrandläufer
 
-        //free: aquamarine
+        //free: aquamarine, darkgreen
     }
     
     public enum SortBy {
