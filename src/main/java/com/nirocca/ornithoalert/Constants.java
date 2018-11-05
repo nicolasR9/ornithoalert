@@ -59,7 +59,6 @@ public class Constants {
         LATIN_NAME_TO_COLOR.put("Sylvia nisoria", "teal"); //Sperbergrasmuecke
         LATIN_NAME_TO_COLOR.put("Coturnix coturnix", "violet"); //Wachtel
         LATIN_NAME_TO_COLOR.put("Certhia familiaris", "orange"); //Waldbaumlaeufer
-        LATIN_NAME_TO_COLOR.put("Rallus aquaticus", "lightblue"); //Wasserralle
         LATIN_NAME_TO_COLOR.put("Anthus pratensis", "lightgreen"); //Wiesenpieper
 
         //Limikolen
@@ -71,7 +70,7 @@ public class Constants {
         LATIN_NAME_TO_COLOR.put("Tringa ochropus", "beige"); //Waldwasserlaeufer
         LATIN_NAME_TO_COLOR.put("Calidris minuta", "beige"); //Zwergstrandläufer
 
-        //free: aquamarine, darkgreen
+        //free: aquamarine, darkgreen, lightblue
     }
     
     public enum SortBy {
