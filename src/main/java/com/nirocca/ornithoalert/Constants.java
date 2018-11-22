@@ -30,6 +30,7 @@ class Constants {
             "Waldsaatg\u00e4nse",
             "Anser-G\u00e4nse, unbestimmt",
             "Hausgans",
+            "Hausente",
             "M\u00f6we, unbestimmt, unbestimmt",
             "Mittelmeer-_oder_Steppenm\u00f6we (Weißkopfm\u00f6we)",
             "M\u00f6wen, unbestimmt",
@@ -48,7 +49,10 @@ class Constants {
             "Schwanzmeisen (ssp. caudatus)",
             "Schwanzmeise (ssp. caudatus)",
             "Stockenten Bastard fehlfarben",
-            "Goldh\u00e4hnchen, unbestimmt"
+            "Goldh\u00e4hnchen, unbestimmt",
+            "Bussard, unbestimmt",
+            "Tafel-_x_Reiherente ",
+            "Wasseramsel (ssp. cinclus)"
             ));
     
     static final Map<String, String> LATIN_NAME_TO_COLOR = new HashMap<>();
