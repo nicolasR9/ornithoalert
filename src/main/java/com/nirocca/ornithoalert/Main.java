@@ -27,20 +27,8 @@ public class Main {
     
     public static void main(String[] args) throws IOException, ParseException {
         initParams(args);
-        
-        MySightingsReader mySightingsReader = new MySightingsReader();
-        List<String> mySightedSpeciesLatin = mySightingsReader.readMySightedSpeciesLatin();
-        
-        RegionLastSightingsReader regionLastSightingsReader = new RegionLastSightingsReader();
-        List<Sighting> lastSightings = regionLastSightingsReader.read(url);
-        
-        lastSightings = sort(lastSightings, sortBy);
-        
-        lastSightings = lastSightings.stream()
-                .filter(a->!Constants.SPECIES_TO_EXCLUDE.contains(a.getGermanNamePlural()))
-                .filter(a->!mySightedSpeciesLatin.contains(a.getLatinName()))
-                .collect(Collectors.toList());
 
+        List<Sighting> lastSightings = calcSightings(url, sortBy);
         MaxNElementsCollector<LatinComparedSpecies> maxSpecies = new MaxNElementsCollector<>();
         System.out.println("Markdown list:");
         for (Sighting sighting : lastSightings) {
@@ -49,12 +37,30 @@ public class Main {
         }
         
         System.out.println("\nMax 10:");
-        maxSpecies.getMaxElements(10).stream().forEach(e->System.out.println(e));
+        maxSpecies.getMaxElements(10).forEach(System.out::println);
         
         System.out.println("\nCoordinates for GPS Visualizer:");
         
         CoordinatesExporter coordinatesExporter = new CoordinatesExporter();
         coordinatesExporter.printCoordinates(lastSightings);
+    }
+
+    public static List<Sighting> calcSightings(String url, SortBy sortBy) throws IOException {
+        MySightingsReader mySightingsReader = new MySightingsReader();
+        List<String> mySightedSpeciesLatin = mySightingsReader.readMySightedSpeciesLatin();
+
+        RegionLastSightingsReader regionLastSightingsReader = new RegionLastSightingsReader();
+        List<Sighting> lastSightings = regionLastSightingsReader.read(url);
+
+        lastSightings = sort(lastSightings, sortBy);
+
+        lastSightings = lastSightings.stream()
+                .filter(a->!Constants.SPECIES_TO_EXCLUDE.contains(a.getGermanNamePlural()))
+                .filter(a->!mySightedSpeciesLatin.contains(a.getLatinName()))
+                .collect(Collectors.toList());
+
+
+        return lastSightings;
     }
 
     private static void initParams(String[] args) throws ParseException {

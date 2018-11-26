@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-class Constants {
+public class Constants {
     static final SortBy DEFAULT_SORT_ORDER = SortBy.SPECIES;
     static final OrnithoUrl DEFAULT_URL = OrnithoUrl.GROSSRAUM_LAST_8_DAYS;
    
