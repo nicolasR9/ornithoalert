@@ -61,7 +61,6 @@ public class Constants {
     static {
         LATIN_NAME_TO_COLOR.put("Remiz pendulinus", "sienna"); //Beutelmeise
         LATIN_NAME_TO_COLOR.put("Locustella naevia", "yellow"); //Feldschwirl
-        LATIN_NAME_TO_COLOR.put("Galerida cristata", "salmon"); //Haubenlaerche
         LATIN_NAME_TO_COLOR.put("Anser brachyrhynchus", "darkgreen"); //Kurzschnabelgans
         LATIN_NAME_TO_COLOR.put("Falco columbarius", "black"); //Merlin
         LATIN_NAME_TO_COLOR.put("Emberiza hortulana", "sandybrown"); //Ortolan
@@ -81,7 +80,7 @@ public class Constants {
         LATIN_NAME_TO_COLOR.put("Calidris minuta", "beige"); //Zwergstrandläufer
         LATIN_NAME_TO_COLOR.put("Scolopax rusticola", "beige"); //Waldschnepfe
 
-        //free: aquamarine, lightblue
+        //free: aquamarine, lightblue, salmon
     }
     
     public enum SortBy {
