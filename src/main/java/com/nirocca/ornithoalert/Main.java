@@ -3,6 +3,7 @@ package com.nirocca.ornithoalert;
 import com.nirocca.ornithoalert.Constants.SortBy;
 import com.nirocca.ornithoalert.model.LatinComparedSpecies;
 import com.nirocca.ornithoalert.model.Sighting;
+import java.util.function.Predicate;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -45,7 +46,7 @@ public class Main {
         coordinatesExporter.printCoordinates(lastSightings);
     }
 
-    public static List<Sighting> calcSightings(String url, SortBy sortBy) throws IOException {
+    private static List<Sighting> calcSightings(String url, SortBy sortBy) throws IOException {
         MySightingsReader mySightingsReader = new MySightingsReader();
         List<String> mySightedSpeciesLatin = mySightingsReader.readMySightedSpeciesLatin();
 
@@ -55,12 +56,19 @@ public class Main {
         lastSightings = sort(lastSightings, sortBy);
 
         lastSightings = lastSightings.stream()
+                .filter(isWithouCommonFilterPattern())
                 .filter(a->!Constants.SPECIES_TO_EXCLUDE.contains(a.getGermanNamePlural()))
                 .filter(a->!mySightedSpeciesLatin.contains(a.getLatinName()))
                 .collect(Collectors.toList());
 
 
         return lastSightings;
+    }
+
+    private static Predicate<Sighting> isWithouCommonFilterPattern() {
+        return a->!a.getGermanNamePlural().contains("unbestimmt")
+            && !a.getGermanNamePlural().contains("_x_")
+            && !a.getGermanNamePlural().contains(" x ");
     }
 
     private static void initParams(String[] args) throws ParseException {
