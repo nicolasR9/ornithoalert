@@ -46,7 +46,8 @@ public class Main {
         coordinatesExporter.printCoordinates(lastSightings);
     }
 
-    private static List<Sighting> calcSightings(String url, SortBy sortBy) throws IOException {
+    //must remain public (accessed by ornitho-service)
+    public static List<Sighting> calcSightings(String url, SortBy sortBy) throws IOException {
         MySightingsReader mySightingsReader = new MySightingsReader();
         List<String> mySightedSpeciesLatin = mySightingsReader.readMySightedSpeciesLatin();
 
