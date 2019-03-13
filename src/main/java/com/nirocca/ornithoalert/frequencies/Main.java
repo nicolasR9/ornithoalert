@@ -27,11 +27,17 @@ public class Main {
     private static final int WALDWASSERLAEUFER = 231;
     private static final int FLUSSUFERLAEUFER = 233;
     private static final int SCHLAGSCHWIRL = 418;
+    private static final int MERLIN = 176;
+    private static final int PRACHTTAUCHER = 2;
+    private static final int STERNTAUCHER = 1;
+    private static final int ZWERGDOMMEL = 37;
+    private static final int BERGPIEPER = 469;
+    private static final int KURZSCHNABELGANS = 65;
 
     public static void main(String[] args)
         throws IOException {
         OrnithoPageReader pageReader = new OrnithoPageReader();
-        int speciesId= SCHLAGSCHWIRL;
+        int speciesId= KURZSCHNABELGANS;
         int[] yearsToCheck = {2016, 2017, 2018};
         for (int month = 1; month <= 12; month++) {
             for (int monthPart = 0; monthPart < 3; monthPart++) {
