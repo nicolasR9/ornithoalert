@@ -54,7 +54,6 @@ public class Constants {
         LATIN_NAME_TO_COLOR.put("Anthus pratensis", "lightgreen"); //Wiesenpieper
 
         //Limikolen
-        LATIN_NAME_TO_COLOR.put("Numenius arquata", "beige"); //Brachvogel
         LATIN_NAME_TO_COLOR.put("Tringa erythropus", "beige"); //Dunkler Wasserlaeufer
         LATIN_NAME_TO_COLOR.put("Actitis hypoleucos", "beige"); //Flussuferläufer
         LATIN_NAME_TO_COLOR.put("Pluvialis squatarola", "beige"); //Kiebitzregenpfeifer
