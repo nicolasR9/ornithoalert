@@ -57,7 +57,7 @@ public class Main {
         lastSightings = sort(lastSightings, sortBy);
 
         lastSightings = lastSightings.stream()
-                .filter(isWithouCommonFilterPattern())
+                .filter(isWithoutCommonFilterPattern())
                 .filter(a->!Constants.SPECIES_TO_EXCLUDE.contains(a.getGermanNamePlural()))
                 .filter(a->!mySightedSpeciesLatin.contains(a.getLatinName()))
                 .collect(Collectors.toList());
@@ -66,7 +66,7 @@ public class Main {
         return lastSightings;
     }
 
-    private static Predicate<Sighting> isWithouCommonFilterPattern() {
+    private static Predicate<Sighting> isWithoutCommonFilterPattern() {
         return a->!a.getGermanNamePlural().contains("unbestimmt")
             && !a.getGermanNamePlural().contains("_x_")
             && !a.getGermanNamePlural().contains(" x ");
