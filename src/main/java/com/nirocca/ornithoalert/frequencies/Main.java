@@ -42,11 +42,12 @@ public class Main {
     private static final int WALDOHREULE = 322;
     private static final int SUMPFOHREULE = 323;
     private static final int SCHLEIEREULE = 315;
+    private static final int GOLDREGENPFEIFER = 216;
 
     public static void main(String[] args)
         throws IOException {
         OrnithoPageReader pageReader = new OrnithoPageReader();
-        int speciesId= ORTOLAN;
+        int speciesId= GOLDREGENPFEIFER;
         int[] yearsToCheck = {2016, 2017, 2018};
         for (int month = 1; month <= 12; month++) {
             for (int monthPart = 0; monthPart < 3; monthPart++) {
