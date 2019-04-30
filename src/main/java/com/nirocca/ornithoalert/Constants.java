@@ -46,15 +46,12 @@ public class Constants {
         LATIN_NAME_TO_COLOR.put("Pluvialis apricaria", "orange"); //Goldregenpfeifer
         LATIN_NAME_TO_COLOR.put("Anser brachyrhynchus", "darkgreen"); //Kurzschnabelgans
         LATIN_NAME_TO_COLOR.put("Falco columbarius", "black"); //Merlin
-        LATIN_NAME_TO_COLOR.put("Emberiza hortulana", "sandybrown"); //Ortolan
         LATIN_NAME_TO_COLOR.put("Botaurus stellaris", "darkblue"); //Rohrdommel
-        LATIN_NAME_TO_COLOR.put("Branta ruficollis", "salmon"); //Rothalsgans
         LATIN_NAME_TO_COLOR.put("Sylvia nisoria", "teal"); //Sperbergrasmuecke
         LATIN_NAME_TO_COLOR.put("Coturnix coturnix", "violet"); //Wachtel
         LATIN_NAME_TO_COLOR.put("Anthus pratensis", "lightgreen"); //Wiesenpieper
 
         //Limikolen
-        LATIN_NAME_TO_COLOR.put("Tringa erythropus", "beige"); //Dunkler Wasserlaeufer
         LATIN_NAME_TO_COLOR.put("Actitis hypoleucos", "beige"); //Flussuferläufer
         LATIN_NAME_TO_COLOR.put("Pluvialis squatarola", "beige"); //Kiebitzregenpfeifer
         LATIN_NAME_TO_COLOR.put("Charadrius hiaticula", "beige"); //Sandregenpfeifer
@@ -62,7 +59,7 @@ public class Constants {
         LATIN_NAME_TO_COLOR.put("Tringa ochropus", "beige"); //Waldwasserlaeufer
         LATIN_NAME_TO_COLOR.put("Calidris minuta", "beige"); //Zwergstrandläufer
 
-        //free: aquamarine, lightblue, salmon
+        //free: aquamarine, lightblue, salmon, sandybrown
     }
     
     public enum SortBy {
