@@ -24,6 +24,7 @@ public class Main {
 
     private static String url;
     private static SortBy sortBy;
+    private static boolean onlyExactCoords;
     
     
     public static void main(String[] args) throws IOException, ParseException {
@@ -43,7 +44,7 @@ public class Main {
         System.out.println("\nCoordinates for GPS Visualizer:");
         
         CoordinatesExporter coordinatesExporter = new CoordinatesExporter();
-        coordinatesExporter.printCoordinates(lastSightings);
+        coordinatesExporter.printCoordinates(lastSightings, onlyExactCoords);
     }
 
     //must remain public (accessed by ornitho-service)
@@ -75,6 +76,7 @@ public class Main {
     private static void initParams(String[] args) throws ParseException {
         Options options = new Options();
         options.addOption("url", true, "url to use (" + Arrays.toString(OrnithoUrl.values()) + " or custom");
+        options.addOption("exact", true, "prints coords only if exact");
         options.addOption("h", false, "print help");
         
         Option sortOption = new Option("sort", true, "sort (TIME, REGION, SPECIES)");
@@ -104,6 +106,8 @@ public class Main {
         }
         
         sortBy = SortBy.valueOf(commandLine.getOptionValue("sort", Constants.DEFAULT_SORT_ORDER.name()));
+
+        onlyExactCoords = Boolean.parseBoolean(commandLine.getOptionValue("exact", "false"));
         
         System.out.println("using SORT: " + sortBy);
     }

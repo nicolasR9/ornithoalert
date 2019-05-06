@@ -25,7 +25,7 @@ public class CoordinatesExporter {
     
     private static OrnithoPageReader ornithoPageReader = new OrnithoPageReader();
 
-    public void printCoordinates(List<Sighting> sightings) throws IOException {
+    public void printCoordinates(List<Sighting> sightings, boolean onlyExactCoords) throws IOException {
         OutputStream outStream = createOutputStream();
         try (PrintWriter out = new PrintWriter(outStream)) {
         
@@ -37,10 +37,11 @@ public class CoordinatesExporter {
                     coordinates.shiftABit();
                 }
                 coordinatesUsed.add(coordinates);
-                
+
+                String latitude = !onlyExactCoords || coordinates.isExact() ? String.valueOf(coordinates.getLatitude()) : "";
+                String longitude = !onlyExactCoords || coordinates.isExact() ? String.valueOf(coordinates.getLongitude()) : "";
                 out.printf("%s,%s,%s,%s,%s,%s%n", sighting.getGermanNamePlural().replaceAll(",", ""),
-                        sighting.getDate().replaceAll(",", ""), coordinates.getLatitude(),
-                        coordinates.getLongitude(), getColor(sighting), sighting.getUrl());
+                        sighting.getDate().replaceAll(",", ""), latitude, longitude, getColor(sighting), sighting.getUrl());
             }
         }
     }
@@ -70,7 +71,7 @@ public class CoordinatesExporter {
         Pattern pattern = Pattern.compile(".*openlayerMap.addMovingMarker\\((\\d+\\.\\d+),(\\d+\\.\\d+).*", Pattern.DOTALL);
         Matcher matcher = pattern.matcher(html);
         if (matcher.matches()) {
-            return new Coordinates(matcher.group(1), matcher.group(2));
+            return new Coordinates(matcher.group(1), matcher.group(2), true);
         }
         
         // for sightings without exact locations, call the subpage for the location
@@ -88,7 +89,7 @@ public class CoordinatesExporter {
             System.err.println("unexpected coord format: " + coordText);
         }
         
-        return new Coordinates(matcher.group(2), matcher.group(1));
+        return new Coordinates(matcher.group(2), matcher.group(1), false);
     }
     
     public static void main(String[] args) throws IOException {
@@ -97,7 +98,7 @@ public class CoordinatesExporter {
         SightingsPageParser parser = new SightingsPageParser();
         List<Day> structure = parser.parseSightingStructure(html);
         List<Sighting> sightings = Sighting.fromDays(structure);
-        new CoordinatesExporter().printCoordinates(sightings);
+        new CoordinatesExporter().printCoordinates(sightings, false);
     }
 
 }
