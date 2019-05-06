@@ -8,10 +8,12 @@ import java.util.regex.Pattern;
 public class Coordinates {
     private double latitude;
     private double longitude;
+    private boolean exact;
     
-    public Coordinates(String latitude, String longitude) {
+    public Coordinates(String latitude, String longitude, boolean exact) {
         this.latitude = toDecimal(latitude);
         this.longitude = toDecimal(longitude);
+        this.exact = exact;
     }
     
     public double getLatitude() {
@@ -41,6 +43,10 @@ public class Coordinates {
     
     public void shiftABit() {
         latitude -= 0.0006;
+    }
+
+    public boolean isExact() {
+        return exact;
     }
 
     @Override
