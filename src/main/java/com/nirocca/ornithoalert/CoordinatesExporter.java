@@ -25,10 +25,9 @@ public class CoordinatesExporter {
     
     private static OrnithoPageReader ornithoPageReader = new OrnithoPageReader();
 
-    public void printCoordinates(List<Sighting> sightings, boolean onlyExactCoords) throws IOException {
-        OutputStream outStream = createOutputStream();
+    public void printCoordinates(List<Sighting> sightings, boolean onlyExactCoords, OutputStream outStream) throws IOException {
         try (PrintWriter out = new PrintWriter(outStream)) {
-        
+
             out.println("name,desc,latitude,longitude,color,url");
             Set<Coordinates> coordinatesUsed = new HashSet<>();
             for (Sighting sighting : sightings) {
@@ -41,9 +40,14 @@ public class CoordinatesExporter {
                 String latitude = !onlyExactCoords || coordinates.isExact() ? String.valueOf(coordinates.getLatitude()) : "";
                 String longitude = !onlyExactCoords || coordinates.isExact() ? String.valueOf(coordinates.getLongitude()) : "";
                 out.printf("%s,%s,%s,%s,%s,%s%n", sighting.getGermanNamePlural().replaceAll(",", ""),
-                        sighting.getDate().replaceAll(",", ""), latitude, longitude, getColor(sighting), sighting.getUrl());
+                    sighting.getDate().replaceAll(",", ""), latitude, longitude, getColor(sighting), sighting.getUrl());
             }
         }
+    }
+
+    public void printCoordinates(List<Sighting> sightings, boolean onlyExactCoords) throws IOException {
+        printCoordinates(sightings, onlyExactCoords, createOutputStream());
+
     }
 
     private OutputStream createOutputStream() throws FileNotFoundException {

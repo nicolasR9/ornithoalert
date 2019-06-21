@@ -1,6 +1,7 @@
 package com.nirocca.ornithoalert.frequencies;
 
 import com.nirocca.ornithoalert.OrnithoPageReader;
+import com.nirocca.ornithoalert.Species;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -16,38 +17,9 @@ public class Main {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
     private static final DateTimeFormatter FORMATTER_WITHOUT_YEAR = DateTimeFormatter.ofPattern("dd.MM");
 
-    //find species id: https://www.ornitho.de/index.php?m_id=15&showback=stor&backlink=skip&y=2019&frmSpecies=176&sp_tg=1
-
-    private static final int WALDSCHNEPFE = 240;
-    private static final int WIESENPIEPER = 463;
-    private static final int TURTELTAUBE = 311;
-    private static final int BEUTELMEISE = 378;
-    private static final int FELDSCHWIRL = 417;
-    private static final int ORTOLAN = 527;
-    private static final int SPERBERGRASMUECKE = 434;
-    private static final int SCHWARZSTORCH = 41;
-    private static final int REBHUHN = 188;
-    private static final int WACHTEL = 189;
-    private static final int BRACHPIEPER = 465;
-    private static final int WALDWASSERLAEUFER = 231;
-    private static final int FLUSSUFERLAEUFER = 233;
-    private static final int SCHLAGSCHWIRL = 418;
-    private static final int MERLIN = 176;
-    private static final int PRACHTTAUCHER = 2;
-    private static final int STERNTAUCHER = 1;
-    private static final int ZWERGDOMMEL = 37;
-    private static final int ROHRDOMMEL = 38;
-    private static final int BERGPIEPER = 469;
-    private static final int KURZSCHNABELGANS = 65;
-    private static final int WALDOHREULE = 322;
-    private static final int SUMPFOHREULE = 323;
-    private static final int SCHLEIEREULE = 315;
-    private static final int GOLDREGENPFEIFER = 216;
-
-    public static void main(String[] args)
-        throws IOException {
+    public static void main(String[] args) throws IOException {
         OrnithoPageReader pageReader = new OrnithoPageReader();
-        int speciesId= GOLDREGENPFEIFER;
+        int speciesId= Species.BERGENTE.getOrnithoSpeciesId();
         int[] yearsToCheck = {2016, 2017, 2018};
         for (int month = 1; month <= 12; month++) {
             for (int monthPart = 0; monthPart < 3; monthPart++) {
