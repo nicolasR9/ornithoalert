@@ -34,7 +34,9 @@ public class Constants {
             "Schwanzmeisen (ssp. caudatus)",
             "Schwanzmeise (ssp. caudatus)",
             "Stockenten Bastard fehlfarben",
-            "Wasseramsel (ssp. cinclus)"
+            "Wasseramsel (ssp. cinclus)",
+            "Raben-_oder_Nebelkr\u00e4he (Aaskr\u00e4he)",
+            "Raben- / Nebelkr\u00e4hen"
             ));
     
     static final Map<String, String> LATIN_NAME_TO_COLOR = new HashMap<>();
