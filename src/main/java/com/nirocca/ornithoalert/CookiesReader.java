@@ -20,6 +20,7 @@ public class CookiesReader {
         List<String> cookies = IOUtils.readLines(stream);
         Pattern pattern = Pattern.compile("^(\\S+)\\s+\\S+\\s+(\\S+)\\s+\\S+\\s+((\\d+)\\s+)?(\\S+)\\s+(\\S+)$");
         for (String cookieLine : cookies) {
+            if (cookieLine.startsWith("#")) continue;
             Matcher matcher = pattern.matcher(cookieLine);
             if (matcher.matches()) {
                 BasicClientCookie cookie = new BasicClientCookie(matcher.group(5), matcher.group(6));
