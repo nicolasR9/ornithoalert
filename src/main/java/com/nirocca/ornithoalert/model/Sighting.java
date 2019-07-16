@@ -10,17 +10,11 @@ public class Sighting {
     private String germanNamePlural;
     private String latinName;
     private String url;
-    
-    public Sighting(String date, String germanNamePlural, String latinName, String url, String location) {
-        this.date = date;
-        this.germanNamePlural = germanNamePlural;
-        this.latinName = latinName;
-        this.url = url;
-        this.location = location;
-    }
+    private String count;
     
     public Sighting(Day day, Location location, Observation observation) {
-        this(day.parseDay(), observation.parseGermanName(), observation.parseLatinName(), observation.parseUrl(), location.getLocationText());
+        this(day.parseDay(), observation.parseGermanName(), observation.parseLatinName(), observation.parseUrl(),
+            location.getLocationText(), observation.parseCount());
     }
     
     public static List<Sighting> fromDays(List<Day> days) {
@@ -34,7 +28,16 @@ public class Sighting {
         }
         return sightings;
     }
-    
+
+    private Sighting(String date, String germanNamePlural, String latinName, String url, String location, String count) {
+        this.date = date;
+        this.germanNamePlural = germanNamePlural;
+        this.latinName = latinName;
+        this.url = url;
+        this.location = location;
+        this.count = count;
+    }
+
     public String getLatinName() {
         return latinName;
     }
@@ -53,6 +56,10 @@ public class Sighting {
     
     public String getDate() {
         return date;
+    }
+
+    public String getCount() {
+        return count;
     }
 
     @Override

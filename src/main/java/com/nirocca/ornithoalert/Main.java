@@ -58,6 +58,7 @@ public class Main {
         lastSightings = sort(lastSightings, sortBy);
 
         lastSightings = lastSightings.stream()
+                .filter(a->!"0".equals(a.getCount()))
                 .filter(isWithoutCommonFilterPattern())
                 .filter(a->!Constants.SPECIES_TO_EXCLUDE.contains(a.getGermanNamePlural()))
                 .filter(a->!mySightedSpeciesLatin.contains(a.getLatinName()))

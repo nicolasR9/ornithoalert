@@ -21,4 +21,9 @@ public final class Observation {
         //<a href="https://www.ornitho.de/index.php?m_id=54&id=28889469">
         return observationElement.selectFirst("a[href~=https://www.ornitho.de/index.php\\?m_id=54.*]").attr("href");
     }
+
+    public String parseCount() {
+        return observationElement.selectFirst("span[style=\"vertical-align:top\"]").text();
+
+    }
 }
