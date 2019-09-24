@@ -43,28 +43,23 @@ public class Constants {
     
     // see https://www.w3schools.com/colors/colors_names.asp
     static {
-        LATIN_NAME_TO_COLOR.put("Pluvialis apricaria", "orange"); //Goldregenpfeifer
         LATIN_NAME_TO_COLOR.put("Anser brachyrhynchus", "darkgreen"); //Kurzschnabelgans
         LATIN_NAME_TO_COLOR.put("Falco columbarius", "teal"); //Merlin
-        LATIN_NAME_TO_COLOR.put("Perdix perdix", "aquamarine"); //Rebhuhn
         LATIN_NAME_TO_COLOR.put("Botaurus stellaris", "darkblue"); //Rohrdommel
         LATIN_NAME_TO_COLOR.put("Locustella fluviatilis", "violet"); //Schlagschwirl
-        LATIN_NAME_TO_COLOR.put("Streptopelia turtur", "salmon"); //Turteltaube
         LATIN_NAME_TO_COLOR.put("Coturnix coturnix", "yellow"); //Wachtel
-        LATIN_NAME_TO_COLOR.put("Anthus pratensis", "lightgreen"); //Wiesenpieper
+        LATIN_NAME_TO_COLOR.put("Cygnus bewickii", "sienna"); //Zwergschwan
 
         //Limikolen
-        LATIN_NAME_TO_COLOR.put("Actitis hypoleucos", "sandybrown"); //Flussuferläufer
-        LATIN_NAME_TO_COLOR.put("Tringa ochropus", "sienna"); //Waldwasserlaeufer
-
         LATIN_NAME_TO_COLOR.put("Pluvialis squatarola", "beige"); //Kiebitzregenpfeifer
+        LATIN_NAME_TO_COLOR.put("Pluvialis apricaria", "orange"); //Goldregenpfeifer
         LATIN_NAME_TO_COLOR.put("Scolopax rusticola", "beige"); //Waldschnepfe
         LATIN_NAME_TO_COLOR.put("Calidris minuta", "beige"); //Zwergstrandläufer
 
         //Eulen
         LATIN_NAME_TO_COLOR.put(" Asio otus", "black"); //Waldohreule
 
-        //free: lightblue
+        //free: lightblue, sandybrown, lightgreen, salmon, aquamarine
     }
     
     public enum SortBy {
