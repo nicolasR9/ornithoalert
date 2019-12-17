@@ -25,7 +25,8 @@ public class Main {
     private static String url;
     private static SortBy sortBy;
     private static boolean onlyExactCoords;
-    
+    private static boolean filterOnlyThisYear;
+
     
     public static void main(String[] args) throws IOException, ParseException {
         initParams(args);
@@ -50,7 +51,9 @@ public class Main {
     //must remain public (accessed by ornitho-service)
     public static List<Sighting> calcSightings(String url, SortBy sortBy) throws IOException {
         MySightingsReader mySightingsReader = new MySightingsReader();
-        List<String> mySightedSpeciesLatin = mySightingsReader.readMySightedSpeciesLatin();
+        List<String> mySightedSpeciesLatin = filterOnlyThisYear ?
+            mySightingsReader.readMySightedSpeciesLatinThisYear() :
+            mySightingsReader.readMySightedSpeciesLatin();
 
         RegionLastSightingsReader regionLastSightingsReader = new RegionLastSightingsReader();
         List<Sighting> lastSightings = regionLastSightingsReader.read(url);
@@ -78,6 +81,7 @@ public class Main {
         Options options = new Options();
         options.addOption("url", true, "url to use (" + Arrays.toString(OrnithoUrl.values()) + " or custom");
         options.addOption("exact", true, "prints coords only if exact");
+        options.addOption("cy", true, "show also observations if species was sighted in previous years (but not this year)");
         options.addOption("h", false, "print help");
         
         Option sortOption = new Option("sort", true, "sort (TIME, REGION, SPECIES)");
@@ -109,7 +113,8 @@ public class Main {
         sortBy = SortBy.valueOf(commandLine.getOptionValue("sort", Constants.DEFAULT_SORT_ORDER.name()));
 
         onlyExactCoords = Boolean.parseBoolean(commandLine.getOptionValue("exact", "false"));
-        
+        filterOnlyThisYear = Boolean.parseBoolean(commandLine.getOptionValue("cy", "false"));
+
         System.out.println("using SORT: " + sortBy);
     }
 
