@@ -46,6 +46,14 @@ public class StatisticsCalculator {
         return speciesForYear.size();
     }
 
+    private long calcSpeciesCountUntilDate(int year, List<Sighting> sightings) {
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, year);
+        List<Sighting> filteredSightings = sightings.stream().filter(s -> s.getSightingDate().before(cal.getTime()))
+            .collect(Collectors.toList());
+        return calcSpeciesCount(year, filteredSightings);
+    }
+
     private Set<Species> getSpeciesUpToYear(List<Sighting> sightings, int lastYearExclusive) {
         Set<Species> speciesSightedInPreviousYears = new HashSet<>();
         for (int i = MY_FIRST_SIGHTING_YEAR; i < lastYearExclusive; i++) {
@@ -68,7 +76,7 @@ public class StatisticsCalculator {
         return cal.get(Calendar.YEAR) == year;
     }
 
-    private Set<Species> calcPreviouslySightesSpeciesNotSightedInTheCurrentYear(List<Sighting> sightings) {
+    private Set<Species> calcPreviouslySightedSpeciesNotSightedInTheCurrentYear(List<Sighting> sightings) {
 
         int thisYear = Calendar.getInstance().get(Calendar.YEAR);
         Set<Species> previousSpecies = getSpeciesUpToYear(sightings, thisYear);
@@ -99,9 +107,10 @@ public class StatisticsCalculator {
             System.out.println(year);
             System.out.println("\ttotal species: " + calculator.calcSpeciesCount(year, sightings));
             System.out.println("\tfirst time s.: " + calculator.calcSpeciesCountFirstSighting(year, sightings));
+            System.out.println("\tspecies until date: " + calculator.calcSpeciesCountUntilDate(year, sightings));
         }
 
-        Set<Species> s = calculator.calcPreviouslySightesSpeciesNotSightedInTheCurrentYear(sightings);
+        Set<Species> s = calculator.calcPreviouslySightedSpeciesNotSightedInTheCurrentYear(sightings);
         System.out.printf("\nPreviously sighted species not sighted this year (%d):%n", s.size());
         s.forEach(x->System.out.println(x.getSpeciesName()));
 
@@ -109,4 +118,6 @@ public class StatisticsCalculator {
         System.out.printf("\nSighted every previous year, but not this year (%d):%n", s.size());
         s.forEach(x->System.out.println(x.getSpeciesName()));
     }
+
+
 }
