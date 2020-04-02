@@ -78,6 +78,19 @@ public class StatisticsCalculator {
         return previousSpecies;
     }
 
+    private Set<Species> calcSpeciesSightedEveryYearButNoInTheCurrentYear(List<Sighting> sightings) {
+        Set<Species> everyYear = getSpeciesForYear(sightings, MY_FIRST_SIGHTING_YEAR);
+        int thisYear = Calendar.getInstance().get(Calendar.YEAR);
+        for (int year = MY_FIRST_SIGHTING_YEAR + 1; year < thisYear; year++) {
+            everyYear = everyYear.stream().filter(getSpeciesForYear(sightings, year)::contains).collect(Collectors.toSet());
+        }
+
+        Set<Species> speciesThisYear = getSpeciesForYear(sightings, thisYear);
+
+        everyYear.removeAll(speciesThisYear);
+        return everyYear;
+    }
+
     public static void main(String[] args) throws IOException {
         StatisticsCalculator calculator = new StatisticsCalculator();
         List<Sighting> sightings = calculator.readMySightings();
@@ -88,12 +101,12 @@ public class StatisticsCalculator {
             System.out.println("\tfirst time s.: " + calculator.calcSpeciesCountFirstSighting(year, sightings));
         }
 
-        System.out.println("\nPreviously sighted species not sighted this year:");
+        Set<Species> s = calculator.calcPreviouslySightesSpeciesNotSightedInTheCurrentYear(sightings);
+        System.out.printf("\nPreviously sighted species not sighted this year (%d):%n", s.size());
+        s.forEach(x->System.out.println(x.getSpeciesName()));
 
-        calculator.calcPreviouslySightesSpeciesNotSightedInTheCurrentYear(sightings).
-            forEach(x->System.out.println(x.getSpeciesName()));
+        s = calculator.calcSpeciesSightedEveryYearButNoInTheCurrentYear(sightings);
+        System.out.printf("\nSighted every previous year, but not this year (%d):%n", s.size());
+        s.forEach(x->System.out.println(x.getSpeciesName()));
     }
-
-
-
 }
