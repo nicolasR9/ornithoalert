@@ -19,9 +19,9 @@ public final class Observation {
     
     public String parseUrl() {
         //<a href="https://www.ornitho.de/index.php?m_id=54&id=28889469">
-        //return observationElement.selectFirst("a[href~=https://www.ornitho.de/index.php\\?m_id=54.*]").attr("href");
-        String obervationId = observationElement.selectFirst("form[id~=btn-edit-*]").selectFirst("input[name=id]").val();
-        return String.format("https://www.ornitho.de/index.php?m_id=54&id=%s", obervationId);
+        return observationElement.selectFirst("a[href~=https://www.ornitho.de/index.php\\?m_id=54.*]").attr("href");
+        //String obervationId = observationElement.selectFirst("form[id~=btn-edit-*]").selectFirst("input[name=id]").val();
+        //return String.format("https://www.ornitho.de/index.php?m_id=54&id=%s", obervationId);
     }
 
     public String parseCount() {
