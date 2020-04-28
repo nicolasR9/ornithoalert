@@ -1,5 +1,8 @@
 package com.nirocca.ornithoalert.statistics;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
@@ -99,6 +102,23 @@ public class StatisticsCalculator {
         return everyYear;
     }
 
+    private Set<Species> calcSpeciesSightedAlmostEveryYearButNoInTheCurrentYear(List<Sighting> sightings) {
+        Map<Species, Integer> count = new HashMap<>();
+        int thisYear = Calendar.getInstance().get(Calendar.YEAR);
+
+        for (int year = MY_FIRST_SIGHTING_YEAR; year < thisYear; year++) {
+            getSpeciesForYear(sightings, year).forEach(s -> {if (!count.containsKey(s)) count.put(s, 0); count.put(s, count.get(s) + 1);} );
+        }
+
+        Set<Species> almostAllYearsSpecies = count.entrySet().stream().filter(e -> e.getValue() >= (thisYear - MY_FIRST_SIGHTING_YEAR -1))
+            .map(Entry::getKey).collect(Collectors.toSet());
+
+        Set<Species> speciesThisYear = getSpeciesForYear(sightings, thisYear);
+
+        almostAllYearsSpecies.removeAll(speciesThisYear);
+        return almostAllYearsSpecies;
+    }
+
     public static void main(String[] args) throws IOException {
         StatisticsCalculator calculator = new StatisticsCalculator();
         List<Sighting> sightings = calculator.readMySightings();
@@ -114,9 +134,15 @@ public class StatisticsCalculator {
         System.out.printf("\nPreviously sighted species not sighted this year (%d):%n", s.size());
         s.forEach(x->System.out.println(x.getSpeciesName()));
 
+        s = calculator.calcSpeciesSightedAlmostEveryYearButNoInTheCurrentYear(sightings);
+        System.out.printf("\nSighted every previous year except at most one, but not this year (%d):%n", s.size());
+        s.forEach(x->System.out.println(x.getSpeciesName()));
+
         s = calculator.calcSpeciesSightedEveryYearButNoInTheCurrentYear(sightings);
         System.out.printf("\nSighted every previous year, but not this year (%d):%n", s.size());
         s.forEach(x->System.out.println(x.getSpeciesName()));
+
+
     }
 
 
