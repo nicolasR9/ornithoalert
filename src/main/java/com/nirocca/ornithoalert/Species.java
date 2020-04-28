@@ -1,7 +1,7 @@
 package com.nirocca.ornithoalert;
 
 public enum Species {
-    //find species id: https://www.ornitho.de/index.php?m_id=15&showback=stor&backlink=skip&y=2019&frmSpecies=176&sp_tg=1
+    //find species id: https://www.ornitho.de/index.php?m_id=15&showback=stor&backlink=skip&y=2019&frmSpecies=176&sp_tg=1 (frmSpecies)
 
     WALDSCHNEPFE(240),
     WIESENPIEPER(463),
@@ -41,7 +41,8 @@ public enum Species {
     EISENTE(129),
     TRAUERENTE(129),
     OHRENTAUCHER(6),
-    GELBSCHNABELTAUCHER(4);
+    GELBSCHNABELTAUCHER(4),
+    BERGHAENFLING(503);
 
 
     private int ornithoSpeciesId;
