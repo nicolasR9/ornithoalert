@@ -31,4 +31,9 @@ public class Species {
     public int hashCode() {
         return Objects.hash(speciesId);
     }
+
+    @Override
+    public String toString() {
+        return speciesName;
+    }
 }
