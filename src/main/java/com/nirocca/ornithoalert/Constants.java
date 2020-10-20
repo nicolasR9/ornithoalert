@@ -12,7 +12,6 @@ public class Constants {
    
     static final Set<String> SPECIES_TO_EXCLUDE = new HashSet<>(Arrays.asList(
             "Keine Art",
-            "Hausente",
             "Saatgans (ssp. fabalis), Waldsaatgans",
             "Gimpel (ssp. pyrrhula), Trompetergimpel",
             "Bl\u00e4ss- / Saatg\u00e4nse",
@@ -50,12 +49,10 @@ public class Constants {
         LATIN_NAME_TO_COLOR.put("Cygnus bewickii", "lightgreen"); //Zwergschwan
 
         LATIN_NAME_TO_COLOR.put("Gavia stellata", "aquamarine"); //Sterntaucher
-        LATIN_NAME_TO_COLOR.put("Podiceps auritus", "aquamarine"); //Ohrentaucher
         LATIN_NAME_TO_COLOR.put("Gavia arctica", "aquamarine"); //Prachttaucher
 
         LATIN_NAME_TO_COLOR.put("Falco columbarius", "teal"); //Merlin
         LATIN_NAME_TO_COLOR.put("Falco vespertinus", "teal"); //Rotfußfalke
-        LATIN_NAME_TO_COLOR.put("Circus pygargus", "teal"); //Wiesenweihe
 
         LATIN_NAME_TO_COLOR.put("Botaurus stellaris", "darkblue"); //Rohrdommel
 
@@ -64,22 +61,20 @@ public class Constants {
         LATIN_NAME_TO_COLOR.put("Coturnix coturnix", "yellow"); //Wachtel
 
         //Limikolen
-        LATIN_NAME_TO_COLOR.put("Pluvialis squatarola", "beige"); //Kiebitzregenpfeifer
         LATIN_NAME_TO_COLOR.put("Pluvialis apricaria", "beige"); //Goldregenpfeifer
         LATIN_NAME_TO_COLOR.put("Calidris minuta", "beige"); //Zwergstrandlaeufer
 
         LATIN_NAME_TO_COLOR.put("Tyto alba", "darkslategray"); //Schleiereule
-        LATIN_NAME_TO_COLOR.put("Asio flammeus", "darkslategray"); //Sumpfohreule
 
 
         LATIN_NAME_TO_COLOR.put("Hydrocoloeus minutus", "lightblue"); //Zwergmoewe
         LATIN_NAME_TO_COLOR.put("Larus fuscus", "lightblue"); //Heringsmöwe
 
-        LATIN_NAME_TO_COLOR.put("Chlidonias hybrida", "white"); //Weissbartseeschwalbe
+        LATIN_NAME_TO_COLOR.put("Hydroprogne caspia", "white"); //Raubseeschwalbe
 
         LATIN_NAME_TO_COLOR.put("Anthus campestris", "sandybrown"); //Brachpieper
 
-        LATIN_NAME_TO_COLOR.put("Ciconia nigra", "black"); //Schwarzstorch
+        //free: black
 
     }
     
