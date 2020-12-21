@@ -47,7 +47,8 @@ public enum Species {
     TRAUERENTE(129),
     OHRENTAUCHER(6),
     GELBSCHNABELTAUCHER(4),
-    BERGHAENFLING(503);
+    BERGHAENFLING(503),
+    BIENENFRESSER(330);
 
 
     private int ornithoSpeciesId;
