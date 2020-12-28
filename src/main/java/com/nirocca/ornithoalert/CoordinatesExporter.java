@@ -69,7 +69,7 @@ public class CoordinatesExporter {
     }
     
 
-    private Coordinates getCoordinates(String detailsUrl) throws IOException {
+    public static Coordinates getCoordinates(String detailsUrl) throws IOException {
         String html = ornithoPageReader.getHtmlForPage(detailsUrl);
         // for sightings with exact locations, the coordinates are directly on this page
         Pattern pattern = Pattern.compile(".*openlayerMap.addMovingMarker\\((\\d+\\.\\d+),(\\d+\\.\\d+).*", Pattern.DOTALL);
