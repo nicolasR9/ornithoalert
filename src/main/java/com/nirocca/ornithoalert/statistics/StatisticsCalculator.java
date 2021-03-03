@@ -132,7 +132,6 @@ public class StatisticsCalculator {
 
         Set<Species> s = calculator.calcPreviouslySightedSpeciesNotSightedInTheCurrentYear(sightings);
         System.out.printf("\nPreviously sighted species not sighted this year (%d):%n", s.size());
-        s.forEach(x->System.out.println(x.getSpeciesName()));
 
         s = calculator.calcSpeciesSightedAlmostEveryYearButNoInTheCurrentYear(sightings);
         System.out.printf("\nSighted every previous year except at most one, but not this year (%d):%n", s.size());
