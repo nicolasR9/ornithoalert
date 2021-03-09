@@ -43,15 +43,9 @@ public class Constants {
     // see https://www.w3schools.com/colors/colors_names.asp
     static {
         LATIN_NAME_TO_COLOR.put("Anser brachyrhynchus", "darkgreen"); //Kurzschnabelgans
-        LATIN_NAME_TO_COLOR.put("Branta ruficollis", "darkgreen"); //Rothalsgans
-        LATIN_NAME_TO_COLOR.put("Aythya marila", "darkgreen"); //Bergente
 
         LATIN_NAME_TO_COLOR.put("Cygnus bewickii", "lightgreen"); //Zwergschwan
 
-        LATIN_NAME_TO_COLOR.put("Gavia stellata", "aquamarine"); //Sterntaucher
-        LATIN_NAME_TO_COLOR.put("Gavia arctica", "aquamarine"); //Prachttaucher
-
-        LATIN_NAME_TO_COLOR.put("Falco columbarius", "teal"); //Merlin
         LATIN_NAME_TO_COLOR.put("Falco vespertinus", "teal"); //Rotfußfalke
 
         LATIN_NAME_TO_COLOR.put("Botaurus stellaris", "darkblue"); //Rohrdommel
@@ -60,22 +54,18 @@ public class Constants {
 
         LATIN_NAME_TO_COLOR.put("Coturnix coturnix", "yellow"); //Wachtel
 
-        //Limikolen
-        LATIN_NAME_TO_COLOR.put("Pluvialis apricaria", "beige"); //Goldregenpfeifer
         LATIN_NAME_TO_COLOR.put("Calidris minuta", "beige"); //Zwergstrandlaeufer
 
-        LATIN_NAME_TO_COLOR.put("Tyto alba", "darkslategray"); //Schleiereule
-
+        LATIN_NAME_TO_COLOR.put("Tyto alba", "black"); //Schleiereule
 
         LATIN_NAME_TO_COLOR.put("Hydrocoloeus minutus", "lightblue"); //Zwergmoewe
-        LATIN_NAME_TO_COLOR.put("Larus fuscus", "lightblue"); //Heringsmöwe
+        LATIN_NAME_TO_COLOR.put("Larus fuscus", "lightblue"); //Heringsmoewe
 
         LATIN_NAME_TO_COLOR.put("Hydroprogne caspia", "white"); //Raubseeschwalbe
 
         LATIN_NAME_TO_COLOR.put("Anthus campestris", "sandybrown"); //Brachpieper
-
-        //free: black
-
+        LATIN_NAME_TO_COLOR.put("Linaria flavirostris", "darkslategray"); //Berghaenfling
+        //free: aquamarine, white
     }
     
     public enum SortBy {
