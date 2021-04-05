@@ -60,8 +60,10 @@ public enum Species {
     DREIZEHENMOEWE(286),
     TROTTELLUMME(301),
     TORDALK(300),
-    EISSTURMVOGEL(10);
-
+    EISSTURMVOGEL(10),
+    HECKENBRAUNELLE(461),
+    GEBIRGSSTELZE(474),
+    ROTHALSTAUCHER(9);
 
 
     private int ornithoSpeciesId;
