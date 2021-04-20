@@ -63,7 +63,10 @@ public enum Species {
     EISSTURMVOGEL(10),
     HECKENBRAUNELLE(461),
     GEBIRGSSTELZE(474),
-    ROTHALSTAUCHER(9);
+    ROTHALSTAUCHER(9),
+    FITIS(445),
+    GARTENROTSCHWANZ(395),
+    STEINSCHMAETZER(399);
 
 
     private int ornithoSpeciesId;
