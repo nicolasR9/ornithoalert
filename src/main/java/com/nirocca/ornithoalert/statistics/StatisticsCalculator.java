@@ -18,13 +18,19 @@ import java.util.stream.Collectors;
 public class StatisticsCalculator {
 
     private static final int MY_FIRST_SIGHTING_YEAR = 2017;
+    private static final Set<String> DO_NOT_COUNT_SPECIES = Set.of("Hausente", "Stockente, Bastard, fehlfarben", "Tafel-_x_Reiherente");
 
     private List<Sighting> readMySightings() throws IOException {
         List<String> lines = IOUtils.readLines(
                 StatisticsCalculator.class.getResourceAsStream("/ornitho_export_meine.txt"));
         DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
-        return lines.subList(2, lines.size()).stream().map(line -> parseSighting(df, line))
-                .collect(Collectors.toList());
+        List<Sighting> allSightings = lines.subList(2, lines.size()).stream().map(line -> parseSighting(df, line))
+            .collect(Collectors.toList());
+        allSightings = allSightings
+            .stream()
+            .filter(s -> !DO_NOT_COUNT_SPECIES.contains(s.getSpecies().getSpeciesName()))
+            .collect(Collectors.toList());
+        return allSightings;
     }
 
     private Sighting parseSighting(DateFormat df, String line) {

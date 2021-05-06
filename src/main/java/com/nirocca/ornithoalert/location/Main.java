@@ -19,8 +19,8 @@ public class Main {
     private static final LocalDate FROM = LocalDate.of(2020, 1, 1);
     private static final LocalDate TO = LocalDate.now();
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-    private static final Species[] SPECIES = {WIESENPIEPER, STEINSCHMAETZER, FITIS, GARTENROTSCHWANZ};
-    private static final String PATH_TO_COORDS_DIR = "/Users/nirocca/tmp/voegel/tmp";
+    private static final Species[] SPECIES = {REGENBRACHVOGEL};
+    private static final String PATH_TO_COORDS_DIR = "/Users/nirocca/tmp/voegel/tmp/";
 
     public static void main(String[] args) throws IOException {
         CoordinatesExporter coordinatesExporter = new CoordinatesExporter();
