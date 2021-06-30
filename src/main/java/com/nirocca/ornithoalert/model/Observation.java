@@ -14,7 +14,7 @@ public final class Observation {
     }
 
     public String parseLatinName() {
-        return observationElement.selectFirst("i").text();
+        return observationElement.select("i").not("[class]").text();
     }
     
     public String parseUrl() {
