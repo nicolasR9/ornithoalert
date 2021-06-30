@@ -40,12 +40,17 @@ public class Main {
         }
         
         System.out.println("\nMax 10:");
-        maxSpecies.getMaxElements(10).forEach(System.out::println);
+        maxSpecies.getMaxElements(30).forEach(System.out::println);
         
         System.out.println("\nCoordinates for GPS Visualizer:");
         
         CoordinatesExporter coordinatesExporter = new CoordinatesExporter();
         coordinatesExporter.printCoordinates(lastSightings, onlyExactCoords);
+    }
+
+    public static List<Sighting> calcSightings(String url, SortBy sortBy, boolean filterOnlyThisYearParam) throws IOException {
+        filterOnlyThisYear = filterOnlyThisYearParam;
+        return calcSightings(url, sortBy);
     }
 
     //must remain public (accessed by ornitho-service)
