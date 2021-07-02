@@ -1,5 +1,6 @@
 package com.nirocca.ornithoalert.statistics;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -18,7 +19,7 @@ import java.util.stream.Collectors;
 public class StatisticsCalculator {
 
     private static final int MY_FIRST_SIGHTING_YEAR = 2017;
-    private static final Set<String> DO_NOT_COUNT_SPECIES = Set.of("Hausente", "Stockente, Bastard, fehlfarben", "Tafel-_x_Reiherente");
+    private static final Set<String> DO_NOT_COUNT_SPECIES = new HashSet<>(Arrays.asList("Hausente", "Stockente, Bastard, fehlfarben", "Tafel-_x_Reiherente"));
 
     private List<Sighting> readMySightings() throws IOException {
         List<String> lines = IOUtils.readLines(
