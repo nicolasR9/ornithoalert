@@ -48,13 +48,13 @@ public class Main {
         coordinatesExporter.printCoordinates(lastSightings, onlyExactCoords);
     }
 
-    public static List<Sighting> calcSightings(String url, SortBy sortBy, boolean filterOnlyThisYearParam) throws IOException {
-        filterOnlyThisYear = filterOnlyThisYearParam;
-        return calcSightings(url, sortBy);
+    public static List<Sighting> calcSightings(String url, SortBy sortBy) throws IOException {
+        return calcSightings(url, sortBy, false);
     }
 
     //must remain public (accessed by ornitho-service)
-    public static List<Sighting> calcSightings(String url, SortBy sortBy) throws IOException {
+    public static List<Sighting> calcSightings(String url, SortBy sortBy, boolean filterOnlyThisYearParam) throws IOException {
+        filterOnlyThisYear = filterOnlyThisYearParam;
         MySightingsReader mySightingsReader = new MySightingsReader();
         List<String> mySightedSpeciesLatin = filterOnlyThisYear ?
             mySightingsReader.readMySightedSpeciesLatinThisYear() :
