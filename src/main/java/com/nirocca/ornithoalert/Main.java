@@ -31,7 +31,7 @@ public class Main {
     public static void main(String[] args) throws IOException, ParseException {
         initParams(args);
 
-        List<Sighting> lastSightings = calcSightings(url, sortBy);
+        List<Sighting> lastSightings = calcSightings(url, sortBy, filterOnlyThisYear);
         MaxNElementsCollector<LatinComparedSpecies> maxSpecies = new MaxNElementsCollector<>();
         System.out.println("Markdown list:");
         for (Sighting sighting : lastSightings) {

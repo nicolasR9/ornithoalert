@@ -48,24 +48,17 @@ public class Constants {
 
         LATIN_NAME_TO_COLOR.put("Falco vespertinus", "teal"); //Rotfußfalke
 
-        LATIN_NAME_TO_COLOR.put("Botaurus stellaris", "darkblue"); //Rohrdommel
-
-        LATIN_NAME_TO_COLOR.put("Locustella fluviatilis", "violet"); //Schlagschwirl
-
-        LATIN_NAME_TO_COLOR.put("Coturnix coturnix", "yellow"); //Wachtel
-
-        LATIN_NAME_TO_COLOR.put("Calidris minuta", "beige"); //Zwergstrandlaeufer
-
         LATIN_NAME_TO_COLOR.put("Tyto alba", "black"); //Schleiereule
-
-        LATIN_NAME_TO_COLOR.put("Hydrocoloeus minutus", "lightblue"); //Zwergmoewe
-        LATIN_NAME_TO_COLOR.put("Larus fuscus", "lightblue"); //Heringsmoewe
 
         LATIN_NAME_TO_COLOR.put("Hydroprogne caspia", "white"); //Raubseeschwalbe
 
-        LATIN_NAME_TO_COLOR.put("Anthus campestris", "sandybrown"); //Brachpieper
         LATIN_NAME_TO_COLOR.put("Linaria flavirostris", "darkslategray"); //Berghaenfling
-        //free: aquamarine, white
+
+        LATIN_NAME_TO_COLOR.put("Sternula albifrons", "aquamarine"); //Zwergseeschwalbe
+        LATIN_NAME_TO_COLOR.put("Himantopus himantopus", "lightblue"); //Stelzenlaeufer
+        LATIN_NAME_TO_COLOR.put("Calidris falcinellus", "darkblue"); //Sumpflaeufer
+        LATIN_NAME_TO_COLOR.put("Tadorna ferruginea", "violet"); //Rostgans
+        //free: white, yellow, sandybrown, beige
     }
     
     public enum SortBy {
