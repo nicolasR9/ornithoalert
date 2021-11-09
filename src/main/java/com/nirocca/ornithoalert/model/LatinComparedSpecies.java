@@ -8,6 +8,11 @@ public final class LatinComparedSpecies {
         this.germanName = germanName;
         this.latinName = latinName;
     }
+
+    public String getLatinName() {
+        return latinName;
+    }
+
     @Override
     public String toString() {
         return germanName;

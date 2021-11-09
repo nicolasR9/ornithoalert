@@ -24,8 +24,10 @@ public class CoordinatesExporter {
     private static final String PATH_TO_COORDS_FILE = "/Users/nirocca/tmp/coord.txt";
     
     private static OrnithoPageReader ornithoPageReader = new OrnithoPageReader();
+    private MostFrequentColorProvider colorProvider;
 
     public void printCoordinates(List<Sighting> sightings, boolean onlyExactCoords, OutputStream outStream) throws IOException {
+        colorProvider = new MostFrequentColorProvider(sightings);
         try (PrintWriter out = new PrintWriter(outStream)) {
 
             out.println("name,desc,latitude,longitude,color,url");
@@ -62,10 +64,11 @@ public class CoordinatesExporter {
     }
     
     private String getColor(Sighting sighting) {
-         if (Constants.LATIN_NAME_TO_COLOR.containsKey(sighting.getLatinName())) {
-         return Constants.LATIN_NAME_TO_COLOR.get(sighting.getLatinName());
-         }
-         return "red";
+        return colorProvider.getColor(sighting);
+//         if (Constants.LATIN_NAME_TO_COLOR.containsKey(sighting.getLatinName())) {
+//            return Constants.LATIN_NAME_TO_COLOR.get(sighting.getLatinName());
+//         }
+//         return "red";
     }
     
 

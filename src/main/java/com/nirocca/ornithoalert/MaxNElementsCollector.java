@@ -34,6 +34,10 @@ public class MaxNElementsCollector<T> {
             this.count = count;
         }
 
+        public T getElement() {
+            return element;
+        }
+
         @Override
         public int compareTo(ElementWithCount<T> o) {
             return Integer.compare(count, o.count);
