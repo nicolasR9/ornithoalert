@@ -78,6 +78,8 @@ public class Main {
 
     private static Predicate<Sighting> isWithoutCommonFilterPattern() {
         return a->!a.getGermanNamePlural().contains("unbestimmt")
+            && !a.getGermanNamePlural().contains("- / ")
+            && !a.getGermanNamePlural().contains("_oder_")
             && !a.getGermanNamePlural().contains("_x_")
             && !a.getGermanNamePlural().contains(" x ");
     }
@@ -130,10 +132,10 @@ public class Main {
             case TIME:
                 return lastSightings;
             case REGION:
-                comparator = (a, b)->a.getLocation().compareTo(b.getLocation());
+                comparator = Comparator.comparing(Sighting::getLocation);
                 break;
             case SPECIES:
-                comparator = (a, b)->a.getGermanNamePlural().compareTo(b.getGermanNamePlural());
+                comparator = Comparator.comparing(Sighting::getGermanNamePlural);
                 break;
         }
         return lastSightings.stream().sorted(comparator).collect(Collectors.toList());
