@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
 public class CoordinatesExporter {
     private static final String PATH_TO_COORDS_FILE = "/Users/nirocca/tmp/coord.txt";
     
-    private static OrnithoPageReader ornithoPageReader = new OrnithoPageReader();
+    private static final OrnithoPageReader ornithoPageReader = new OrnithoPageReader();
     private MostFrequentColorProvider colorProvider;
 
     public void printCoordinates(List<Sighting> sightings, boolean onlyExactCoords, OutputStream outStream) throws IOException {

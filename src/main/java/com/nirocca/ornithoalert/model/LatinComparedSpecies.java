@@ -1,8 +1,8 @@
 package com.nirocca.ornithoalert.model;
 
 public final class LatinComparedSpecies {
-    private String germanName;
-    private String latinName;
+    private final String germanName;
+    private final String latinName;
     
     public LatinComparedSpecies(String germanName, String latinName) {
         this.germanName = germanName;
@@ -17,6 +17,7 @@ public final class LatinComparedSpecies {
     public String toString() {
         return germanName;
     }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -34,11 +35,9 @@ public final class LatinComparedSpecies {
             return false;
         LatinComparedSpecies other = (LatinComparedSpecies) obj;
         if (latinName == null) {
-            if (other.latinName != null)
-                return false;
-        } else if (!latinName.equals(other.latinName))
-            return false;
-        return true;
+            return other.latinName == null;
+        } else
+            return latinName.equals(other.latinName);
     }
     
     

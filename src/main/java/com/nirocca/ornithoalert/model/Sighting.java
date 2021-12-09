@@ -5,12 +5,12 @@ import java.util.List;
 
 public class Sighting {
     
-    private String date;
-    private String location;
-    private String germanNamePlural;
-    private String latinName;
-    private String url;
-    private String count;
+    private final String date;
+    private final String location;
+    private final String germanNamePlural;
+    private final String latinName;
+    private final String url;
+    private final String count;
     
     public Sighting(Day day, Location location, Observation observation) {
         this(day.parseDay(), observation.parseGermanName(), observation.parseLatinName(), observation.parseUrl(),

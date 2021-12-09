@@ -3,8 +3,8 @@ package com.nirocca.ornithoalert.statistics;
 import java.util.Date;
 
 class Sighting {
-    private Species species;
-    private Date sightingDate;
+    private final Species species;
+    private final Date sightingDate;
     
     
     Sighting(Species species, Date sightingDate) {

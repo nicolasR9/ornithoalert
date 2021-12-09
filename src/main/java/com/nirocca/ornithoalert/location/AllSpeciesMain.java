@@ -1,11 +1,8 @@
 package com.nirocca.ornithoalert.location;
 
-import static com.nirocca.ornithoalert.Species.ROSTGANS;
-
 import com.nirocca.ornithoalert.Constants.SortBy;
 import com.nirocca.ornithoalert.CoordinatesExporter;
 import com.nirocca.ornithoalert.MaxNElementsCollector;
-import com.nirocca.ornithoalert.Species;
 import com.nirocca.ornithoalert.model.LatinComparedSpecies;
 import com.nirocca.ornithoalert.model.Sighting;
 import java.io.FileOutputStream;

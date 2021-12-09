@@ -3,7 +3,7 @@ package com.nirocca.ornithoalert.model;
 import org.jsoup.nodes.Element;
 
 public final class Observation {
-    private Element observationElement;
+    private final Element observationElement;
     
     public Observation(Element observationElement) {
         this.observationElement = observationElement;
@@ -18,10 +18,7 @@ public final class Observation {
     }
     
     public String parseUrl() {
-        //<a href="https://www.ornitho.de/index.php?m_id=54&id=28889469">
         return observationElement.selectFirst("a[href~=https://www.ornitho.de/index.php\\?m_id=54.*]").attr("href");
-        //String obervationId = observationElement.selectFirst("form[id~=btn-edit-*]").selectFirst("input[name=id]").val();
-        //return String.format("https://www.ornitho.de/index.php?m_id=54&id=%s", obervationId);
     }
 
     public String parseCount() {

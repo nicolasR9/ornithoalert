@@ -87,13 +87,13 @@ public enum Species {
     STEINSCHMAETZER(399);
 
 
-    private int ornithoSpeciesId;
+    private final int ornithoSpeciesId;
 
     public int getOrnithoSpeciesId() {
         return ornithoSpeciesId;
     }
 
-    private Species(int ornithoSpeciesId) {
+    Species(int ornithoSpeciesId) {
         this.ornithoSpeciesId = ornithoSpeciesId;
     }
 }

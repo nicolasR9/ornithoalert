@@ -3,8 +3,8 @@ package com.nirocca.ornithoalert.statistics;
 import java.util.Objects;
 
 public class Species {
-    private int speciesId;
-    private String speciesName;
+    private final int speciesId;
+    private final String speciesName;
 
     Species(int speciesId, String speciesName) {
         this.speciesId = speciesId;

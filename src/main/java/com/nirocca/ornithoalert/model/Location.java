@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class Location {
-    private Element locationElement;
-    private List<Observation> observations = new ArrayList<>();
+    private final Element locationElement;
+    private final List<Observation> observations = new ArrayList<>();
     
     public Location(Element locationElement) {
         this.locationElement = locationElement;

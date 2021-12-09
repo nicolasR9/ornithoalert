@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class MaxNElementsCollector<T> {
     
-    private Map<T, Integer> countMap = new HashMap<>();
+    private final Map<T, Integer> countMap = new HashMap<>();
     
     public void add(T element) {
         if (!countMap.containsKey(element)) {
@@ -19,15 +19,14 @@ public class MaxNElementsCollector<T> {
     
     public List<ElementWithCount<T>> getMaxElements(int count) {
         List<ElementWithCount<T>> list = new ArrayList<>(countMap.size());
-        countMap.entrySet().stream()
-                .forEach(e -> list.add(new ElementWithCount<T>(e.getKey(), e.getValue())));
-        Collections.sort(list, Collections.reverseOrder());
+        countMap.forEach((key, value) -> list.add(new ElementWithCount<>(key, value)));
+        list.sort(Collections.reverseOrder());
         return list.subList(0, Math.min(count, list.size()));
     }
     
     public static final class ElementWithCount<T> implements Comparable<ElementWithCount<T>>{
-        private T element;
-        private int count;
+        private final T element;
+        private final int count;
         
         public ElementWithCount(T element, int count) {
             this.element = element;

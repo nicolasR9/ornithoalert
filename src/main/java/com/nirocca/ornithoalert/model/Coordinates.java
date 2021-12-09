@@ -7,8 +7,8 @@ import java.util.regex.Pattern;
 
 public class Coordinates {
     private double latitude;
-    private double longitude;
-    private boolean exact;
+    private final double longitude;
+    private final boolean exact;
     
     public Coordinates(String latitude, String longitude, boolean exact) {
         this.latitude = toDecimal(latitude);
@@ -72,8 +72,6 @@ public class Coordinates {
         Coordinates other = (Coordinates) obj;
         if (Double.doubleToLongBits(latitude) != Double.doubleToLongBits(other.latitude))
             return false;
-        if (Double.doubleToLongBits(longitude) != Double.doubleToLongBits(other.longitude))
-            return false;
-        return true;
+        return Double.doubleToLongBits(longitude) == Double.doubleToLongBits(other.longitude);
     }
 }

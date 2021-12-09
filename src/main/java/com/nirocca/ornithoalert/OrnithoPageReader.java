@@ -10,10 +10,11 @@ import org.apache.http.util.EntityUtils;
 import java.io.IOException;
 
 public class OrnithoPageReader {
-    private BasicCookieStore cookieStore;
-    private HttpClient client;
+
+    private final HttpClient client;
 
     public OrnithoPageReader() {
+        BasicCookieStore cookieStore;
         try {
             cookieStore = new CookiesReader().readCookies();
         } catch (IOException e) {
@@ -29,8 +30,7 @@ public class OrnithoPageReader {
 
         HttpResponse response = client.execute(request);
 
-        String html = EntityUtils.toString(response.getEntity(), "UTF-8");
-        return html;
+        return EntityUtils.toString(response.getEntity(), "UTF-8");
     }
 
 }

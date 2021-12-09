@@ -19,9 +19,9 @@ public class RegionLastSightingsReader {
 
     private static final int CHUNK_SIZE = 5;
     
-    private SightingsPageParser parser = new SightingsPageParser();
+    private final SightingsPageParser parser = new SightingsPageParser();
     
-    private OrnithoPageReader ornithoPageReader = new OrnithoPageReader();
+    private final OrnithoPageReader ornithoPageReader = new OrnithoPageReader();
     
 
     public List<Sighting> read(String url) {
