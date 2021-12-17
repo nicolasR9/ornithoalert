@@ -3,6 +3,7 @@ package com.nirocca.ornithoalert;
 import com.nirocca.ornithoalert.model.Day;
 import com.nirocca.ornithoalert.model.Location;
 import com.nirocca.ornithoalert.model.Observation;
+import java.util.Collections;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -17,6 +18,9 @@ public class SightingsPageParser {
     public List<Day> parseSightingStructure(String html) {
         Document doc = Jsoup.parse(html);
         Element topElement = doc.selectFirst("div.listContainer");
+        if (topElement == null) {
+            return Collections.emptyList();
+        }
         
         List<Day> days = new ArrayList<>();
         Day currentDay = null;
