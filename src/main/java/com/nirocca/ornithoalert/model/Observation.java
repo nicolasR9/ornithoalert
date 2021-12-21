@@ -14,7 +14,8 @@ public final class Observation {
     }
 
     public String parseLatinName() {
-        return observationElement.select("i").not("[class]").text();
+        String result = observationElement.select("i").not("[class]").text();
+        return result.replaceAll("\\(", "").replaceAll("\\)", "");
     }
     
     public String parseUrl() {

@@ -50,7 +50,7 @@ public class MySightingsReader {
     }
 
     private List<String> extractBirdNames(String html) {
-        Pattern p = Pattern.compile("<span style=\"color:#[0-9A-H]+\"><b>[^<]+</b> \\(<i>([^<]+)</i>\\)</span>");
+        Pattern p = Pattern.compile("<span style=\"color:#[0-9A-H]+\"><b>[^<]+</b> <i>\\(([^<]+)\\)</i></span>");
         ArrayList<String> result = new ArrayList<>();
         Matcher m = p.matcher(html);
         while (m.find()) {

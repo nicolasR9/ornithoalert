@@ -50,10 +50,14 @@ public class StatisticsCalculator {
     }
     
     private long calcSpeciesCountFirstSighting(int year, List<Sighting> sightings) {
+        return calcSpeciesFirstSighting(year, sightings).size();
+    }
+
+    private Set<Species> calcSpeciesFirstSighting(int year, List<Sighting> sightings) {
         Set<Species> speciesSightedInPreviousYears = getSpeciesUpToYear(sightings, year);
         Set<Species> speciesForYear = getSpeciesForYear(sightings, year);
         speciesForYear.removeAll(speciesSightedInPreviousYears);
-        return speciesForYear.size();
+        return speciesForYear;
     }
 
     private long calcSpeciesCountUntilDate(int year, List<Sighting> sightings) {
@@ -129,8 +133,9 @@ public class StatisticsCalculator {
     public static void main(String[] args) throws IOException {
         StatisticsCalculator calculator = new StatisticsCalculator();
         List<Sighting> sightings = calculator.readMySightings();
-        
-        for (int year = MY_FIRST_SIGHTING_YEAR; year <= Calendar.getInstance().get(Calendar.YEAR); year++) {
+
+        int thisYear = Calendar.getInstance().get(Calendar.YEAR);
+        for (int year = MY_FIRST_SIGHTING_YEAR; year <= thisYear; year++) {
             System.out.println(year);
             System.out.println("\ttotal species: " + calculator.calcSpeciesCount(year, sightings));
             System.out.println("\tfirst time s.: " + calculator.calcSpeciesCountFirstSighting(year, sightings));
@@ -148,7 +153,7 @@ public class StatisticsCalculator {
         System.out.printf("\nSighted every previous year, but not this year (%d):%n", s.size());
         s.forEach(x->System.out.println(x.getSpeciesName()));
 
-
+        System.out.println("Sighted first this year: " + calculator.calcSpeciesFirstSighting(thisYear, sightings));
     }
 
 
