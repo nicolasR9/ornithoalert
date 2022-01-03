@@ -2,21 +2,26 @@ package com.nirocca.ornithoalert.statistics;
 
 import java.util.Date;
 
-class Sighting {
+public class Sighting {
     private final Species species;
     private final Date sightingDate;
+    private final boolean isZeroCount;
     
-    
-    Sighting(Species species, Date sightingDate) {
+    Sighting(Species species, Date sightingDate, String countString) {
         this.species = species;
         this.sightingDate = sightingDate;
+        isZeroCount = "0".equals(countString);
     }
 
     Date getSightingDate() {
         return sightingDate;
     }
 
-    Species getSpecies() {
+    public Species getSpecies() {
         return species;
+    }
+
+    public boolean isZeroCount() {
+        return isZeroCount;
     }
 }

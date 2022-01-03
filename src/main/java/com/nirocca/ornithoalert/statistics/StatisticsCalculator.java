@@ -1,25 +1,23 @@
 package com.nirocca.ornithoalert.statistics;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-import org.apache.commons.io.IOUtils;
-
+import com.nirocca.ornithoalert.util.SightingFilter;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.stream.Collectors;
+import org.apache.commons.io.IOUtils;
 
 public class StatisticsCalculator {
 
     private static final int MY_FIRST_SIGHTING_YEAR = 2017;
-    private static final Set<String> DO_NOT_COUNT_SPECIES = new HashSet<>(Arrays.asList("Hausente", "Stockente, Bastard, fehlfarben", "Tafel-_x_Reiherente"));
 
     private List<Sighting> readMySightings() throws IOException {
         List<String> lines = IOUtils.readLines(
@@ -27,17 +25,14 @@ public class StatisticsCalculator {
         DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
         List<Sighting> allSightings = lines.subList(2, lines.size()).stream().map(line -> parseSighting(df, line))
             .collect(Collectors.toList());
-        allSightings = allSightings
-            .stream()
-            .filter(s -> !DO_NOT_COUNT_SPECIES.contains(s.getSpecies().getSpeciesName()))
-            .collect(Collectors.toList());
-        return allSightings;
+
+        return SightingFilter.filterOutNonRelevantSightingsStats(allSightings);
     }
 
     private Sighting parseSighting(DateFormat df, String line) {
         String[] parts = line.split("\\t");
         try {
-            return new Sighting(new Species(Integer.parseInt(parts[1]), parts[2]), df.parse(parts[7]));
+            return new Sighting(new Species(Integer.parseInt(parts[1]), parts[2]), df.parse(parts[7]), parts[24]);
         } catch (NumberFormatException e) {
             throw new RuntimeException("Unparsable number: " + parts[1]);
         } catch (ParseException e) {

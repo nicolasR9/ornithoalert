@@ -3,7 +3,12 @@ package com.nirocca.ornithoalert;
 import com.nirocca.ornithoalert.Constants.SortBy;
 import com.nirocca.ornithoalert.model.LatinComparedSpecies;
 import com.nirocca.ornithoalert.model.Sighting;
-import java.util.function.Predicate;
+import com.nirocca.ornithoalert.util.SightingFilter;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -11,12 +16,6 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
-
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class Main {
     
@@ -63,25 +62,13 @@ public class Main {
         RegionLastSightingsReader regionLastSightingsReader = new RegionLastSightingsReader();
         List<Sighting> lastSightings = regionLastSightingsReader.read(url);
 
+        lastSightings = SightingFilter.filterOutNonRelevantSightings(lastSightings);
+        lastSightings = lastSightings.stream()
+            .filter(a -> !mySightedSpeciesLatin.contains(a.getLatinName()))
+            .collect(Collectors.toList());
         lastSightings = sort(lastSightings, sortBy);
 
-        lastSightings = lastSightings.stream()
-                .filter(a->!"0".equals(a.getCount()))
-                .filter(isWithoutCommonFilterPattern())
-                .filter(a->!Constants.SPECIES_TO_EXCLUDE.contains(a.getGermanNamePlural()))
-                .filter(a->!mySightedSpeciesLatin.contains(a.getLatinName()))
-                .collect(Collectors.toList());
-
-
         return lastSightings;
-    }
-
-    private static Predicate<Sighting> isWithoutCommonFilterPattern() {
-        return a->!a.getGermanNamePlural().contains("unbestimmt")
-            && !a.getGermanNamePlural().contains("- / ")
-            && !a.getGermanNamePlural().contains("_oder_")
-            && !a.getGermanNamePlural().contains("_x_")
-            && !a.getGermanNamePlural().contains(" x ");
     }
 
     private static void initParams(String[] args) throws ParseException {

@@ -11,7 +11,7 @@ public class Species {
         this.speciesName = speciesName;
     }
 
-    String getSpeciesName() {
+    public String getSpeciesName() {
         return speciesName;
     }
 

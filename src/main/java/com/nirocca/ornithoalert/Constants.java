@@ -1,45 +1,11 @@
 package com.nirocca.ornithoalert;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 public class Constants {
     static final SortBy DEFAULT_SORT_ORDER = SortBy.SPECIES;
     static final OrnithoUrl DEFAULT_URL = OrnithoUrl.GROSSRAUM_LAST_8_DAYS;
-   
-    static final Set<String> SPECIES_TO_EXCLUDE = new HashSet<>(Arrays.asList(
-            "Keine Art",
-            "Saatgans (ssp. fabalis), Waldsaatgans",
-            "Gimpel (ssp. pyrrhula), Trompetergimpel",
-            "Bl\u00e4ss- / Saatg\u00e4nse",
-            "Tundrasaatg\u00e4nse",
-            "Waldsaatg\u00e4nse",
-            "Bl\u00e4ss-_oder_Saatgans",
-            "Saatgans (ssp. rossicus) Tundrasaatgans",
-            "Hausgans",
-            "Hausente",
-            "Mittelmeer-_oder_Steppenm\u00f6we (Weißkopfm\u00f6we)",
-            "Silber-oderMittelmeer-oderSteppenm\u00f6we",
-            "Silber-_oder_Mittelmeer-_oder_Steppenm\u00f6we",
-            "Silber- / Mittelmeer- / Steppenm\u00f6wen",
-            "Mittelmeer- / Steppenm\u00f6wen",
-            "Stockente, Bastard, fehlfarben",
-            "Stockenten, Bastard, fehlfarben",
-            "Taigabirkenzeisige",
-            "Alpenbirkenzeisige",
-            "Birkenzeisig (ssp. cabaret), Alpenbirkenzeisig",
-            "Birkenzeisig (ssp. flammea), Taigabirkenzeisig",
-            "Buch- / Bergfinken",
-            "Schwanzmeisen (ssp. caudatus)",
-            "Schwanzmeise (ssp. caudatus)",
-            "Stockenten Bastard fehlfarben",
-            "Wasseramsel (ssp. cinclus)",
-            "Raben-_oder_Nebelkr\u00e4he (Aaskr\u00e4he)",
-            "Raben- / Nebelkr\u00e4hen"
-            ));
     
     static final Map<String, String> LATIN_NAME_TO_COLOR = new HashMap<>();
     
