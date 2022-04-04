@@ -6,7 +6,7 @@ import com.nirocca.ornithoalert.model.Sighting;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MostFrequentColorProvider {
+public class MostFrequentColorProvider implements ColorProvider {
 
     private final List<String> latinNamesByFrequency;
     private static final String[] COLORS = {"darkgreen", "darkblue", "black", "white", "yellow", "violet",
@@ -27,6 +27,7 @@ public class MostFrequentColorProvider {
         return latinNamesByFrequency;
     }
 
+    @Override
     public String getColor(Sighting sighting) {
         int pos = latinNamesByFrequency.indexOf(sighting.getLatinName());
         return (pos >= 0 && pos < COLORS.length) ? COLORS[pos] : FALLBACK_COLOR;

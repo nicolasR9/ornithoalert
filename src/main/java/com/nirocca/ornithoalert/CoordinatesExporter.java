@@ -24,10 +24,10 @@ public class CoordinatesExporter {
     private static final String PATH_TO_COORDS_FILE = "/Users/nirocca/tmp/coord.txt";
     
     private static final OrnithoPageReader ornithoPageReader = new OrnithoPageReader();
-    private MostFrequentColorProvider colorProvider;
+    private ColorProvider colorProvider;
 
-    public void printCoordinates(List<Sighting> sightings, boolean onlyExactCoords, OutputStream outStream) throws IOException {
-        colorProvider = new MostFrequentColorProvider(sightings);
+    public void printCoordinates(List<Sighting> sightings, boolean onlyExactCoords, OutputStream outStream, ColorProvider colorProvider) throws IOException {
+        this.colorProvider = colorProvider;
         try (PrintWriter out = new PrintWriter(outStream)) {
 
             out.println("name,desc,latitude,longitude,color,url");
@@ -45,6 +45,10 @@ public class CoordinatesExporter {
                     sighting.getDate().replaceAll(",", ""), latitude, longitude, getColor(sighting), sighting.getUrl());
             }
         }
+    }
+
+    public void printCoordinates(List<Sighting> sightings, boolean onlyExactCoords, OutputStream outStream) throws IOException {
+        printCoordinates(sightings, onlyExactCoords, outStream, new MostFrequentColorProvider(sightings));
     }
 
     public void printCoordinates(List<Sighting> sightings, boolean onlyExactCoords) throws IOException {

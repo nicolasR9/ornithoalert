@@ -17,7 +17,7 @@ public class SightingFilter {
         "Waldsaatg\u00e4nse",
         "Bl\u00e4ss-_oder_Saatgans",
         "Saatgans (ssp. rossicus) Tundrasaatgans",
-        "Saatgans (ssp. rossicus), Tundrasaatgans",
+        "Tundrasaatgans",
         "Hausgans",
         "Hausente",
         "Mittelmeer-_oder_Steppenm\u00f6we (Weißkopfm\u00f6we)",
