@@ -116,7 +116,7 @@ public class StatisticsCalculator {
             getSpeciesForYear(sightings, year).forEach(s -> {if (!count.containsKey(s)) count.put(s, 0); count.put(s, count.get(s) + 1);} );
         }
 
-        Set<Species> almostAllYearsSpecies = count.entrySet().stream().filter(e -> e.getValue() >= (thisYear - MY_FIRST_SIGHTING_YEAR -1))
+        Set<Species> almostAllYearsSpecies = count.entrySet().stream().filter(e -> e.getValue() >= (thisYear - MY_FIRST_SIGHTING_YEAR - 1))
             .map(Entry::getKey).collect(Collectors.toSet());
 
         Set<Species> speciesThisYear = getSpeciesForYear(sightings, thisYear);

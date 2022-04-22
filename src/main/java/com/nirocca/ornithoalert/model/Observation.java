@@ -1,5 +1,7 @@
 package com.nirocca.ornithoalert.model;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.jsoup.nodes.Element;
 
 public final class Observation {
@@ -20,6 +22,15 @@ public final class Observation {
     
     public String parseUrl() {
         return observationElement.selectFirst("a[href~=https://www.ornitho.de/index.php\\?m_id=54.*]").attr("href");
+    }
+
+    public int parseSpeciesId() {
+        var link = observationElement.selectFirst("a[href~=https://www.ornitho.de/index.php\\?m_id=94.*]").attr("href");
+        Matcher m = Pattern.compile(".*sp_S=(\\d+)&.*").matcher(link);
+        if (m.matches()) {
+            return Integer.parseInt(m.group(1));
+        }
+        throw new RuntimeException("No matching link: " + link);
     }
 
     public String parseCount() {

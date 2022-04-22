@@ -9,11 +9,12 @@ public class Sighting {
     private final String location;
     private final String germanNamePlural;
     private final String latinName;
+    private final int speciesId;
     private final String url;
     private final String count;
     
     public Sighting(Day day, Location location, Observation observation) {
-        this(day.parseDay(), observation.parseGermanName(), observation.parseLatinName(), observation.parseUrl(),
+        this(day.parseDay(), observation.parseGermanName(), observation.parseLatinName(), observation.parseSpeciesId(), observation.parseUrl(),
             location.getLocationText(), observation.parseCount());
     }
     
@@ -29,10 +30,11 @@ public class Sighting {
         return sightings;
     }
 
-    private Sighting(String date, String germanNamePlural, String latinName, String url, String location, String count) {
+    private Sighting(String date, String germanNamePlural, String latinName, int speciesId, String url, String location, String count) {
         this.date = date;
         this.germanNamePlural = germanNamePlural;
         this.latinName = latinName;
+        this.speciesId = speciesId;
         this.url = url;
         this.location = location;
         this.count = count;
@@ -41,7 +43,11 @@ public class Sighting {
     public String getLatinName() {
         return latinName;
     }
-    
+
+    public int getSpeciesId() {
+        return speciesId;
+    }
+
     public String getLocation() {
         return location;
     }

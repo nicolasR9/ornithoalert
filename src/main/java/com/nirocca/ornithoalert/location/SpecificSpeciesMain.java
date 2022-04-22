@@ -1,15 +1,12 @@
 package com.nirocca.ornithoalert.location;
 
-import static com.nirocca.ornithoalert.Species.GRAUSCHNAEPPER;
-import static com.nirocca.ornithoalert.Species.HAUBENMEISE;
-import static com.nirocca.ornithoalert.Species.KLEINSPECHT;
-import static com.nirocca.ornithoalert.Species.MITTELSPECHT;
-import static com.nirocca.ornithoalert.Species.SCHWARZSPECHT;
-import static com.nirocca.ornithoalert.Species.TANNENMEISE;
-import static com.nirocca.ornithoalert.Species.TRAUERSCHNAEPPER;
-import static com.nirocca.ornithoalert.Species.WALDBAUMLAEUFER;
-import static com.nirocca.ornithoalert.Species.WALDKAUZ;
-import static com.nirocca.ornithoalert.Species.WALDLAUBSAENGER;
+import static com.nirocca.ornithoalert.Species.DOHLE;
+import static com.nirocca.ornithoalert.Species.GIRLITZ;
+import static com.nirocca.ornithoalert.Species.HECKENBRAUNELLE;
+import static com.nirocca.ornithoalert.Species.KLAPPERGRASMUECKE;
+import static com.nirocca.ornithoalert.Species.STRASSENTAUBE;
+import static com.nirocca.ornithoalert.Species.TUERKENTAUBE;
+import static com.nirocca.ornithoalert.Species.WEISSSTORCH;
 
 import com.nirocca.ornithoalert.ColorProvider;
 import com.nirocca.ornithoalert.Constants.SortBy;
@@ -33,7 +30,7 @@ public class SpecificSpeciesMain {
     private static final String FROM_DATE = "15.04.";
     private static final String TO_DATE = "31.05.";
 
-    private static final Species[] SPECIES = {WALDKAUZ, WALDLAUBSAENGER, WALDBAUMLAEUFER, TANNENMEISE, HAUBENMEISE, MITTELSPECHT, KLEINSPECHT, SCHWARZSPECHT, GRAUSCHNAEPPER, TRAUERSCHNAEPPER};
+    private static final Species[] SPECIES = {WEISSSTORCH, GIRLITZ, DOHLE, TUERKENTAUBE, KLAPPERGRASMUECKE, HECKENBRAUNELLE, STRASSENTAUBE};
 
     private static final String PATH_TO_COORDS_DIR = "/Users/nirocca/tmp/voegel/tmp/";
 

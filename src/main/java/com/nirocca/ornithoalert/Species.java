@@ -1,5 +1,7 @@
 package com.nirocca.ornithoalert;
 
+import java.util.Arrays;
+
 public enum Species {
     //find species id: https://www.ornitho.de/index.php?m_id=15&showback=stor&backlink=skip&y=2019&frmSpecies=176&sp_tg=1 (frmSpecies)
 
@@ -768,6 +770,10 @@ public enum Species {
 
     Species(int ornithoSpeciesId) {
         this.ornithoSpeciesId = ornithoSpeciesId;
+    }
+
+    public static Species getById(int ornithoSpeciesId) {
+        return Arrays.stream(values()).filter(s -> s.ornithoSpeciesId == ornithoSpeciesId).findFirst().get();
     }
 }
 
