@@ -1,5 +1,6 @@
 package com.nirocca.ornithoalert.location;
 
+import com.nirocca.ornithoalert.Constants.FilterMySightedSpecies;
 import com.nirocca.ornithoalert.Constants.SortBy;
 import com.nirocca.ornithoalert.CoordinatesExporter;
 import com.nirocca.ornithoalert.Species;
@@ -29,7 +30,7 @@ public class AllSpeciesSeparateFilesMain {
             String url = URL_TEMPLATE.replaceAll("sp_DFrom=[^&]+&", "sp_DFrom=" + FROM_DATE + year + "&");
             url = url.replaceAll("sp_DTo=[^&]+&", "sp_DTo=" + TO_DATE + year + "&");
 
-            sightings.addAll(com.nirocca.ornithoalert.Main.calcSightings(url, SortBy.SPECIES, false));
+            sightings.addAll(com.nirocca.ornithoalert.Main.calcSightings(url, SortBy.SPECIES, FilterMySightedSpecies.NO));
         }
 
         var map = sightings.stream().collect(Collectors.groupingBy(sighting -> Species.getById(sighting.getSpeciesId()).name()));

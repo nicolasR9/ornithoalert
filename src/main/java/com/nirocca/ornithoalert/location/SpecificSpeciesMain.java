@@ -1,14 +1,9 @@
 package com.nirocca.ornithoalert.location;
 
-import static com.nirocca.ornithoalert.Species.DOHLE;
-import static com.nirocca.ornithoalert.Species.GIRLITZ;
-import static com.nirocca.ornithoalert.Species.HECKENBRAUNELLE;
-import static com.nirocca.ornithoalert.Species.KLAPPERGRASMUECKE;
-import static com.nirocca.ornithoalert.Species.STRASSENTAUBE;
-import static com.nirocca.ornithoalert.Species.TUERKENTAUBE;
 import static com.nirocca.ornithoalert.Species.WEISSSTORCH;
 
 import com.nirocca.ornithoalert.ColorProvider;
+import com.nirocca.ornithoalert.Constants.FilterMySightedSpecies;
 import com.nirocca.ornithoalert.Constants.SortBy;
 import com.nirocca.ornithoalert.CoordinatesExporter;
 import com.nirocca.ornithoalert.Species;
@@ -30,7 +25,7 @@ public class SpecificSpeciesMain {
     private static final String FROM_DATE = "15.04.";
     private static final String TO_DATE = "31.05.";
 
-    private static final Species[] SPECIES = {WEISSSTORCH, GIRLITZ, DOHLE, TUERKENTAUBE, KLAPPERGRASMUECKE, HECKENBRAUNELLE, STRASSENTAUBE};
+    private static final Species[] SPECIES = {WEISSSTORCH};
 
     private static final String PATH_TO_COORDS_DIR = "/Users/nirocca/tmp/voegel/tmp/";
 
@@ -46,7 +41,7 @@ public class SpecificSpeciesMain {
                 url = url.replaceAll("sp_DTo=[^&]+&", "sp_DTo=" + TO_DATE + year + "&");
                 url = url.replaceAll("sp_S=[^&]+&", "sp_S=" + species.getOrnithoSpeciesId() + "&");
 
-                sightings.addAll(com.nirocca.ornithoalert.Main.calcSightings(url, SortBy.TIME, true));
+                sightings.addAll(com.nirocca.ornithoalert.Main.calcSightings(url, SortBy.TIME, FilterMySightedSpecies.NO));
             }
 
             try (FileOutputStream out = new FileOutputStream(PATH_TO_COORDS_DIR  + species.name() + ".txt")) {

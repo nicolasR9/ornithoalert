@@ -1,11 +1,13 @@
 package com.nirocca.ornithoalert;
 
+import com.nirocca.ornithoalert.Constants.FilterMySightedSpecies;
 import com.nirocca.ornithoalert.Constants.SortBy;
 import com.nirocca.ornithoalert.model.LatinComparedSpecies;
 import com.nirocca.ornithoalert.model.Sighting;
 import com.nirocca.ornithoalert.util.SightingFilter;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,13 +26,12 @@ public class Main {
     private static String url;
     private static SortBy sortBy;
     private static boolean onlyExactCoords;
-    private static boolean filterOnlyThisYear;
+    private static FilterMySightedSpecies filterMySightedSpecies;
 
-    
     public static void main(String[] args) throws IOException, ParseException {
         initParams(args);
 
-        List<Sighting> lastSightings = calcSightings(url, sortBy, filterOnlyThisYear);
+        List<Sighting> lastSightings = calcSightings(url, sortBy, filterMySightedSpecies);
         MaxNElementsCollector<LatinComparedSpecies> maxSpecies = new MaxNElementsCollector<>();
         System.out.println("Markdown list:");
         for (Sighting sighting : lastSightings) {
@@ -38,7 +39,7 @@ public class Main {
             maxSpecies.add(new LatinComparedSpecies(sighting.getGermanNamePlural(), sighting.getLatinName()));
         }
         
-        System.out.println("\nMax 10:");
+        System.out.println("\nMax:");
         maxSpecies.getMaxElements(30).forEach(System.out::println);
         
         System.out.println("\nCoordinates for GPS Visualizer:");
@@ -48,16 +49,13 @@ public class Main {
     }
 
     public static List<Sighting> calcSightings(String url, SortBy sortBy) throws IOException {
-        return calcSightings(url, sortBy, false);
+        return calcSightings(url, sortBy, FilterMySightedSpecies.YES);
     }
 
     //must remain public (accessed by ornitho-service)
-    public static List<Sighting> calcSightings(String url, SortBy sortBy, boolean filterOnlyThisYearParam) throws IOException {
-        filterOnlyThisYear = filterOnlyThisYearParam;
+    public static List<Sighting> calcSightings(String url, SortBy sortBy, FilterMySightedSpecies filterOnlyThisYearParam) throws IOException {
         MySightingsReader mySightingsReader = new MySightingsReader();
-        List<String> mySightedSpeciesLatin = filterOnlyThisYear ?
-            mySightingsReader.readMySightedSpeciesLatinThisYear() :
-            mySightingsReader.readMySightedSpeciesLatin();
+        List<String> mySightedSpeciesLatin = readMySightings(filterOnlyThisYearParam, mySightingsReader);
 
         RegionLastSightingsReader regionLastSightingsReader = new RegionLastSightingsReader();
         List<Sighting> lastSightings = regionLastSightingsReader.read(url);
@@ -69,6 +67,16 @@ public class Main {
         lastSightings = sort(lastSightings, sortBy);
 
         return lastSightings;
+    }
+
+    private static List<String> readMySightings(FilterMySightedSpecies filterOnlyThisYearParam, MySightingsReader mySightingsReader)
+        throws IOException {
+        switch (filterOnlyThisYearParam) {
+            case YES: return mySightingsReader.readMySightedSpeciesLatin();
+            case NO: return Collections.emptyList();
+            case ONLY_THIS_YEAR: return mySightingsReader.readMySightedSpeciesLatinThisYear();
+            default: throw new RuntimeException("Unknown parameter: " + filterOnlyThisYearParam);
+        }
     }
 
     private static void initParams(String[] args) throws ParseException {
@@ -107,7 +115,8 @@ public class Main {
         sortBy = SortBy.valueOf(commandLine.getOptionValue("sort", Constants.DEFAULT_SORT_ORDER.name()));
 
         onlyExactCoords = Boolean.parseBoolean(commandLine.getOptionValue("exact", "false"));
-        filterOnlyThisYear = Boolean.parseBoolean(commandLine.getOptionValue("cy", "false"));
+        boolean filterOnlyThisYear = Boolean.parseBoolean(commandLine.getOptionValue("cy", "false"));
+        filterMySightedSpecies = filterOnlyThisYear ? FilterMySightedSpecies.ONLY_THIS_YEAR : FilterMySightedSpecies.YES;
 
         System.out.println("using SORT: " + sortBy);
     }

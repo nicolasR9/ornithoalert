@@ -35,4 +35,10 @@ public class Constants {
         REGION,
         SPECIES
     }
+
+    public enum FilterMySightedSpecies {
+        NO,
+        YES,
+        ONLY_THIS_YEAR
+    }
 }
