@@ -108,7 +108,7 @@ public class StatisticsCalculator {
         return everyYear;
     }
 
-    private Set<Species> calcSpeciesSightedAlmostEveryYearButNoInTheCurrentYear(List<Sighting> sightings) {
+    private Set<Species> calcSpeciesSightedAlmostEveryYearButNoInTheCurrentYear(List<Sighting> sightings, int exceptCount) {
         Map<Species, Integer> count = new HashMap<>();
         int thisYear = Calendar.getInstance().get(Calendar.YEAR);
 
@@ -116,7 +116,7 @@ public class StatisticsCalculator {
             getSpeciesForYear(sightings, year).forEach(s -> {if (!count.containsKey(s)) count.put(s, 0); count.put(s, count.get(s) + 1);} );
         }
 
-        Set<Species> almostAllYearsSpecies = count.entrySet().stream().filter(e -> e.getValue() >= (thisYear - MY_FIRST_SIGHTING_YEAR - 1))
+        Set<Species> almostAllYearsSpecies = count.entrySet().stream().filter(e -> e.getValue() >= (thisYear - MY_FIRST_SIGHTING_YEAR - exceptCount))
             .map(Entry::getKey).collect(Collectors.toSet());
 
         Set<Species> speciesThisYear = getSpeciesForYear(sightings, thisYear);
@@ -140,8 +140,12 @@ public class StatisticsCalculator {
         Set<Species> s = calculator.calcPreviouslySightedSpeciesNotSightedInTheCurrentYear(sightings);
         System.out.printf("\nPreviously sighted species not sighted this year (%d):%n", s.size());
 
-        s = calculator.calcSpeciesSightedAlmostEveryYearButNoInTheCurrentYear(sightings);
-        System.out.printf("\nSighted every previous year except at most one, but not this year (%d):%n", s.size());
+        s = calculator.calcSpeciesSightedAlmostEveryYearButNoInTheCurrentYear(sightings, 2);
+        System.out.printf("\nSighted every previous year except at most 2, but not this year (%d):%n", s.size());
+        s.forEach(x->System.out.println(x.getSpeciesName()));
+
+        s = calculator.calcSpeciesSightedAlmostEveryYearButNoInTheCurrentYear(sightings, 1);
+        System.out.printf("\nSighted every previous year except at most 1, but not this year (%d):%n", s.size());
         s.forEach(x->System.out.println(x.getSpeciesName()));
 
         s = calculator.calcSpeciesSightedEveryYearButNoInTheCurrentYear(sightings);

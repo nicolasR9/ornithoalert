@@ -14,7 +14,7 @@ public class Sighting {
     private final String count;
     
     public Sighting(Day day, Location location, Observation observation) {
-        this(day.parseDay(), observation.parseGermanName(), observation.parseLatinName(), observation.parseSpeciesId(), observation.parseUrl(),
+        this(day.parseDay(), observation.parseGermanName(), observation.parseLatinName(), 1/*observation.parseSpeciesId()*/, observation.parseUrl(),
             location.getLocationText(), observation.parseCount());
     }
     
@@ -30,7 +30,7 @@ public class Sighting {
         return sightings;
     }
 
-    private Sighting(String date, String germanNamePlural, String latinName, int speciesId, String url, String location, String count) {
+    public Sighting(String date, String germanNamePlural, String latinName, int speciesId, String url, String location, String count) {
         this.date = date;
         this.germanNamePlural = germanNamePlural;
         this.latinName = latinName;
