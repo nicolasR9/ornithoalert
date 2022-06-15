@@ -7,7 +7,11 @@ import com.spatial4j.core.shape.Rectangle;
 import com.spatial4j.core.shape.SpatialRelation;
 import com.spatial4j.core.shape.impl.PointImpl;
 import com.spatial4j.core.shape.impl.RectangleImpl;
+import io.jenetics.jpx.GPX;
+import io.jenetics.jpx.GPX.Builder;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.time.Month;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
@@ -30,16 +34,41 @@ public class GridMain {
         findBestPlacesForEachMonth(sightings);
     }
 
-    private static void findBestPlacesForEachMonth(List<Sighting> sightings) {
+    private static void findBestPlacesForEachMonth(List<Sighting> sightings) throws IOException {
         System.out.println("Locations: lower left corner of 20x20km square.");
+
         List<Rectangle> germanyGrid = createGermanyGrid();
         for (Month month : Month.values()) {
             System.out.println("Month: " + month);
             List<Sighting> monthSightings = filterByMonth(sightings, month);
             List<Hotspot> hotspotRanking = getHotspotRanking(germanyGrid, monthSightings);
-            hotspotRanking.subList(0, 5).stream().forEach(System.out::println);
+            List<Hotspot> hotspots = hotspotRanking.subList(0, 5);
+            hotspots.stream().forEach(System.out::println);
             System.out.println();
+            printCoordinatesToFile(month, hotspots);
         }
+    }
+
+    private static void printCoordinatesToFile(Month month, List<Hotspot> hotspots) throws IOException{
+        Builder gpxBuilder = GPX.builder();
+        for (Hotspot hotspot : hotspots) {
+            Rectangle location = hotspot.getLocation();
+            gpxBuilder
+                .addTrack(track -> track
+                    .addSegment(segment -> segment
+                        .addPoint(p -> p.lat(location.getMinX()).lon(location.getMinY()))
+                        .addPoint(p -> p.lat(location.getMinX()).lon(location.getMaxY()))
+                        .addPoint(p -> p.lat(location.getMaxX()).lon(location.getMaxY()))
+                        .addPoint(p -> p.lat(location.getMaxX()).lon(location.getMinY()))
+                        .addPoint(p -> p.lat(location.getMinX()).lon(location.getMinY())))
+                    .desc(String.format("score: %s, species: %s", hotspot.getScore(), hotspot.getSightingCountBySpecies()))
+                );
+        }
+
+        final GPX gpx = gpxBuilder.build();
+
+        String filename = "/Users/nirocca/tmp/voegel/tmp/" + month.getDisplayName(TextStyle.FULL, Locale.GERMAN) + ".gpx";
+        GPX.write(gpx, Path.of(filename));
     }
 
     private static List<Hotspot> getHotspotRanking(List<Rectangle> germanyGrid, List<Sighting> monthSightings) {
@@ -59,8 +88,12 @@ public class GridMain {
         Map<String, Integer> sightingCountBySpecies = hotspot.getSightingCountBySpecies();
         double score = 0.0;
         for (int count : sightingCountBySpecies.values()) {
-            for (int i = 1; i < count; i++) {
-                score += 1.0 / count;
+            if (count > 10) {
+                score += 10;
+            } else if (count >= 5) {
+                score += 5;
+            } else {
+                score += 1;
             }
         }
 
@@ -115,6 +148,7 @@ public class GridMain {
             String[] fields = line.split(",");
             result.add(new Sighting(fields[1], fields[0], null, Integer.parseInt(fields[6]), fields[5], fields[2] + "," + fields[3], "-1"));
         }
+        //TODO filter out already spotted species
         return result;
     }
 
