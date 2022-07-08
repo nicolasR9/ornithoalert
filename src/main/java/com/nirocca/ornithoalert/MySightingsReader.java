@@ -2,6 +2,7 @@ package com.nirocca.ornithoalert;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.function.Function;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -28,15 +29,19 @@ public class MySightingsReader {
         String url = MY_SIGHTINGS_URL_THIS_YEAR
             .replaceAll("%%DATE_FROM%%", FORMATTER.format(beginningOfYear))
             .replaceAll("%%DATE_TO%%", FORMATTER.format(today));
-        return readSightings(url);
+        return readSightings(url, this::extractBirdNames);
     }
 
 
     public List<String> readMySightedSpeciesLatin() throws IOException {
-        return readSightings(MY_SIGHTINGS_URL);
+        return readSightings(MY_SIGHTINGS_URL, this::extractBirdNames);
     }
 
-    private List<String> readSightings(String url) throws IOException {
+    public List<String> readMySightedSpeciesIds() throws IOException {
+        return readSightings(MY_SIGHTINGS_URL, this::extractIds);
+    }
+
+    private List<String> readSightings(String url, Function<String, List<String>> valueExtractor) throws IOException {
         BasicCookieStore cookieStore = new CookiesReader().readCookies();
         HttpClient client = HttpClientBuilder.create().setDefaultCookieStore(cookieStore).build();
 
@@ -46,7 +51,7 @@ public class MySightingsReader {
 
         String html = EntityUtils.toString(response.getEntity(), "UTF-8");
 
-        return extractBirdNames(html);
+        return valueExtractor.apply(html);
     }
 
     private List<String> extractBirdNames(String html) {
@@ -60,9 +65,21 @@ public class MySightingsReader {
         return result;
     }
 
+    private List<String> extractIds(String html) {
+        Pattern p = Pattern.compile("<a href=\"https://www.ornitho.de/index.php\\?m_id=15&amp;showback=stor&amp;backlink=skip&amp;frmSpecies=(\\d++)&amp;sp_tg=1\">");
+        ArrayList<String> result = new ArrayList<>();
+        Matcher m = p.matcher(html);
+        while (m.find()) {
+            result.add(m.group(1));
+        }
+
+        return result;
+    }
+
     
     public static void main(String[] args) throws IOException {
-        System.out.println(new MySightingsReader().readMySightedSpeciesLatin());
+        List<String> ids = new MySightingsReader().readMySightedSpeciesIds();
+        System.out.println(ids.size());
     }
 
 

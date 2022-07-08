@@ -1,50 +1,7 @@
 package com.nirocca.ornithoalert.location;
 
-import static com.nirocca.ornithoalert.Species.ALEXANDERSITTICH;
-import static com.nirocca.ornithoalert.Species.ALPENBRAUNELLE;
-import static com.nirocca.ornithoalert.Species.ALPENSEGLER;
 import static com.nirocca.ornithoalert.Species.BAUMFALKE;
-import static com.nirocca.ornithoalert.Species.CHILEFLAMINGO;
-import static com.nirocca.ornithoalert.Species.DREIZEHENSPECHT;
-import static com.nirocca.ornithoalert.Species.FLUSSREGENPFEIFER;
-import static com.nirocca.ornithoalert.Species.GELBBRAUEN_LAUBSAENGER;
-import static com.nirocca.ornithoalert.Species.HALSBANDSCHNAEPPER;
-import static com.nirocca.ornithoalert.Species.HASELHUHN;
-import static com.nirocca.ornithoalert.Species.KLEINES_SUMPFHUHN;
-import static com.nirocca.ornithoalert.Species.LACHSEESCHWALBE;
-import static com.nirocca.ornithoalert.Species.NACHTREIHER;
-import static com.nirocca.ornithoalert.Species.ORPHEUSSPOETTER;
-import static com.nirocca.ornithoalert.Species.REBHUHN;
-import static com.nirocca.ornithoalert.Species.ROSAFLAMINGO;
-import static com.nirocca.ornithoalert.Species.ROTFUSSFALKE;
-import static com.nirocca.ornithoalert.Species.ROTKEHLPIEPER;
-import static com.nirocca.ornithoalert.Species.ROTKOPFWUERGER;
-import static com.nirocca.ornithoalert.Species.SANDREGENPFEIFER;
-import static com.nirocca.ornithoalert.Species.SCHLAGSCHWIRL;
-import static com.nirocca.ornithoalert.Species.SCHWARZKOPF_RUDERENTE;
-import static com.nirocca.ornithoalert.Species.SEEREGENPFEIFER;
-import static com.nirocca.ornithoalert.Species.SEIDENREIHER;
-import static com.nirocca.ornithoalert.Species.SEIDENSAENGER;
-import static com.nirocca.ornithoalert.Species.SPERBERGRASMUECKE;
-import static com.nirocca.ornithoalert.Species.SPORNAMMER;
-import static com.nirocca.ornithoalert.Species.STEINADLER;
-import static com.nirocca.ornithoalert.Species.TANNENHAEHER;
-import static com.nirocca.ornithoalert.Species.TEICHWASSERLAEUFER;
-import static com.nirocca.ornithoalert.Species.TORDALK;
-import static com.nirocca.ornithoalert.Species.TURTELTAUBE;
-import static com.nirocca.ornithoalert.Species.WACHTEL;
-import static com.nirocca.ornithoalert.Species.WEISSKOPF_RUDERENTE;
-import static com.nirocca.ornithoalert.Species.WEISSRUECKENSPECHT;
-import static com.nirocca.ornithoalert.Species.WEISSSTORCH;
 import static com.nirocca.ornithoalert.Species.WESPENBUSSARD;
-import static com.nirocca.ornithoalert.Species.ZAUNAMMER;
-import static com.nirocca.ornithoalert.Species.ZIPPAMMER;
-import static com.nirocca.ornithoalert.Species.ZITRONENZEISIG;
-import static com.nirocca.ornithoalert.Species.ZWERGGANS;
-import static com.nirocca.ornithoalert.Species.ZWERGKANADAGANS;
-import static com.nirocca.ornithoalert.Species.ZWERGOHREULE;
-import static com.nirocca.ornithoalert.Species.ZWERGSCHNAEPPER;
-import static com.nirocca.ornithoalert.Species.ZWERGSCHNEPFE;
 
 import com.nirocca.ornithoalert.ColorProvider;
 import com.nirocca.ornithoalert.Constants.FilterMySightedSpecies;
@@ -65,16 +22,12 @@ import java.util.Map;
 
 public class SpecificSpeciesMain {
 
-    private static final String URL_TEMPLATE = "https://www.ornitho.de/index.php?m_id=94&p_c=3&p_cc=206&sp_tg=1&sp_DChoice=range&sp_DFrom=01.01.2020&sp_DTo=31.12.2020&sp_DSeasonFromDay=1&sp_DSeasonFromMonth=1&sp_DSeasonToDay=31&sp_DSeasonToMonth=12&sp_DOffset=5&sp_SChoice=species&speciesFilter=&sp_S=145&sp_Cat[never]=1&sp_Cat[veryrare]=1&sp_Cat[rare]=1&sp_Cat[unusual]=1&sp_Family=1&sp_PChoice=all&sp_cC=0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010100011001101100100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000&sp_cCO=001100000000010000000000000&sp_CommuneCounty=356&sp_Commune=12332&sp_Info=&sp_P=0&sp_Polygon=&sp_PolygonSaveName=&sp_PolygonSaveRestoreID=&sp_AltitudeFrom=-19&sp_AltitudeTo=2962&sp_CommentValue=&sp_OnlyAH=0&sp_Ats=-00000&sp_project=&sp_OnlyStoc=&sp_frmListType=&sp_FChoice=list&sp_FDisplay=DATE_PLACE_SPECIES&sp_DFormat=DESC&sp_FOrderListSpecies=ALPHA&sp_FListSpeciesChoice=DATA&sp_DateSynth=01.01.2020&sp_FOrderSynth=ALPHA&sp_FGraphChoice=DATA&sp_FGraphFormat=auto&sp_FAltScale=250&sp_FAltChoice=DATA&sp_FMapFormat=none&submit=Abfrage+starten&mp_item_per_page=60&mp_current_page=1";
-    private static final int[] yearsToCheck = {2021};
+    private static final String URL_TEMPLATE = "https://www.ornitho.de/index.php?m_id=94&p_c=3&p_cc=206&sp_tg=1&sp_DChoice=range&sp_DFrom=01.01.2020&sp_DTo=31.12.2020&sp_DSeasonFromDay=1&sp_DSeasonFromMonth=1&sp_DSeasonToDay=31&sp_DSeasonToMonth=12&sp_DOffset=5&sp_SChoice=species&speciesFilter=&sp_S=145&sp_Cat[never]=1&sp_Cat[veryrare]=1&sp_Cat[rare]=1&sp_Cat[unusual]=1&sp_Family=1&sp_PChoice=canton&sp_cC=0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000100100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000&sp_cCO=001100000000010000000000000&sp_CommuneCounty=356&sp_Commune=12332&sp_Info=&sp_P=0&sp_Polygon=&sp_PolygonSaveName=&sp_PolygonSaveRestoreID=&sp_AltitudeFrom=-19&sp_AltitudeTo=2962&sp_CommentValue=&sp_OnlyAH=0&sp_Ats=-00000&sp_project=&sp_OnlyStoc=&sp_frmListType=&sp_FChoice=list&sp_FDisplay=DATE_PLACE_SPECIES&sp_DFormat=DESC&sp_FOrderListSpecies=ALPHA&sp_FListSpeciesChoice=DATA&sp_DateSynth=01.01.2020&sp_FOrderSynth=ALPHA&sp_FGraphChoice=DATA&sp_FGraphFormat=auto&sp_FAltScale=250&sp_FAltChoice=DATA&sp_FMapFormat=none&submit=Abfrage+starten&mp_item_per_page=60&mp_current_page=1";
+    private static final int[] yearsToCheck = {2022};
     private static final String FROM_DATE = "01.01.";
-    private static final String TO_DATE = "31.12.";
+    private static final String TO_DATE = "17.06.";
 
-    private static final Species[] SPECIES = {ORPHEUSSPOETTER, TORDALK, ALEXANDERSITTICH,
-    WEISSRUECKENSPECHT, LACHSEESCHWALBE, SPORNAMMER, ROTFUSSFALKE, GELBBRAUEN_LAUBSAENGER, SEEREGENPFEIFER, ROTKEHLPIEPER,
-    ZWERGGANS, KLEINES_SUMPFHUHN, ZIPPAMMER, ZWERGKANADAGANS, DREIZEHENSPECHT, ZITRONENZEISIG, SEIDENSAENGER, ROSAFLAMINGO,
-    CHILEFLAMINGO, SCHWARZKOPF_RUDERENTE, WEISSKOPF_RUDERENTE, HASELHUHN, ALPENBRAUNELLE, ROTKOPFWUERGER, TEICHWASSERLAEUFER,
-    STEINADLER};
+    private static final Species[] SPECIES = {BAUMFALKE, WESPENBUSSARD};
 
     private static final boolean separateFiles = false;
 

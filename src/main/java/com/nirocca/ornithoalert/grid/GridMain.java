@@ -1,5 +1,6 @@
 package com.nirocca.ornithoalert.grid;
 
+import com.nirocca.ornithoalert.MySightingsReader;
 import com.nirocca.ornithoalert.model.Sighting;
 import com.spatial4j.core.context.SpatialContext;
 import com.spatial4j.core.shape.Point;
@@ -9,7 +10,6 @@ import com.spatial4j.core.shape.impl.PointImpl;
 import com.spatial4j.core.shape.impl.RectangleImpl;
 import io.jenetics.jpx.GPX;
 import io.jenetics.jpx.GPX.Builder;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.time.Month;
@@ -20,7 +20,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Map.Entry;
+import java.util.Set;
 import java.util.stream.Collectors;
 import org.apache.commons.io.IOUtils;
 
@@ -43,7 +43,7 @@ public class GridMain {
             List<Sighting> monthSightings = filterByMonth(sightings, month);
             List<Hotspot> hotspotRanking = getHotspotRanking(germanyGrid, monthSightings);
             List<Hotspot> hotspots = hotspotRanking.subList(0, 5);
-            hotspots.stream().forEach(System.out::println);
+            hotspots.forEach(System.out::println);
             System.out.println();
             printCoordinatesToFile(month, hotspots);
         }
@@ -148,8 +148,9 @@ public class GridMain {
             String[] fields = line.split(",");
             result.add(new Sighting(fields[1], fields[0], null, Integer.parseInt(fields[6]), fields[5], fields[2] + "," + fields[3], "-1"));
         }
-        //TODO filter out already spotted species
-        return result;
+        List<String> sightedSpeciesIds = new MySightingsReader().readMySightedSpeciesIds();
+        Set<Integer> ids = sightedSpeciesIds.stream().map(Integer::valueOf).collect(Collectors.toSet());
+        return result.stream().filter(s -> !ids.contains(s.getSpeciesId())).collect(Collectors.toList());
     }
 
 }
