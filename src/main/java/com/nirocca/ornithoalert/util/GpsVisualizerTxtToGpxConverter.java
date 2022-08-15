@@ -15,11 +15,11 @@ import java.util.Objects;
 import org.apache.commons.io.IOUtils;
 
 public class GpsVisualizerTxtToGpxConverter {
-    private static final String TXT_FILES_DIR = "/Users/nirocca/tmp/convert";
+    private static final String TXT_FILES_DIR = "/Users/nirocca/tmp/voegel/tmp";
 
     public static void main(String[] args) throws IOException {
         File sourceDir = new File(TXT_FILES_DIR);
-        for (File file : Objects.requireNonNull(sourceDir.listFiles())) {
+        for (File file : Objects.requireNonNull(sourceDir.listFiles((dir, name) -> name.endsWith(".txt")))) {
             GPX gpx = createGpx(new FileInputStream(file));
             GPX.write(gpx, Path.of(new File(sourceDir, file.getName() + ".gpx").getAbsolutePath()));
         }

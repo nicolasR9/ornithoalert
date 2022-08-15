@@ -1,0 +1,4 @@
+- install chrome extension "Get cookies.txt"
+- login to ornitho.de using option "save password"
+- export cookies from the extentions
+- put in cookies.txt

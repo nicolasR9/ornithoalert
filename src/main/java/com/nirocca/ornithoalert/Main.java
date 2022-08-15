@@ -136,8 +136,4 @@ public class Main {
         }
         return lastSightings.stream().sorted(comparator).collect(Collectors.toList());
     }
-    
-
-    
-
 }

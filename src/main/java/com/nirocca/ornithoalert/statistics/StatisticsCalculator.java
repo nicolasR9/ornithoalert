@@ -58,6 +58,7 @@ public class StatisticsCalculator {
     private long calcSpeciesCountUntilDate(int year, List<Sighting> sightings) {
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR, year);
+        //cal.add(Calendar.DAY_OF_MONTH, 3);
         List<Sighting> filteredSightings = sightings.stream().filter(s -> s.getSightingDate().before(cal.getTime()))
             .collect(Collectors.toList());
         return calcSpeciesCount(year, filteredSightings);
