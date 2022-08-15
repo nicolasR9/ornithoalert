@@ -3,15 +3,15 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.nirocca</groupId>
     <artifactId>ornithoalert</artifactId>
-    <version>0.0.32-SNAPSHOT</version>
+    <version>0.0.33-SNAPSHOT</version>
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>11</source>
-                    <target>11</target>
+                    <source>8</source>
+                    <target>8</target>
                 </configuration>
             </plugin>
         </plugins>
