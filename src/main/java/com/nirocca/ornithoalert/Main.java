@@ -58,6 +58,7 @@ public class Main {
         List<String> mySightedSpeciesLatin = readMySightings(filterOnlyThisYearParam, mySightingsReader);
 
         RegionLastSightingsReader regionLastSightingsReader = new RegionLastSightingsReader();
+        url = sanitizeUrl(url);
         List<Sighting> lastSightings = regionLastSightingsReader.read(url);
 
         lastSightings = SightingFilter.filterOutNonRelevantSightings(lastSightings);
@@ -67,6 +68,13 @@ public class Main {
         lastSightings = sort(lastSightings, sortBy);
 
         return lastSightings;
+    }
+
+    private static String sanitizeUrl(String url) {
+        if (!url.endsWith(URL_PAGING_END)) {
+            url += URL_PAGING_END;
+        }
+        return url;
     }
 
     private static List<String> readMySightings(FilterMySightedSpecies filterOnlyThisYearParam, MySightingsReader mySightingsReader)
@@ -106,9 +114,6 @@ public class Main {
             System.out.println("using URL: " + urlEnum);
         } catch (Exception e) {
             //use url as it was passed
-            if (!url.endsWith(URL_PAGING_END)) {
-                url += URL_PAGING_END;
-            }
             System.out.println("using URL: " + url);
         }
         
