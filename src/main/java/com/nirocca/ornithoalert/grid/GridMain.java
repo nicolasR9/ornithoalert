@@ -11,7 +11,7 @@ import com.spatial4j.core.shape.impl.RectangleImpl;
 import io.jenetics.jpx.GPX;
 import io.jenetics.jpx.GPX.Builder;
 import java.io.IOException;
-import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.Month;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
@@ -28,6 +28,8 @@ public class GridMain {
     private static final double LATITUDE_DELTA_20_KM = 0.180237;
     private static final double LONGITUDE_DELTA_20_KM = 0.295272;
     private static final String SIGHTINGS_FILE ="/allDe.txt";
+
+    private static final int[] YEARS_IN_SIGHTINGS_FILE = {2020, 2021};
 
     public static void main(String[] args) throws IOException {
         List<Sighting> sightings = readSightings();
@@ -68,7 +70,7 @@ public class GridMain {
         final GPX gpx = gpxBuilder.build();
 
         String filename = "/Users/nirocca/tmp/voegel/tmp/" + month.getDisplayName(TextStyle.FULL, Locale.GERMAN) + ".gpx";
-        GPX.write(gpx, Path.of(filename));
+        GPX.write(gpx, Paths.get(filename));
     }
 
     private static List<Hotspot> getHotspotRanking(List<Rectangle> germanyGrid, List<Sighting> monthSightings) {
@@ -85,15 +87,18 @@ public class GridMain {
     }
 
     private static void calcScore(Hotspot hotspot) {
-        Map<String, Integer> sightingCountBySpecies = hotspot.getSightingCountBySpecies();
+
         double score = 0.0;
-        for (int count : sightingCountBySpecies.values()) {
-            if (count > 10) {
-                score += 10;
-            } else if (count >= 5) {
-                score += 5;
-            } else {
-                score += 1;
+        for (int year : YEARS_IN_SIGHTINGS_FILE) {
+            Map<String, Integer> sightingCountBySpecies = hotspot.getSightingCountBySpecies(year);
+            for (int count : sightingCountBySpecies.values()) {
+                if (count > 10) {
+                    score += 10;
+                } else if (count >= 5) {
+                    score += 5;
+                } else {
+                    score += 1;
+                }
             }
         }
 

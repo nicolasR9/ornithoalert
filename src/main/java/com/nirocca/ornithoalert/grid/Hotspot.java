@@ -36,6 +36,18 @@ public class Hotspot implements Comparable<Hotspot> {
         return sightings;
     }
 
+    Map<String, Integer> getSightingCountBySpecies(int year) {
+        Map<String, List<Sighting>> map = sightings.stream().collect(
+            Collectors.groupingBy(sighting -> Species.getById(sighting.getSpeciesId()).name()));
+        Map<String, Integer> result = new HashMap<>(map.size());
+        for (Entry<String, List<Sighting>> entry : map.entrySet()) {
+            List<Sighting> sightingsInYear =
+                entry.getValue().stream().filter(s -> s.getDate().endsWith(String.valueOf(year))).collect(
+                    Collectors.toList());
+            result.put(entry.getKey(), sightingsInYear.size());
+        }
+        return result;
+    }
     Map<String, Integer> getSightingCountBySpecies() {
         Map<String, List<Sighting>> map = sightings.stream().collect(
             Collectors.groupingBy(sighting -> Species.getById(sighting.getSpeciesId()).name()));

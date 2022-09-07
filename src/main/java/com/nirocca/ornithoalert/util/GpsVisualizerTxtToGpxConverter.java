@@ -10,7 +10,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Objects;
 import org.apache.commons.io.IOUtils;
 
@@ -21,7 +21,7 @@ public class GpsVisualizerTxtToGpxConverter {
         File sourceDir = new File(TXT_FILES_DIR);
         for (File file : Objects.requireNonNull(sourceDir.listFiles((dir, name) -> name.endsWith(".txt")))) {
             GPX gpx = createGpx(new FileInputStream(file));
-            GPX.write(gpx, Path.of(new File(sourceDir, file.getName() + ".gpx").getAbsolutePath()));
+            GPX.write(gpx, Paths.get(new File(sourceDir, file.getName() + ".gpx").getAbsolutePath()));
         }
     }
 
