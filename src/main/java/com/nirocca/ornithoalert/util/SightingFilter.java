@@ -10,11 +10,9 @@ import java.util.stream.Collectors;
 public class SightingFilter {
     static final Set<String> SPECIES_TO_EXCLUDE = new HashSet<>(Arrays.asList(
         "Keine Art",
-        "Saatgans (ssp. fabalis), Waldsaatgans",
         "Gimpel (ssp. pyrrhula), Trompetergimpel",
         "Bl\u00e4ss- / Saatg\u00e4nse",
         "Tundrasaatg\u00e4nse",
-        "Waldsaatg\u00e4nse",
         "Bl\u00e4ss-_oder_Saatgans",
         "Saatgans (ssp. rossicus) Tundrasaatgans",
         "Tundrasaatgans",
@@ -28,8 +26,6 @@ public class SightingFilter {
         "Stockente, Bastard, fehlfarben",
         "Stockenten, Bastard, fehlfarben",
         "Taigabirkenzeisige",
-        "Alpenbirkenzeisige",
-        "Birkenzeisig (ssp. cabaret), Alpenbirkenzeisig",
         "Birkenzeisig (ssp. flammea), Taigabirkenzeisig",
         "Buch- / Bergfinken",
         "Schwanzmeisen (ssp. caudatus)",
