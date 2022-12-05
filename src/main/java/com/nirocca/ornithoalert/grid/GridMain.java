@@ -144,7 +144,7 @@ public class GridMain {
         return sightings.stream().filter(s -> s.getDate().split(" ")[2].equals(monthName)).collect(Collectors.toList());
     }
 
-    private static List<Sighting> readSightings() throws IOException {
+    static List<Sighting> readSightings() throws IOException {
         List<String> lines = IOUtils.readLines(GridMain.class.getResourceAsStream(SIGHTINGS_FILE), "utf-8");
         lines.remove(0);
 

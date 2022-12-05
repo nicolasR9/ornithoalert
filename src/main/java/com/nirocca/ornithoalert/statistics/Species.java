@@ -6,13 +6,20 @@ public class Species {
     private final int speciesId;
     private final String speciesName;
 
-    Species(int speciesId, String speciesName) {
+    private final String latinName;
+
+    Species(int speciesId, String speciesName, String latinName) {
         this.speciesId = speciesId;
         this.speciesName = speciesName;
+        this.latinName = latinName;
     }
 
     public String getSpeciesName() {
         return speciesName;
+    }
+
+    public String getLatinName() {
+        return latinName;
     }
 
     @Override

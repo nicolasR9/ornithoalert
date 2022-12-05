@@ -19,7 +19,7 @@ public class StatisticsCalculator {
 
     private static final int MY_FIRST_SIGHTING_YEAR = 2017;
 
-    private List<Sighting> readMySightings() throws IOException {
+    public static List<Sighting> readMySightings() throws IOException {
         List<String> lines = IOUtils.readLines(
                 StatisticsCalculator.class.getResourceAsStream("/ornitho_export_meine.txt"));
         DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
@@ -29,10 +29,10 @@ public class StatisticsCalculator {
         return SightingFilter.filterOutNonRelevantSightingsStats(allSightings);
     }
 
-    private Sighting parseSighting(DateFormat df, String line) {
+    private static Sighting parseSighting(DateFormat df, String line) {
         String[] parts = line.split("\\t");
         try {
-            return new Sighting(new Species(Integer.parseInt(parts[1]), parts[2]), df.parse(parts[7]), parts[24]);
+            return new Sighting(new Species(Integer.parseInt(parts[1]), parts[2], parts[3]), df.parse(parts[7]), parts[24]);
         } catch (NumberFormatException e) {
             throw new RuntimeException("Unparsable number: " + parts[1]);
         } catch (ParseException e) {
@@ -72,7 +72,7 @@ public class StatisticsCalculator {
         return speciesSightedInPreviousYears;
     }
 
-    private Set<Species> getSpeciesForYear(List<Sighting> sightings, final int year) {
+    private static Set<Species> getSpeciesForYear(List<Sighting> sightings, final int year) {
         return sightings
         .stream()
         .filter(sighting -> yearMatches(year, sighting))
@@ -80,7 +80,7 @@ public class StatisticsCalculator {
     }
     
 
-    private boolean yearMatches(int year, Sighting sighting) {
+    private static boolean yearMatches(int year, Sighting sighting) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(sighting.getSightingDate());
         return cal.get(Calendar.YEAR) == year;
@@ -109,7 +109,17 @@ public class StatisticsCalculator {
         return everyYear;
     }
 
-    private Set<Species> calcSpeciesSightedAlmostEveryYearButNoInTheCurrentYear(List<Sighting> sightings, int exceptCount) {
+    private static Set<Species> calcSpeciesSightedAlmostEveryYearButNoInTheCurrentYear(List<Sighting> sightings, int exceptCount) {
+
+        Set<Species> almostAllYearsSpecies = calcSpeciesSightedAlmostEveryYear(sightings, exceptCount);
+
+        int thisYear = Calendar.getInstance().get(Calendar.YEAR);
+        Set<Species> speciesThisYear = getSpeciesForYear(sightings, thisYear);
+        almostAllYearsSpecies.removeAll(speciesThisYear);
+        return almostAllYearsSpecies;
+    }
+
+    public static Set<Species> calcSpeciesSightedAlmostEveryYear(List<Sighting> sightings, int exceptCount) {
         Map<Species, Integer> count = new HashMap<>();
         int thisYear = Calendar.getInstance().get(Calendar.YEAR);
 
@@ -117,14 +127,10 @@ public class StatisticsCalculator {
             getSpeciesForYear(sightings, year).forEach(s -> {if (!count.containsKey(s)) count.put(s, 0); count.put(s, count.get(s) + 1);} );
         }
 
-        Set<Species> almostAllYearsSpecies = count.entrySet().stream().filter(e -> e.getValue() >= (thisYear - MY_FIRST_SIGHTING_YEAR - exceptCount))
+        return count.entrySet().stream().filter(e -> e.getValue() >= (thisYear - MY_FIRST_SIGHTING_YEAR - exceptCount))
             .map(Entry::getKey).collect(Collectors.toSet());
-
-        Set<Species> speciesThisYear = getSpeciesForYear(sightings, thisYear);
-
-        almostAllYearsSpecies.removeAll(speciesThisYear);
-        return almostAllYearsSpecies;
     }
+
 
     public static void main(String[] args) throws IOException {
         StatisticsCalculator calculator = new StatisticsCalculator();
