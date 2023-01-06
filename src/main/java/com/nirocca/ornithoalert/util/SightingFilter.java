@@ -34,7 +34,13 @@ public class SightingFilter {
         "Wasseramsel (ssp. cinclus)",
         "Raben-_oder_Nebelkr\u00e4he (Aaskr\u00e4he)",
         "Raben- / Nebelkr\u00e4hen",
-        "Tafel-_x_Reiherente"
+        "Tafel-_x_Reiherente",
+        "Ringdrosseln (ssp. alpestris)",
+        "Ringdrossel (ssp. alpestris)",
+        "Weidenmeise (ssp. montanus), Alpenmeise",
+        "Weidenmeisen (ssp. montanus), Alpenmeisen",
+        "Alpenmeise",
+        "Alpenmeisen"
     ));
 
     public static List<Sighting> filterOutNonRelevantSightings(List<Sighting> sightings) {

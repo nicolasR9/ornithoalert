@@ -14,7 +14,7 @@ public class Sighting {
     private final String count;
     
     public Sighting(Day day, Location location, Observation observation) {
-        this(day.parseDay(), observation.parseGermanName(), observation.parseLatinName(), 1/*observation.parseSpeciesId()*/, observation.parseUrl(),
+        this(day.parseDay(), observation.parseGermanName(), observation.parseLatinName(), -1/*observation.parseSpeciesId()*/, observation.parseUrl(),
             location.getLocationText(), observation.parseCount());
     }
     

@@ -2,6 +2,7 @@ package com.nirocca.ornithoalert.grid;
 
 import com.nirocca.ornithoalert.MySightingsReader;
 import com.nirocca.ornithoalert.model.Sighting;
+import com.nirocca.ornithoalert.util.HotspotScoreCalculator;
 import com.spatial4j.core.context.SpatialContext;
 import com.spatial4j.core.shape.Point;
 import com.spatial4j.core.shape.Rectangle;
@@ -19,7 +20,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.apache.commons.io.IOUtils;
@@ -78,31 +78,12 @@ public class GridMain {
         for (Rectangle rectangle : germanyGrid) {
             List<Sighting> sightings = filterByRectangle(monthSightings, rectangle);
             Hotspot hotspot = new Hotspot(rectangle, sightings);
-            calcScore(hotspot);
+            HotspotScoreCalculator.calcScore(hotspot, YEARS_IN_SIGHTINGS_FILE);
             result.add(hotspot);
         }
 
         Collections.sort(result, Comparator.reverseOrder());
         return result;
-    }
-
-    private static void calcScore(Hotspot hotspot) {
-
-        double score = 0.0;
-        for (int year : YEARS_IN_SIGHTINGS_FILE) {
-            Map<String, Integer> sightingCountBySpecies = hotspot.getSightingCountBySpecies(year);
-            for (int count : sightingCountBySpecies.values()) {
-                if (count > 10) {
-                    score += 10;
-                } else if (count >= 5) {
-                    score += 5;
-                } else {
-                    score += 1;
-                }
-            }
-        }
-
-        hotspot.setScore(score);
     }
 
     private static List<Sighting> filterByRectangle(List<Sighting> monthSightings, Rectangle rectangle) {
