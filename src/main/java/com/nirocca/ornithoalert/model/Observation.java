@@ -16,7 +16,7 @@ public final class Observation {
     }
 
     public String parseLatinName() {
-        String result = observationElement.select("i").not("[class]").text();
+        String result = observationElement.select("span[class=\"sci_name\"]").text();
         return result.replaceAll("\\(", "").replaceAll("\\)", "");
     }
     

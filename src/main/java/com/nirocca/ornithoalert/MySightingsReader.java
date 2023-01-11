@@ -1,20 +1,19 @@
 package com.nirocca.ornithoalert;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Function;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class MySightingsReader {
     
@@ -55,7 +54,7 @@ public class MySightingsReader {
     }
 
     private List<String> extractBirdNames(String html) {
-        Pattern p = Pattern.compile("<span style=\"color:#[0-9A-H]+\"><b>[^<]+</b> <i>\\(([^<]+)\\)</i></span>");
+        Pattern p = Pattern.compile("<span class=\"sci_name\">\\(([^<]+)\\)</span>");
         ArrayList<String> result = new ArrayList<>();
         Matcher m = p.matcher(html);
         while (m.find()) {
