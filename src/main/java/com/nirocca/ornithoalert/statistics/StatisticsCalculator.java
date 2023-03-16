@@ -2,6 +2,7 @@ package com.nirocca.ornithoalert.statistics;
 
 import com.nirocca.ornithoalert.util.SightingFilter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,10 +19,11 @@ import org.apache.commons.io.IOUtils;
 public class StatisticsCalculator {
 
     private static final int MY_FIRST_SIGHTING_YEAR = 2017;
+    private static final int MAX_SPECIES_PRINT = 50;
 
     public static List<Sighting> readMySightings() throws IOException {
         List<String> lines = IOUtils.readLines(
-                StatisticsCalculator.class.getResourceAsStream("/ornitho_export_meine.txt"));
+                StatisticsCalculator.class.getResourceAsStream("/ornitho_export_meine.txt"), StandardCharsets.UTF_8);
         DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
         List<Sighting> allSightings = lines.subList(2, lines.size()).stream().map(line -> parseSighting(df, line))
             .collect(Collectors.toList());
@@ -56,12 +58,16 @@ public class StatisticsCalculator {
     }
 
     private long calcSpeciesCountUntilDate(int year, List<Sighting> sightings) {
+        List<Sighting> filteredSightings = getSightingsUntilDate(year, sightings);
+        return calcSpeciesCount(year, filteredSightings);
+    }
+
+    private static List<Sighting> getSightingsUntilDate(int year, List<Sighting> sightings) {
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR, year);
         //cal.add(Calendar.DAY_OF_MONTH, 3);
-        List<Sighting> filteredSightings = sightings.stream().filter(s -> s.getSightingDate().before(cal.getTime()))
+        return sightings.stream().filter(s -> s.getSightingDate().before(cal.getTime()))
             .collect(Collectors.toList());
-        return calcSpeciesCount(year, filteredSightings);
     }
 
     private Set<Species> getSpeciesUpToYear(List<Sighting> sightings, int lastYearExclusive) {
@@ -119,6 +125,18 @@ public class StatisticsCalculator {
         return almostAllYearsSpecies;
     }
 
+    private static Set<Species> calcSpeciesSightedLastYearButNoInTheCurrentYear(List<Sighting> sightings) {
+
+        int thisYear = Calendar.getInstance().get(Calendar.YEAR);
+        Set<Species> speciesThisYear = getSpeciesForYear(sightings, thisYear);
+
+        List<Sighting> sightingsLastYear = getSightingsUntilDate(thisYear - 1, sightings);
+        Set<Species> lastYearSpecies = getSpeciesForYear(sightingsLastYear, thisYear - 1);
+
+        lastYearSpecies.removeAll(speciesThisYear);
+        return lastYearSpecies;
+    }
+
     public static Set<Species> calcSpeciesSightedAlmostEveryYear(List<Sighting> sightings, int exceptCount) {
         Map<Species, Integer> count = new HashMap<>();
         int thisYear = Calendar.getInstance().get(Calendar.YEAR);
@@ -149,21 +167,25 @@ public class StatisticsCalculator {
 
         s = calcSpeciesSightedAlmostEveryYearButNoInTheCurrentYear(sightings, 2);
         System.out.printf("\nSighted every previous year except at most 2, but not this year: %d%n", s.size());
-        if (s.size() < 50)
+        if (s.size() < MAX_SPECIES_PRINT)
             s.forEach(x->System.out.println(x.getSpeciesName()));
 
         s = calcSpeciesSightedAlmostEveryYearButNoInTheCurrentYear(sightings, 1);
         System.out.printf("\nSighted every previous year except at most 1, but not this year: %d%n", s.size());
-        if (s.size() < 50)
+        if (s.size() < MAX_SPECIES_PRINT)
             s.forEach(x->System.out.println(x.getSpeciesName()));
 
         s = calcSpeciesSightedEveryYearButNoInTheCurrentYear(sightings);
         System.out.printf("\nSighted every previous year, but not this year (%d):%n", s.size());
-        if (s.size() < 50)
+        if (s.size() < MAX_SPECIES_PRINT)
+            s.forEach(x->System.out.println(x.getSpeciesName()));
+
+
+        s = calcSpeciesSightedLastYearButNoInTheCurrentYear(sightings);
+        System.out.printf("\nSighted last year until this date, but not this year (%d):%n", s.size());
+        if (s.size() < MAX_SPECIES_PRINT)
             s.forEach(x->System.out.println(x.getSpeciesName()));
 
         System.out.println("Sighted first this year: " + calculator.calcSpeciesFirstSighting(thisYear, sightings));
     }
-
-
 }
