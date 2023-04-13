@@ -1,5 +1,6 @@
 package com.nirocca.ornithoalert.location;
 
+import com.nirocca.ornithoalert.Constants;
 import com.nirocca.ornithoalert.Constants.FilterMySightedSpecies;
 import com.nirocca.ornithoalert.Constants.SortBy;
 import com.nirocca.ornithoalert.CoordinatesExporter;
@@ -20,7 +21,7 @@ public class AllSpeciesSeparateFilesMain {
     private static final String FROM_DATE = "15.7.";
     private static final String TO_DATE = "31.8.";
 
-    private static final String PATH_TO_COORDS_DIR = "/Users/nirocca/tmp/voegel/tmp/";
+    private static final String PATH_TO_COORDS_DIR = Constants.OUTPUT_DIR + "/allSpeciesSeparateFiles/";
 
     public static void main(String[] args) throws IOException {
         CoordinatesExporter coordinatesExporter = new CoordinatesExporter();

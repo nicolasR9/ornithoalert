@@ -21,7 +21,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CoordinatesExporter {
-    private static final String PATH_TO_COORDS_FILE = "/Users/nirocca/tmp/coord.txt";
+    private static final String PATH_TO_COORDS_FILE = Constants.OUTPUT_DIR + "coord.txt";
     
     private static final OrnithoPageReader ornithoPageReader = new OrnithoPageReader();
     private ColorProvider colorProvider;

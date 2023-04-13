@@ -7,11 +7,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.nirocca.ornithoalert.Constants;
 import org.apache.commons.io.IOUtils;
 
 public class ColorReplacer {
 
-    private static final String FILE = "/Users/nirocca/tmp/coord.txt";
+    private static final String FILE = Constants.OUTPUT_DIR + "coord.txt";
     private static final Map<String, String> BIRDS_TO_COLORS = new HashMap<>();
 
     static {

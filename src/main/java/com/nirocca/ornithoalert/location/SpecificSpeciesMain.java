@@ -2,12 +2,9 @@ package com.nirocca.ornithoalert.location;
 
 import static com.nirocca.ornithoalert.Species.ALPENSEGLER;
 
-import com.nirocca.ornithoalert.ColorProvider;
+import com.nirocca.ornithoalert.*;
 import com.nirocca.ornithoalert.Constants.FilterMySightedSpecies;
 import com.nirocca.ornithoalert.Constants.SortBy;
-import com.nirocca.ornithoalert.CoordinatesExporter;
-import com.nirocca.ornithoalert.Main;
-import com.nirocca.ornithoalert.Species;
 import com.nirocca.ornithoalert.model.Sighting;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -30,7 +27,7 @@ public class SpecificSpeciesMain {
 
     private static final boolean separateFiles = false;
 
-    private static final String PATH_TO_COORDS_DIR = "/Users/nirocca/tmp/voegel/tmp/";
+    private static final String PATH_TO_COORDS_DIR = Constants.OUTPUT_DIR + "specificSpecies/";
 
     public static void main(String[] args) throws IOException {
         CoordinatesExporter coordinatesExporter = new CoordinatesExporter();

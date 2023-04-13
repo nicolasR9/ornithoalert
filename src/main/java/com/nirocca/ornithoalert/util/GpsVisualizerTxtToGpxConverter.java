@@ -1,5 +1,6 @@
 package com.nirocca.ornithoalert.util;
 
+import com.nirocca.ornithoalert.Constants;
 import io.jenetics.jpx.GPX;
 import io.jenetics.jpx.GPX.Builder;
 import io.jenetics.jpx.WayPoint;
@@ -15,7 +16,7 @@ import java.util.Objects;
 import org.apache.commons.io.IOUtils;
 
 public class GpsVisualizerTxtToGpxConverter {
-    private static final String TXT_FILES_DIR = "/Users/nirocca/tmp/voegel/tmp";
+    private static final String TXT_FILES_DIR = Constants.OUTPUT_DIR + "toGpxConverter";
 
     public static void main(String[] args) throws IOException {
         File sourceDir = new File(TXT_FILES_DIR);

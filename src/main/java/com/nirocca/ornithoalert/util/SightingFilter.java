@@ -40,7 +40,8 @@ public class SightingFilter {
         "Weidenmeise (ssp. montanus), Alpenmeise",
         "Weidenmeisen (ssp. montanus), Alpenmeisen",
         "Alpenmeise",
-        "Alpenmeisen"
+        "Alpenmeisen",
+        "Bachstelze (ssp. yarrellii), Trauerbachstelze"
     ));
 
     public static List<Sighting> filterOutNonRelevantSightings(List<Sighting> sightings) {

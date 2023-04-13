@@ -1,5 +1,6 @@
 package com.nirocca.ornithoalert.grid;
 
+import com.nirocca.ornithoalert.Constants;
 import com.nirocca.ornithoalert.MySightingsReader;
 import com.nirocca.ornithoalert.model.Sighting;
 import com.nirocca.ornithoalert.util.HotspotScoreCalculator;
@@ -69,7 +70,7 @@ public class GridMain {
 
         final GPX gpx = gpxBuilder.build();
 
-        String filename = "/Users/nirocca/tmp/voegel/tmp/" + month.getDisplayName(TextStyle.FULL, Locale.GERMAN) + ".gpx";
+        String filename = Constants.OUTPUT_DIR + "grid/" + month.getDisplayName(TextStyle.FULL, Locale.GERMAN) + ".gpx";
         GPX.write(gpx, Paths.get(filename));
     }
 

@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Constants {
+
+    public static final String OUTPUT_DIR = "/Users/nicolas.rocca/tmp/ornithoalert/";
     static final SortBy DEFAULT_SORT_ORDER = SortBy.SPECIES;
     static final OrnithoUrl DEFAULT_URL = OrnithoUrl.GROSSRAUM_LAST_8_DAYS;
     
