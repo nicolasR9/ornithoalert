@@ -123,6 +123,7 @@ public class Main {
         boolean filterOnlyThisYear = Boolean.parseBoolean(commandLine.getOptionValue("cy", "false"));
         filterMySightedSpecies = filterOnlyThisYear ? FilterMySightedSpecies.ONLY_THIS_YEAR : FilterMySightedSpecies.YES;
 
+        System.out.println("filter: " + filterMySightedSpecies);
         System.out.println("using SORT: " + sortBy);
     }
 
