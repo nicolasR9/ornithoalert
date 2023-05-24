@@ -83,7 +83,7 @@ public class GridMain {
             result.add(hotspot);
         }
 
-        Collections.sort(result, Comparator.reverseOrder());
+        result.sort(Comparator.reverseOrder());
         return result;
     }
 
