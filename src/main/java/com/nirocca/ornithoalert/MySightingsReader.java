@@ -1,6 +1,7 @@
 package com.nirocca.ornithoalert;
 
 import java.io.IOException;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -28,6 +29,18 @@ public class MySightingsReader {
         String url = MY_SIGHTINGS_URL_THIS_YEAR
             .replaceAll("%%DATE_FROM%%", FORMATTER.format(beginningOfYear))
             .replaceAll("%%DATE_TO%%", FORMATTER.format(today));
+        return readSightings(url, this::extractBirdNames);
+    }
+
+    public List<String> readMySightedSpeciesLatinThisWeekend() throws IOException {
+        LocalDate today = LocalDate.now();
+        LocalDate start = today;
+        if (today.getDayOfWeek().getValue() >= DayOfWeek.SATURDAY.getValue()) { // weekend
+            start = start.minusDays(today.getDayOfWeek().getValue() - DayOfWeek.FRIDAY.getValue());
+        }
+        String url = MY_SIGHTINGS_URL_THIS_YEAR
+                .replaceAll("%%DATE_FROM%%", FORMATTER.format(start))
+                .replaceAll("%%DATE_TO%%", FORMATTER.format(today));
         return readSightings(url, this::extractBirdNames);
     }
 

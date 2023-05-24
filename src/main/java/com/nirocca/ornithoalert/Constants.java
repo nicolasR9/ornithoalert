@@ -41,6 +41,8 @@ public class Constants {
     public enum FilterMySightedSpecies {
         NO,
         YES,
-        ONLY_THIS_YEAR
+        ONLY_THIS_YEAR,
+
+        ONLY_THIS_WEEKEND
     }
 }

@@ -83,6 +83,7 @@ public class Main {
             case YES: return mySightingsReader.readMySightedSpeciesLatin();
             case NO: return Collections.emptyList();
             case ONLY_THIS_YEAR: return mySightingsReader.readMySightedSpeciesLatinThisYear();
+            case ONLY_THIS_WEEKEND: return mySightingsReader.readMySightedSpeciesLatinThisWeekend();
             default: throw new RuntimeException("Unknown parameter: " + filterOnlyThisYearParam);
         }
     }
