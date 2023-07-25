@@ -3528,7 +3528,7 @@ Blauschwanz,Dienstag 12. Oktober 2021,54.177604732539535,7.885126360357508,darkg
 Blauschwanz,Dienstag 12. Oktober 2021,54.177632864762806,7.8857904468646725,darkgreen,https://www.ornitho.de/index.php?m_id=54&id=62034467,392
 Blauschwanz,Dienstag 12. Oktober 2021,54.176899999999996,7.890555555555555,darkgreen,https://www.ornitho.de/index.php?m_id=54&id=62034659,392
 Blauschwanz,Dienstag 12. Oktober 2021,54.177499999999995,7.8838888888888885,darkgreen,https://www.ornitho.de/index.php?m_id=54&id=62035237,392
-Blauschwanz,Sonntag 26. September 2021,54.184519,7.882282,darkgreen,https://www.ornitho.de/index.php?m_id=54&id=61660080,392name,desc,latitude,longitude,color,urlname,desc,latitude,longitude,color,url
+Blauschwanz,Sonntag 26. September 2021,54.184519,7.882282,darkgreen,https://www.ornitho.de/index.php?m_id=54&id=61660080,392
 Chileflamingo,Mittwoch 28. Dezember 2022,48.489483,10.2399,darkgreen,https://www.ornitho.de/index.php?m_id=54&id=73905736,46
 Chileflamingo,Dienstag 27. Dezember 2022,48.48825,10.23743,darkgreen,https://www.ornitho.de/index.php?m_id=54&id=73866145,46
 Chileflamingo,Dienstag 27. Dezember 2022,48.480763,10.230923,darkgreen,https://www.ornitho.de/index.php?m_id=54&id=73883738,46
