@@ -4,6 +4,7 @@ import com.nirocca.ornithoalert.Constants;
 import com.nirocca.ornithoalert.Constants.FilterMySightedSpecies;
 import com.nirocca.ornithoalert.Constants.SortBy;
 import com.nirocca.ornithoalert.CoordinatesExporter;
+import com.nirocca.ornithoalert.PrintParameters;
 import com.nirocca.ornithoalert.grid.Hotspot;
 import com.nirocca.ornithoalert.model.Sighting;
 import com.nirocca.ornithoalert.util.HotspotScoreCalculator;
@@ -41,7 +42,7 @@ public class BestMonthCalculator {
             Hotspot hsp = new Hotspot(null, sightings);
             HotspotScoreCalculator.calcScore(hsp, yearsToCheck);
             try (FileOutputStream out = new FileOutputStream(PATH_TO_COORDS_DIR  + month.name() + "-" + hsp.getScore() + ".txt")) {
-                coordinatesExporter.printCoordinates(sightings, false, out);
+                coordinatesExporter.printCoordinates(new PrintParameters(sightings, false, out, null, true));
             }
         }
     }

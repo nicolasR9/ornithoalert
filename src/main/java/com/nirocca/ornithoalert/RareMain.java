@@ -32,6 +32,7 @@ public class RareMain {
         System.out.println("\nCoordinates for GPS Visualizer:");
 
         CoordinatesExporter coordinatesExporter = new CoordinatesExporter();
-        coordinatesExporter.printCoordinates(sightings, false);
+        coordinatesExporter.printCoordinates(new PrintParameters(sightings, false, null, null, true));
+
     }
 }

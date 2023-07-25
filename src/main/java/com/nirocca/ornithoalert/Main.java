@@ -45,7 +45,8 @@ public class Main {
         System.out.println("\nCoordinates for GPS Visualizer:");
         
         CoordinatesExporter coordinatesExporter = new CoordinatesExporter();
-        coordinatesExporter.printCoordinates(lastSightings, onlyExactCoords);
+        coordinatesExporter.printCoordinates(new PrintParameters(lastSightings, onlyExactCoords, null, null, true));
+
     }
 
     public static List<Sighting> calcSightings(String url, SortBy sortBy) throws IOException {
@@ -79,13 +80,12 @@ public class Main {
 
     private static List<String> readMySightings(FilterMySightedSpecies filterOnlyThisYearParam, MySightingsReader mySightingsReader)
         throws IOException {
-        switch (filterOnlyThisYearParam) {
-            case YES: return mySightingsReader.readMySightedSpeciesLatin();
-            case NO: return Collections.emptyList();
-            case ONLY_THIS_YEAR: return mySightingsReader.readMySightedSpeciesLatinThisYear();
-            case ONLY_THIS_WEEKEND: return mySightingsReader.readMySightedSpeciesLatinThisWeekend();
-            default: throw new RuntimeException("Unknown parameter: " + filterOnlyThisYearParam);
-        }
+        return switch (filterOnlyThisYearParam) {
+            case YES -> mySightingsReader.readMySightedSpeciesLatin();
+            case NO -> Collections.emptyList();
+            case ONLY_THIS_YEAR -> mySightingsReader.readMySightedSpeciesLatinThisYear();
+            case ONLY_THIS_WEEKEND -> mySightingsReader.readMySightedSpeciesLatinThisWeekend();
+        };
     }
 
     private static void initParams(String[] args) throws ParseException {
@@ -132,14 +132,11 @@ public class Main {
     private static List<Sighting> sort(List<Sighting> lastSightings, SortBy sortBy) {
         Comparator<? super Sighting> comparator = null;
         switch (sortBy) {
-            case TIME:
+            case TIME -> {
                 return lastSightings;
-            case REGION:
-                comparator = Comparator.comparing(Sighting::getLocation);
-                break;
-            case SPECIES:
-                comparator = Comparator.comparing(Sighting::getGermanNamePlural);
-                break;
+            }
+            case REGION -> comparator = Comparator.comparing(Sighting::getLocation);
+            case SPECIES -> comparator = Comparator.comparing(Sighting::getGermanNamePlural);
         }
         return lastSightings.stream().sorted(comparator).collect(Collectors.toList());
     }

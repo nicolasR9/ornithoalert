@@ -1,10 +1,8 @@
 package com.nirocca.ornithoalert.location;
 
-import com.nirocca.ornithoalert.Constants;
+import com.nirocca.ornithoalert.*;
 import com.nirocca.ornithoalert.Constants.FilterMySightedSpecies;
 import com.nirocca.ornithoalert.Constants.SortBy;
-import com.nirocca.ornithoalert.CoordinatesExporter;
-import com.nirocca.ornithoalert.Species;
 import com.nirocca.ornithoalert.model.Sighting;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -41,7 +39,7 @@ public class AllSpeciesSeparateFilesMain {
 
         for (Entry<String, List<Sighting>> entry : map.entrySet()) {
             try (FileOutputStream out = new FileOutputStream(PATH_TO_COORDS_DIR  + entry.getKey() + ".txt")) {
-                coordinatesExporter.printCoordinates(entry.getValue(), false, out);
+                coordinatesExporter.printCoordinates(new PrintParameters(entry.getValue(), false, out, new MostFrequentColorProvider(entry.getValue()), true));
             }
         }
         System.out.println("Done.");

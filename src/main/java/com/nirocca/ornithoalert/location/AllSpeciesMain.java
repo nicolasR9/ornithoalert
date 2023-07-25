@@ -1,10 +1,8 @@
 package com.nirocca.ornithoalert.location;
 
-import com.nirocca.ornithoalert.Constants;
+import com.nirocca.ornithoalert.*;
 import com.nirocca.ornithoalert.Constants.FilterMySightedSpecies;
 import com.nirocca.ornithoalert.Constants.SortBy;
-import com.nirocca.ornithoalert.CoordinatesExporter;
-import com.nirocca.ornithoalert.MaxNElementsCollector;
 import com.nirocca.ornithoalert.model.LatinComparedSpecies;
 import com.nirocca.ornithoalert.model.Sighting;
 import java.io.FileOutputStream;
@@ -43,7 +41,7 @@ public class AllSpeciesMain {
 
         System.out.println("Sightings read - printing coordinates.");
         try (FileOutputStream out = new FileOutputStream(PATH_TO_COORDS_DIR  + "coords.txt")) {
-            coordinatesExporter.printCoordinates(sightings, false, out);
+            coordinatesExporter.printCoordinates(new PrintParameters(sightings, false, out, null, true));
         }
         System.out.println("Done.");
     }

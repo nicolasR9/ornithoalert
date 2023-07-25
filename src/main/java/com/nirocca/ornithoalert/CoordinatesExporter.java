@@ -26,37 +26,36 @@ public class CoordinatesExporter {
     private static final OrnithoPageReader ornithoPageReader = new OrnithoPageReader();
     private ColorProvider colorProvider;
 
-    public void printCoordinates(List<Sighting> sightings, boolean onlyExactCoords, OutputStream outStream, ColorProvider colorProvider) throws IOException {
-        this.colorProvider = colorProvider;
-        try (PrintWriter out = new PrintWriter(outStream)) {
 
-            out.println("name,desc,latitude,longitude,color,url");
+    public void printCoordinates(PrintParameters printParameters) throws IOException {
+        OutputStream outputStream = printParameters.outStream() != null ? printParameters.outStream() : createOutputStream();
+
+        this.colorProvider = printParameters.colorProvider() != null ? printParameters.colorProvider() : new MostFrequentColorProvider(printParameters.sightings());
+        try (PrintWriter out = new PrintWriter(outputStream)) {
+            if (printParameters.printHeader())
+                out.println("name,desc,latitude,longitude,color,url");
             Set<Coordinates> coordinatesUsed = new HashSet<>();
-            for (Sighting sighting : sightings) {
+            for (Sighting sighting : printParameters.sightings()) {
                 Coordinates coordinates = getCoordinates(sighting.getUrl());
                 while (coordinatesUsed.contains(coordinates)) {
                     coordinates.shiftABit();
                 }
                 coordinatesUsed.add(coordinates);
 
-                String latitude = !onlyExactCoords || coordinates.isExact() ? String.valueOf(coordinates.getLatitude()) : "";
-                String longitude = !onlyExactCoords || coordinates.isExact() ? String.valueOf(coordinates.getLongitude()) : "";
-                out.printf("%s,%s,%s,%s,%s,%s%n", sighting.getGermanNamePlural().replaceAll(",", ""),
+                String latitude = !printParameters.onlyExactCoords() || coordinates.isExact() ? String.valueOf(coordinates.getLatitude()) : "";
+                String longitude = !printParameters.onlyExactCoords() || coordinates.isExact() ? String.valueOf(coordinates.getLongitude()) : "";
+                out.printf("%s,%s,%s,%s,%s,%s", sighting.getGermanNamePlural().replaceAll(",", ""),
                     sighting.getDate().replaceAll(",", ""), latitude, longitude, getColor(sighting), sighting.getUrl());
+                if (printParameters.speciesIdToAppend() == null) {
+                    out.printf("%n");
+                } else {
+                    out.printf(",%s%n", printParameters.speciesIdToAppend());
+                }
             }
         }
     }
 
-    public void printCoordinates(List<Sighting> sightings, boolean onlyExactCoords, OutputStream outStream) throws IOException {
-        printCoordinates(sightings, onlyExactCoords, outStream, new MostFrequentColorProvider(sightings));
-    }
-
-    public void printCoordinates(List<Sighting> sightings, boolean onlyExactCoords) throws IOException {
-        printCoordinates(sightings, onlyExactCoords, createOutputStream());
-
-    }
-
-    private OutputStream createOutputStream() throws FileNotFoundException {
+    private static OutputStream createOutputStream() throws FileNotFoundException {
         File file = new File(PATH_TO_COORDS_FILE);
         if (file.getParentFile().exists()) {
             FileOutputStream fileOut = new FileOutputStream(file);
@@ -109,7 +108,9 @@ public class CoordinatesExporter {
         SightingsPageParser parser = new SightingsPageParser();
         List<Day> structure = parser.parseSightingStructure(html);
         List<Sighting> sightings = Sighting.fromDays(structure);
-        new CoordinatesExporter().printCoordinates(sightings, false);
+        CoordinatesExporter coordinatesExporter = new CoordinatesExporter();
+        coordinatesExporter.printCoordinates(new PrintParameters(sightings, false, null, null, true));
+
     }
 
 }
