@@ -17,7 +17,6 @@ import java.nio.file.Paths;
 import java.time.Month;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
@@ -30,7 +29,7 @@ public class GridMain {
     private static final double LONGITUDE_DELTA_20_KM = 0.295272;
     private static final String SIGHTINGS_FILE ="/allDe.txt";
 
-    private static final int[] YEARS_IN_SIGHTINGS_FILE = {2020, 2021};
+    private static final int[] YEARS_IN_SIGHTINGS_FILE = {2021, 2022};
 
     public static void main(String[] args) throws IOException {
         List<Sighting> sightings = readSightings();

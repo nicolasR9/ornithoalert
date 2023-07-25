@@ -2,8 +2,10 @@ package com.nirocca.ornithoalert.grid;
 
 import com.nirocca.ornithoalert.*;
 import com.nirocca.ornithoalert.model.Sighting;
+import org.apache.commons.io.FileUtils;
 
 import java.io.*;
+import java.nio.charset.Charset;
 import java.util.List;
 
 import static com.nirocca.ornithoalert.Species.*;
@@ -16,12 +18,12 @@ public class CreateAllDeFile {
     private static final File OUT_FILE = new File("src/main/resources/allDe.txt");
 
     private static final Species[] SPECIES = {
-            /*ALEXANDERSITTICH,
+            ALEXANDERSITTICH,
             ALPENBIRKENZEISIG,
             ALPENBRAUNELLE,
             ATLANTIKSTURMTAUCHER,
             BARTGEIER,
-            BLAUSCHWANZ,*/
+            BLAUSCHWANZ,
             CHILEFLAMINGO,
             DREIZEHENSPECHT,
             DUNKLER_STURMTAUCHER,
@@ -58,7 +60,7 @@ public class CreateAllDeFile {
     };
 
     public static void main(String[] args) throws IOException {
-        // FileUtils.write(new File(OUT_FILE.toURI()), "", Charset.defaultCharset());
+        FileUtils.write(new File(OUT_FILE.toURI()), "", Charset.defaultCharset());
 
         CoordinatesExporter coordinatesExporter = new CoordinatesExporter();
         boolean first = true;
