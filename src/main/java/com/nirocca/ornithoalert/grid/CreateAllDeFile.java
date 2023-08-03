@@ -33,7 +33,6 @@ public class CreateAllDeFile {
             GOLDHAEHNCHEN_LAUBSAENGER,
             GRUENLAUBSAENGER,
             HASELHUHN,
-            NACHTREIHER,
             ORPHEUSSPOETTER,
             POLARMOEWE,
             ROSAFLAMINGO,
