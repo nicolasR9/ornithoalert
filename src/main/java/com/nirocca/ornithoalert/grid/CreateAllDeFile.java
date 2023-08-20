@@ -38,6 +38,7 @@ public class CreateAllDeFile {
             ROSAFLAMINGO,
             ROTKEHLPIEPER,
             ROTKOPFWUERGER,
+            SCHNEEGANS,
             SCHWARZKOPF_RUDERENTE,
             SEEREGENPFEIFER,
             SPORNAMMER,
