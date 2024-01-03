@@ -759,7 +759,10 @@ public enum Species {
     WEIDENAMMER(525),
     MEISENWALDSAENGER(1088),
     ROSENBRUST_KERNKNACKER(1093),
-    ROTKARDINAL(555);
+    ROTKARDINAL(555),
+    ROTAUGENVIREO(1137),
+
+    UNKNOWN(-1);
 
 
     private final int ornithoSpeciesId;
@@ -773,7 +776,7 @@ public enum Species {
     }
 
     public static Species getById(int ornithoSpeciesId) {
-        return Arrays.stream(values()).filter(s -> s.ornithoSpeciesId == ornithoSpeciesId).findFirst().get();
+        return Arrays.stream(values()).filter(s -> s.ornithoSpeciesId == ornithoSpeciesId).findFirst().orElse(UNKNOWN);
     }
 }
 

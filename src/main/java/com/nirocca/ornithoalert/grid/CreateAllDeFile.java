@@ -36,7 +36,6 @@ public class CreateAllDeFile {
             ORPHEUSSPOETTER,
             POLARMOEWE,
             ROSAFLAMINGO,
-            ROTKEHLPIEPER,
             ROTKOPFWUERGER,
             SCHNEEGANS,
             SCHWARZKOPF_RUDERENTE,
@@ -44,7 +43,6 @@ public class CreateAllDeFile {
             SPORNAMMER,
             STEINADLER,
             STEINROETEL,
-            STEPPENWEIHE,
             TANNENHAEHER,
             WALDRAPP,
             WEISSKOPF_RUDERENTE,
@@ -53,10 +51,8 @@ public class CreateAllDeFile {
             ZISTENSAENGER,
             ZITRONENSTELZE,
             ZITRONENZEISIG,
-            ZWERGAMMER,
             ZWERGGANS,
-            ZWERGKANADAGANS,
-            ZWERGSCHNEPFE
+            ZWERGKANADAGANS
     };
 
     public static void main(String[] args) throws IOException {

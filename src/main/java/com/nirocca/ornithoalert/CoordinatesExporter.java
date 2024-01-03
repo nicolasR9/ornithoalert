@@ -42,8 +42,12 @@ public class CoordinatesExporter {
                 }
                 coordinatesUsed.add(coordinates);
 
-                String latitude = !printParameters.onlyExactCoords() || coordinates.isExact() ? String.valueOf(coordinates.getLatitude()) : "";
-                String longitude = !printParameters.onlyExactCoords() || coordinates.isExact() ? String.valueOf(coordinates.getLongitude()) : "";
+                if (printParameters.onlyExactCoords() && !coordinates.isExact()) {
+                    continue;
+                }
+
+                String latitude = String.valueOf(coordinates.getLatitude());
+                String longitude = String.valueOf(coordinates.getLongitude());
                 out.printf("%s,%s,%s,%s,%s,%s", sighting.getGermanNamePlural().replaceAll(",", ""),
                     sighting.getDate().replaceAll(",", ""), latitude, longitude, getColor(sighting), sighting.getUrl());
                 if (printParameters.speciesIdToAppend() == null) {

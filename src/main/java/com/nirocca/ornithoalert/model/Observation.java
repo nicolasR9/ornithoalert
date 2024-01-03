@@ -25,7 +25,12 @@ public final class Observation {
     }
 
     public int parseSpeciesId() {
-        String link = observationElement.selectFirst("a[href~=https://www.ornitho.de/index.php\\?m_id=94.*]").attr("href");
+        Element l = observationElement.selectFirst("a[href~=https://www.ornitho.de/index.php\\?m_id=94.*]");
+        if (l == null) {
+            System.err.println("Unable to find species id");
+            return -1;
+        }
+        String link = l.attr("href");
         Matcher m = Pattern.compile(".*sp_S=(\\d+)&.*").matcher(link);
         if (m.matches()) {
             return Integer.parseInt(m.group(1));
