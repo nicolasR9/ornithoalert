@@ -161,31 +161,29 @@ public class StatisticsCalculator {
             System.out.println("\tfirst time s.: " + calculator.calcSpeciesCountFirstSighting(year, sightings));
             System.out.println("\tspecies until date: " + calculator.calcSpeciesCountUntilDate(year, sightings));
         }
+        System.out.println();
 
-        Set<Species> s = calculator.calcPreviouslySightedSpeciesNotSightedInTheCurrentYear(sightings);
-        System.out.printf("\nPreviously sighted species not sighted this year: %d%n", s.size());
+        printSpecies("Previously sighted species not sighted this year",
+                calculator.calcPreviouslySightedSpeciesNotSightedInTheCurrentYear(sightings));
 
-        s = calcSpeciesSightedAlmostEveryYearButNoInTheCurrentYear(sightings, 2);
-        System.out.printf("\nSighted every previous year except at most 2, but not this year: %d%n", s.size());
+        printSpecies("Sighted every previous year except at most 2, but not this year",
+                calcSpeciesSightedAlmostEveryYearButNoInTheCurrentYear(sightings, 2));
+
+        printSpecies("Sighted every previous year except at most 1, but not this year",
+                calcSpeciesSightedAlmostEveryYearButNoInTheCurrentYear(sightings, 1));
+
+        printSpecies("Sighted every previous year, but not this year",
+                calcSpeciesSightedEveryYearButNoInTheCurrentYear(sightings));
+
+        printSpecies("Sighted last year until this date, but not this year",
+                calcSpeciesSightedLastYearButNoInTheCurrentYear(sightings));
+
+        printSpecies("Sighted first this year", calculator.calcSpeciesFirstSighting(thisYear, sightings));
+    }
+
+    private static void printSpecies(String text, Set<Species> s) {
+        System.out.printf(text + ":\t%d%n", s.size());
         if (s.size() < MAX_SPECIES_PRINT)
-            s.forEach(x->System.out.println(x.getSpeciesName()));
-
-        s = calcSpeciesSightedAlmostEveryYearButNoInTheCurrentYear(sightings, 1);
-        System.out.printf("\nSighted every previous year except at most 1, but not this year: %d%n", s.size());
-        if (s.size() < MAX_SPECIES_PRINT)
-            s.forEach(x->System.out.println(x.getSpeciesName()));
-
-        s = calcSpeciesSightedEveryYearButNoInTheCurrentYear(sightings);
-        System.out.printf("\nSighted every previous year, but not this year (%d):%n", s.size());
-        if (s.size() < MAX_SPECIES_PRINT)
-            s.forEach(x->System.out.println(x.getSpeciesName()));
-
-
-        s = calcSpeciesSightedLastYearButNoInTheCurrentYear(sightings);
-        System.out.printf("\nSighted last year until this date, but not this year (%d):%n", s.size());
-        if (s.size() < MAX_SPECIES_PRINT)
-            s.forEach(x->System.out.println(x.getSpeciesName()));
-
-        System.out.println("Sighted first this year: " + calculator.calcSpeciesFirstSighting(thisYear, sightings));
+            s.forEach(x->System.out.println(" " + x.getSpeciesName()));
     }
 }
