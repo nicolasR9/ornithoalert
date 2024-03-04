@@ -14,9 +14,9 @@ public class RareMain {
     public static void main(String[] args) throws IOException {
         List<com.nirocca.ornithoalert.statistics.Sighting> mySightings = StatisticsCalculator.readMySightings();
         Set<com.nirocca.ornithoalert.statistics.Species> frequentSpecies =
-                StatisticsCalculator.calcSpeciesSightedAlmostEveryYear(mySightings, 2);
+                StatisticsCalculator.calcSpeciesSightedAlmostEveryYear(mySightings, 3);
         Set<String> frequentLatin = frequentSpecies.stream().map(Species::getLatinName).collect(Collectors.toSet());
-        List<Sighting> lastSightings = Main.calcSightings(OrnithoUrl.GROSSRAUM_LAST_3_DAYS.getUrl(), Constants.SortBy.SPECIES, Constants.FilterMySightedSpecies.ONLY_THIS_YEAR);
+        List<Sighting> lastSightings = Main.calcSightings(OrnithoUrl.GROSSRAUM_LAST_8_DAYS.getUrl(), Constants.SortBy.SPECIES, Constants.FilterMySightedSpecies.ONLY_THIS_YEAR);
         List<Sighting> sightings = lastSightings.stream().filter(s -> !frequentLatin.contains(s.getLatinName())).collect(Collectors.toList());
 
         MaxNElementsCollector<LatinComparedSpecies> maxSpecies = new MaxNElementsCollector<>();
