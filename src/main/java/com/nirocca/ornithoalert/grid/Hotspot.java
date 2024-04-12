@@ -42,8 +42,7 @@ public class Hotspot implements Comparable<Hotspot> {
         Map<String, Integer> result = new HashMap<>(map.size());
         for (Entry<String, List<Sighting>> entry : map.entrySet()) {
             List<Sighting> sightingsInYear =
-                entry.getValue().stream().filter(s -> s.getDate().endsWith(String.valueOf(year))).collect(
-                    Collectors.toList());
+                entry.getValue().stream().filter(s -> s.getDate().endsWith(String.valueOf(year))).toList();
             result.put(entry.getKey(), sightingsInYear.size());
         }
         return result;
