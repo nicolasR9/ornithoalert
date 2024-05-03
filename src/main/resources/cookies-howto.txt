@@ -1,4 +1,5 @@
-- install chrome extension "Get cookies.txt"
-- login to ornitho.de using option "save password"
-- export cookies from the extentions
-- put in cookies.txt
+cookies.txt:
+- log in to ornitho.de with "save password" option
+- chrome developer tools -> network tab
+- export as curl
+- copy cookie header into cookies.txt
