@@ -1,14 +1,14 @@
 package com.nirocca.ornithoalert;
 
-import com.nirocca.ornithoalert.model.LatinComparedSpecies;
-import com.nirocca.ornithoalert.model.Sighting;
-import com.nirocca.ornithoalert.statistics.Species;
-import com.nirocca.ornithoalert.statistics.StatisticsCalculator;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import com.nirocca.ornithoalert.model.LatinComparedSpecies;
+import com.nirocca.ornithoalert.model.Sighting;
+import com.nirocca.ornithoalert.statistics.Species;
+import com.nirocca.ornithoalert.statistics.StatisticsCalculator;
 
 public class RareMain {
     public static void main(String[] args) throws IOException {

@@ -1,14 +1,50 @@
 package com.nirocca.ornithoalert.grid;
 
-import com.nirocca.ornithoalert.*;
-import com.nirocca.ornithoalert.model.Sighting;
-import org.apache.commons.io.FileUtils;
+import static com.nirocca.ornithoalert.Species.ALPENBIRKENZEISIG;
+import static com.nirocca.ornithoalert.Species.ALPENBRAUNELLE;
+import static com.nirocca.ornithoalert.Species.ATLANTIKSTURMTAUCHER;
+import static com.nirocca.ornithoalert.Species.BARTGEIER;
+import static com.nirocca.ornithoalert.Species.BLAUSCHWANZ;
+import static com.nirocca.ornithoalert.Species.CHILEFLAMINGO;
+import static com.nirocca.ornithoalert.Species.DUNKLER_STURMTAUCHER;
+import static com.nirocca.ornithoalert.Species.EISMOEWE;
+import static com.nirocca.ornithoalert.Species.GAENSEGEIER;
+import static com.nirocca.ornithoalert.Species.GELBBRAUEN_LAUBSAENGER;
+import static com.nirocca.ornithoalert.Species.GOLDHAEHNCHEN_LAUBSAENGER;
+import static com.nirocca.ornithoalert.Species.GRUENLAUBSAENGER;
+import static com.nirocca.ornithoalert.Species.HASELHUHN;
+import static com.nirocca.ornithoalert.Species.POLARMOEWE;
+import static com.nirocca.ornithoalert.Species.ROSAFLAMINGO;
+import static com.nirocca.ornithoalert.Species.ROTKOPFWUERGER;
+import static com.nirocca.ornithoalert.Species.SCHNEEGANS;
+import static com.nirocca.ornithoalert.Species.SCHWARZKOPF_RUDERENTE;
+import static com.nirocca.ornithoalert.Species.SEEREGENPFEIFER;
+import static com.nirocca.ornithoalert.Species.SPORNAMMER;
+import static com.nirocca.ornithoalert.Species.STEINADLER;
+import static com.nirocca.ornithoalert.Species.STEINROETEL;
+import static com.nirocca.ornithoalert.Species.TANNENHAEHER;
+import static com.nirocca.ornithoalert.Species.WALDRAPP;
+import static com.nirocca.ornithoalert.Species.WEISSKOPF_RUDERENTE;
+import static com.nirocca.ornithoalert.Species.WEISSRUECKENSPECHT;
+import static com.nirocca.ornithoalert.Species.ZISTENSAENGER;
+import static com.nirocca.ornithoalert.Species.ZITRONENSTELZE;
+import static com.nirocca.ornithoalert.Species.ZITRONENZEISIG;
+import static com.nirocca.ornithoalert.Species.ZWERGGANS;
+import static com.nirocca.ornithoalert.Species.ZWERGKANADAGANS;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.List;
 
-import static com.nirocca.ornithoalert.Species.*;
+import com.nirocca.ornithoalert.Constants;
+import com.nirocca.ornithoalert.CoordinatesExporter;
+import com.nirocca.ornithoalert.Main;
+import com.nirocca.ornithoalert.PrintParameters;
+import com.nirocca.ornithoalert.Species;
+import com.nirocca.ornithoalert.model.Sighting;
+import org.apache.commons.io.FileUtils;
 
 public class CreateAllDeFile {
 
@@ -18,14 +54,12 @@ public class CreateAllDeFile {
     private static final File OUT_FILE = new File("src/main/resources/allDe.txt");
 
     private static final Species[] SPECIES = {
-            ALEXANDERSITTICH,
             ALPENBIRKENZEISIG,
             ALPENBRAUNELLE,
             ATLANTIKSTURMTAUCHER,
             BARTGEIER,
             BLAUSCHWANZ,
             CHILEFLAMINGO,
-            DREIZEHENSPECHT,
             DUNKLER_STURMTAUCHER,
             EISMOEWE,
             GAENSEGEIER,
@@ -33,7 +67,6 @@ public class CreateAllDeFile {
             GOLDHAEHNCHEN_LAUBSAENGER,
             GRUENLAUBSAENGER,
             HASELHUHN,
-            ORPHEUSSPOETTER,
             POLARMOEWE,
             ROSAFLAMINGO,
             ROTKOPFWUERGER,
@@ -47,7 +80,6 @@ public class CreateAllDeFile {
             WALDRAPP,
             WEISSKOPF_RUDERENTE,
             WEISSRUECKENSPECHT,
-            ZIPPAMMER,
             ZISTENSAENGER,
             ZITRONENSTELZE,
             ZITRONENZEISIG,
