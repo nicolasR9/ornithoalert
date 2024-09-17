@@ -1,28 +1,29 @@
 package com.nirocca.ornithoalert.util;
 
-import com.nirocca.ornithoalert.model.Sighting;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.nirocca.ornithoalert.model.Sighting;
+
 public class SightingFilter {
     static final Set<String> SPECIES_TO_EXCLUDE = new HashSet<>(Arrays.asList(
         "Keine Art",
         "Gimpel (ssp. pyrrhula), Trompetergimpel",
-        "Bl\u00e4ss- / Saatg\u00e4nse",
-        "Tundrasaatg\u00e4nse",
-        "Bl\u00e4ss-_oder_Saatgans",
+        "Bläss- / Saatgänse",
+        "Tundrasaatgänse",
+        "Bläss-_oder_Saatgans",
         "Saatgans (ssp. rossicus) Tundrasaatgans",
         "Tundrasaatgans",
         "Hausgans",
         "Hausente",
-        "Mittelmeer-_oder_Steppenm\u00f6we (Weißkopfm\u00f6we)",
-        "Silber-oderMittelmeer-oderSteppenm\u00f6we",
-        "Silber-_oder_Mittelmeer-_oder_Steppenm\u00f6we",
-        "Silber- / Mittelmeer- / Steppenm\u00f6wen",
-        "Mittelmeer- / Steppenm\u00f6wen",
+        "Mittelmeer-_oder_Steppenmöwe (Weißkopfmöwe)",
+        "Silber-oderMittelmeer-oderSteppenmöwe",
+        "Silber-_oder_Mittelmeer-_oder_Steppenmöwe",
+        "Silber- / Mittelmeer- / Steppenmöwen",
+        "Mittelmeer- / Steppenmöwen",
         "Stockente, Bastard, fehlfarben",
         "Stockenten, Bastard, fehlfarben",
         "Taigabirkenzeisige",
@@ -32,8 +33,8 @@ public class SightingFilter {
         "Schwanzmeise (ssp. caudatus)",
         "Stockenten Bastard fehlfarben",
         "Wasseramsel (ssp. cinclus)",
-        "Raben-_oder_Nebelkr\u00e4he (Aaskr\u00e4he)",
-        "Raben- / Nebelkr\u00e4hen",
+        "Raben-_oder_Nebelkrähe (Aaskrähe)",
+        "Raben- / Nebelkrähen",
         "Tafel-_x_Reiherente",
         "Ringdrosseln (ssp. alpestris)",
         "Ringdrossel (ssp. alpestris)",
@@ -41,7 +42,10 @@ public class SightingFilter {
         "Weidenmeisen (ssp. montanus), Alpenmeisen",
         "Alpenmeise",
         "Alpenmeisen",
-        "Bachstelze (ssp. yarrellii), Trauerbachstelze"
+        "Bachstelze (ssp. yarrellii), Trauerbachstelze",
+        "Isländische Uferschnepfen",
+        "Trottellummen / Tordalken",
+        "Hellbäuchige Ringelgänse"
     ));
 
     public static List<Sighting> filterOutNonRelevantSightings(List<Sighting> sightings) {

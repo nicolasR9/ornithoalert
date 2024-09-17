@@ -13,6 +13,7 @@ import static com.nirocca.ornithoalert.Species.GELBBRAUEN_LAUBSAENGER;
 import static com.nirocca.ornithoalert.Species.GOLDHAEHNCHEN_LAUBSAENGER;
 import static com.nirocca.ornithoalert.Species.GRUENLAUBSAENGER;
 import static com.nirocca.ornithoalert.Species.HASELHUHN;
+import static com.nirocca.ornithoalert.Species.KRABBENTAUCHER;
 import static com.nirocca.ornithoalert.Species.POLARMOEWE;
 import static com.nirocca.ornithoalert.Species.ROSAFLAMINGO;
 import static com.nirocca.ornithoalert.Species.ROTKOPFWUERGER;
@@ -67,6 +68,7 @@ public class CreateAllDeFile {
             GOLDHAEHNCHEN_LAUBSAENGER,
             GRUENLAUBSAENGER,
             HASELHUHN,
+            KRABBENTAUCHER,
             POLARMOEWE,
             ROSAFLAMINGO,
             ROTKOPFWUERGER,
