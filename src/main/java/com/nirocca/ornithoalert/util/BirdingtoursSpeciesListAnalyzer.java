@@ -13,6 +13,25 @@ public class BirdingtoursSpeciesListAnalyzer {
   private static final String FILE = "/Users/nicolas.rocca/tmp/HAV 02 2024 Artenliste (1).csv";
 
   public static void main(String[] args) throws IOException {
+    //analyze();
+    printSpeciesForDay(2);
+  }
+
+  private static void printSpeciesForDay(int day) throws IOException {
+    List<String> lines = IOUtils.readLines(new BufferedInputStream(new FileInputStream(FILE)), Charset.defaultCharset());
+    lines.remove(0); // headers
+    for (String line : lines) {
+      String[] parts = line.split(";");
+      if (parts.length < 1) continue;
+      String species = parts[0];
+      List<Integer> days = getDays(parts);
+      if (days.contains(day)) {
+        System.out.println("\"" + species + "\",");
+      }
+    }
+  }
+
+  private static void analyze() throws IOException {
     List<String> lines = IOUtils.readLines(new BufferedInputStream(new FileInputStream(FILE)), Charset.defaultCharset());
     lines.remove(0); // headers
     int total = 0;
@@ -34,7 +53,6 @@ public class BirdingtoursSpeciesListAnalyzer {
       }
     }
     System.out.println("Insgesamt: " + total);
-
   }
 
   private static List<Integer> getDays(String[] parts) {
