@@ -1,13 +1,5 @@
 package com.nirocca.ornithoalert;
 
-import com.nirocca.ornithoalert.model.Coordinates;
-import com.nirocca.ornithoalert.model.Day;
-import com.nirocca.ornithoalert.model.Sighting;
-import org.apache.commons.io.output.TeeOutputStream;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -19,6 +11,14 @@ import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.nirocca.ornithoalert.model.Coordinates;
+import com.nirocca.ornithoalert.model.Day;
+import com.nirocca.ornithoalert.model.Sighting;
+import org.apache.commons.io.output.TeeOutputStream;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 
 public class CoordinatesExporter {
     private static final String PATH_TO_COORDS_FILE = Constants.OUTPUT_DIR + "coord.txt";
@@ -96,7 +96,7 @@ public class CoordinatesExporter {
         
         html = ornithoPageReader.getHtmlForPage(locationPageUrl);
         doc = Jsoup.parse(html);
-        String coordText = doc.getElementById("td-main-table").select("td[class='box']").get(1).ownText();
+        String coordText = doc.getElementById("td-main-table").select("div[class='col-sm-80']").get(0).ownText();
         pattern = Pattern.compile("(.* E) / (.*'' N).*");
         matcher = pattern.matcher(coordText);
         if (!matcher.matches()) {

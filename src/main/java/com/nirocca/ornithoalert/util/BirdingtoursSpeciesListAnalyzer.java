@@ -10,18 +10,18 @@ import java.util.List;
 import org.apache.commons.io.IOUtils;
 
 public class BirdingtoursSpeciesListAnalyzer {
-  private static final String FILE = "/Users/nicolas.rocca/tmp/HAV 02 2024 Artenliste (1).csv";
+  private static final String FILE = "/Users/nicolas.rocca/tmp/BRB02 Artenliste 2024.csv";
 
   public static void main(String[] args) throws IOException {
     //analyze();
-    printSpeciesForDay(2);
+    printSpeciesForDay(3);
   }
 
   private static void printSpeciesForDay(int day) throws IOException {
     List<String> lines = IOUtils.readLines(new BufferedInputStream(new FileInputStream(FILE)), Charset.defaultCharset());
     lines.remove(0); // headers
     for (String line : lines) {
-      String[] parts = line.split(";");
+      String[] parts = line.split(",");
       if (parts.length < 1) continue;
       String species = parts[0];
       List<Integer> days = getDays(parts);
@@ -36,7 +36,7 @@ public class BirdingtoursSpeciesListAnalyzer {
     lines.remove(0); // headers
     int total = 0;
     for (String line : lines) {
-      String[] parts = line.split(";");
+      String[] parts = line.split(",");
       if (parts.length < 1) continue;
       String species = parts[0];
       List<Integer> days = getDays(parts);

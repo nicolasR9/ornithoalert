@@ -1,8 +1,4 @@
-{
-    "type": "click",
-    "selectors": [
-    "xpath///select[contains(@onfocus,\"'BIRD_NAME'\")]"
-],
-    "offsetX": 1,
-    "offsetY": 1
-},
+el = document.evaluate("//div[contains(@onmousedown,\"'BIRD_NAME'\")]", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+if (el) {
+  el.onmousedown(undefined);
+}
