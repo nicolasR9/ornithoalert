@@ -1,6 +1,5 @@
 package com.nirocca.ornithoalert.statistics;
 
-import com.nirocca.ornithoalert.util.SightingFilter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
@@ -14,12 +13,14 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import com.nirocca.ornithoalert.util.SightingFilter;
 import org.apache.commons.io.IOUtils;
 
 public class StatisticsCalculator {
 
     private static final int MY_FIRST_SIGHTING_YEAR = 2017;
-    private static final int MAX_SPECIES_PRINT = 50;
+    private static final int MAX_SPECIES_PRINT = 25;
 
     public static List<Sighting> readMySightings() throws IOException {
         List<String> lines = IOUtils.readLines(
@@ -125,7 +126,7 @@ public class StatisticsCalculator {
         return almostAllYearsSpecies;
     }
 
-    private static Set<Species> calcSpeciesSightedLastYearButNoInTheCurrentYear(List<Sighting> sightings) {
+    private static Set<Species> calcSpeciesSightedLastYearButNotCurrentYear(List<Sighting> sightings) {
 
         int thisYear = Calendar.getInstance().get(Calendar.YEAR);
         Set<Species> speciesThisYear = getSpeciesForYear(sightings, thisYear);
@@ -135,6 +136,18 @@ public class StatisticsCalculator {
 
         lastYearSpecies.removeAll(speciesThisYear);
         return lastYearSpecies;
+    }
+
+    private static Set<Species> calcSpeciesSightedThisYearButNotLastYear(List<Sighting> sightings) {
+
+        int thisYear = Calendar.getInstance().get(Calendar.YEAR);
+        Set<Species> speciesThisYear = getSpeciesForYear(sightings, thisYear);
+
+        List<Sighting> sightingsLastYear = getSightingsUntilDate(thisYear - 1, sightings);
+        Set<Species> lastYearSpecies = getSpeciesForYear(sightingsLastYear, thisYear - 1);
+
+        speciesThisYear.removeAll(lastYearSpecies);
+        return speciesThisYear;
     }
 
     public static Set<Species> calcSpeciesSightedAlmostEveryYear(List<Sighting> sightings, int exceptCount) {
@@ -176,7 +189,10 @@ public class StatisticsCalculator {
                 calcSpeciesSightedEveryYearButNoInTheCurrentYear(sightings));
 
         printSpecies("Sighted last year until this date, but not this year",
-                calcSpeciesSightedLastYearButNoInTheCurrentYear(sightings));
+                calcSpeciesSightedLastYearButNotCurrentYear(sightings));
+
+        printSpecies("Sighted this year until this date, but not last year",
+            calcSpeciesSightedThisYearButNotLastYear(sightings));
 
         printSpecies("Sighted first this year", calculator.calcSpeciesFirstSighting(thisYear, sightings));
     }

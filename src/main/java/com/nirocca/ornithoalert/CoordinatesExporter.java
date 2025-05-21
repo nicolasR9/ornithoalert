@@ -37,6 +37,9 @@ public class CoordinatesExporter {
             Set<Coordinates> coordinatesUsed = new HashSet<>();
             for (Sighting sighting : printParameters.sightings()) {
                 Coordinates coordinates = getCoordinates(sighting.getUrl());
+                if (coordinates == null) {
+                    continue;
+                }
                 while (coordinatesUsed.contains(coordinates)) {
                     coordinates.shiftABit();
                 }
@@ -96,11 +99,17 @@ public class CoordinatesExporter {
         
         html = ornithoPageReader.getHtmlForPage(locationPageUrl);
         doc = Jsoup.parse(html);
-        String coordText = doc.getElementById("td-main-table").select("div[class='col-sm-80']").get(0).ownText();
+        Element mainTable = doc.getElementById("td-main-table");
+        if (mainTable == null) {
+            System.err.println("MainTable not found.");
+            return null;
+        }
+        String coordText = mainTable.select("div[class='col-sm-80']").get(0).ownText();
         pattern = Pattern.compile("(.* E) / (.*'' N).*");
         matcher = pattern.matcher(coordText);
         if (!matcher.matches()) {
             System.err.println("unexpected coord format: " + coordText);
+            return null;
         }
         
         return new Coordinates(matcher.group(2), matcher.group(1), false);
