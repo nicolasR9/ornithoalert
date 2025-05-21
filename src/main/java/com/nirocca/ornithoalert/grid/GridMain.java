@@ -1,5 +1,16 @@
 package com.nirocca.ornithoalert.grid;
 
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.time.Month;
+import java.time.format.TextStyle;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Locale;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import com.nirocca.ornithoalert.Constants;
 import com.nirocca.ornithoalert.MySightingsReader;
 import com.nirocca.ornithoalert.model.Sighting;
@@ -12,16 +23,6 @@ import com.spatial4j.core.shape.impl.PointImpl;
 import com.spatial4j.core.shape.impl.RectangleImpl;
 import io.jenetics.jpx.GPX;
 import io.jenetics.jpx.GPX.Builder;
-import java.io.IOException;
-import java.nio.file.Paths;
-import java.time.Month;
-import java.time.format.TextStyle;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
-import java.util.stream.Collectors;
 import org.apache.commons.io.IOUtils;
 
 public class GridMain {
@@ -29,7 +30,7 @@ public class GridMain {
     private static final double LONGITUDE_DELTA_20_KM = 0.295272;
     private static final String SIGHTINGS_FILE ="/allDe.txt";
 
-    private static final int[] YEARS_IN_SIGHTINGS_FILE = {2021, 2022};
+    private static final int[] YEARS_IN_SIGHTINGS_FILE = {2022, 2023, 2024};
 
     public static void main(String[] args) throws IOException {
         List<Sighting> sightings = readSightings();
