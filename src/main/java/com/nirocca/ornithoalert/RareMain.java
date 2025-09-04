@@ -17,13 +17,13 @@ public class RareMain {
                 StatisticsCalculator.calcSpeciesSightedAlmostEveryYear(mySightings, 3);
         Set<String> frequentLatin = frequentSpecies.stream().map(Species::getLatinName).collect(Collectors.toSet());
         List<Sighting> lastSightings = Main.calcSightings(OrnithoUrl.GROSSRAUM_LAST_8_DAYS.getUrl(), Constants.SortBy.SPECIES, Constants.FilterMySightedSpecies.ONLY_THIS_YEAR);
-        List<Sighting> sightings = lastSightings.stream().filter(s -> !frequentLatin.contains(s.getLatinName())).collect(Collectors.toList());
+        List<Sighting> sightings = lastSightings.stream().filter(s -> !frequentLatin.contains(s.latinName())).collect(Collectors.toList());
 
         MaxNElementsCollector<LatinComparedSpecies> maxSpecies = new MaxNElementsCollector<>();
         System.out.println("Markdown list:");
         for (Sighting sighting : sightings) {
             System.out.println(sighting + "<br>");
-            maxSpecies.add(new LatinComparedSpecies(sighting.getGermanName(), sighting.getLatinName()));
+            maxSpecies.add(new LatinComparedSpecies(sighting.germanName(), sighting.latinName()));
         }
 
         System.out.println("\nMax:");

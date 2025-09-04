@@ -50,7 +50,7 @@ public class AllSpeciesSeparateFilesMain {
             url = url.replaceAll("sp_DTo=[^&]+&", "sp_DTo=" + TO_DATE + year + "&");
 
             List<Sighting> forYear = Main.calcSightings(url, SortBy.SPECIES, FilterMySightedSpecies.ONLY_THIS_YEAR);
-            forYear = forYear.stream().filter(s -> !exclude.contains(Species.getById(s.getSpeciesId()))).toList();
+            forYear = forYear.stream().filter(s -> !exclude.contains(Species.getById(s.speciesId()))).toList();
             sightings.addAll(forYear);
         }
 
@@ -58,14 +58,14 @@ public class AllSpeciesSeparateFilesMain {
         System.out.println("Markdown list:");
         for (Sighting sighting : sightings) {
             System.out.println(sighting + "<br>");
-            maxSpecies.add(new LatinComparedSpecies(sighting.getGermanName(), sighting.getLatinName()));
+            maxSpecies.add(new LatinComparedSpecies(sighting.germanName(), sighting.latinName()));
         }
 
         System.out.println("\nMax:");
         maxSpecies.getMaxElements(30).forEach(System.out::println);
 
         Map<String, List<Sighting>>
-            map = sightings.stream().collect(Collectors.groupingBy(sighting -> Species.getById(sighting.getSpeciesId()).name()));
+            map = sightings.stream().collect(Collectors.groupingBy(sighting -> Species.getById(sighting.speciesId()).name()));
         System.out.println("Sightings read - printing coordinates.");
 
         for (Entry<String, List<Sighting>> entry : map.entrySet()) {

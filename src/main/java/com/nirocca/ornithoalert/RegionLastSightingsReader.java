@@ -23,8 +23,6 @@ public class RegionLastSightingsReader {
 
     private static final int CHUNK_SIZE = 5;
     
-    private final SightingsPageParser parser = new SightingsPageParser();
-    
     private final OrnithoPageReader ornithoPageReader = new OrnithoPageReader();
     
 

@@ -40,7 +40,7 @@ public class HotspotScoreCalculator {
 
     private static Map<String,int[]> getBySpeciesPerYear(List<Sighting> sightings, int[] years) {
         Map<String, int[]> map = new HashMap<>();
-        sightings.forEach(s -> addToMap(map, calcYearIndex(s.getDate(), years[0]), calcName(s), years.length));
+        sightings.forEach(s -> addToMap(map, calcYearIndex(s.date(), years[0]), calcName(s), years.length));
         return map;
     }
 
@@ -55,6 +55,6 @@ public class HotspotScoreCalculator {
     }
 
     private static String calcName(Sighting sighting) {
-        return sighting.getSpeciesId() > 0 ? Species.getById(sighting.getSpeciesId()).name() : sighting.getLatinName();
+        return sighting.speciesId() > 0 ? Species.getById(sighting.speciesId()).name() : sighting.latinName();
     }
 }

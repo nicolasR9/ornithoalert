@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 import com.nirocca.ornithoalert.Constants;
 import com.nirocca.ornithoalert.MySightingsReader;
+import com.nirocca.ornithoalert.model.Coordinates;
 import com.nirocca.ornithoalert.model.Sighting;
 import com.nirocca.ornithoalert.util.HotspotScoreCalculator;
 import com.spatial4j.core.context.SpatialContext;
@@ -90,13 +91,12 @@ public class GridMain {
     private static List<Sighting> filterByRectangle(List<Sighting> monthSightings, Rectangle rectangle) {
         return monthSightings
             .stream()
-            .filter(s -> rectangle.relate(toPoint(s.getLocationText())) == SpatialRelation.CONTAINS)
+            .filter(s -> rectangle.relate(toPoint(s.coordinates())) == SpatialRelation.CONTAINS)
             .collect(Collectors.toList());
     }
 
-    private static Point toPoint(String location) {
-        String[] split = location.split(",");
-        return new PointImpl(Double.parseDouble(split[0]), Double.parseDouble(split[1]), SpatialContext.GEO);
+    private static Point toPoint(Coordinates location) {
+        return new PointImpl(location.getLatitude(), location.getLongitude(), SpatialContext.GEO);
     }
 
     private static List<Rectangle> createGermanyGrid() {
@@ -123,7 +123,7 @@ public class GridMain {
         // Freitag 22. Januar 2021
 
         String monthName = month.getDisplayName(TextStyle.FULL, Locale.GERMAN);
-        return sightings.stream().filter(s -> s.getDate().split(" ")[2].equals(monthName)).collect(Collectors.toList());
+        return sightings.stream().filter(s -> s.date().split(" ")[2].equals(monthName)).collect(Collectors.toList());
     }
 
     static List<Sighting> readSightings() throws IOException {
@@ -133,12 +133,13 @@ public class GridMain {
         List<Sighting> result = new ArrayList<>();
         for (String line : lines) {
             String[] fields = line.split(",");
-            // FIXME handle missing lat/lon
             //result.add(new Sighting(fields[1], fields[0], null, Integer.parseInt(fields[6]), fields[5], fields[2] + "," + fields[3], "-1"));
+            Coordinates coordinates = new Coordinates(Double.parseDouble(fields[2]), Double.parseDouble(fields[3]), true);
+            result.add(new Sighting(fields[1], fields[0], null,  Integer.parseInt(fields[6]), fields[5], "", "-1", coordinates));
         }
         List<String> sightedSpeciesIds = new MySightingsReader().readMySightedSpeciesIds();
         Set<Integer> ids = sightedSpeciesIds.stream().map(Integer::valueOf).collect(Collectors.toSet());
-        return result.stream().filter(s -> !ids.contains(s.getSpeciesId())).collect(Collectors.toList());
+        return result.stream().filter(s -> !ids.contains(s.speciesId())).collect(Collectors.toList());
     }
 
 }

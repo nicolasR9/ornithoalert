@@ -21,7 +21,7 @@ public class MostFrequentColorProvider implements ColorProvider {
     private List<String> createLatinNamesByFrequency(List<Sighting> sightings) {
         final List<String> latinNamesByFrequency;
         MaxNElementsCollector<LatinComparedSpecies> frequencies = new MaxNElementsCollector<>();
-        sightings.forEach(s -> frequencies.add(new LatinComparedSpecies(s.getGermanName(), s.getLatinName())));
+        sightings.forEach(s -> frequencies.add(new LatinComparedSpecies(s.germanName(), s.latinName())));
         List<ElementWithCount<LatinComparedSpecies>> maxElements = frequencies.getMaxElements(100);
         latinNamesByFrequency = maxElements.stream().map(s -> s.getElement().getLatinName()).collect(Collectors.toList());
         return latinNamesByFrequency;
@@ -29,7 +29,7 @@ public class MostFrequentColorProvider implements ColorProvider {
 
     @Override
     public String getColor(Sighting sighting) {
-        int pos = latinNamesByFrequency.indexOf(sighting.getLatinName());
+        int pos = latinNamesByFrequency.indexOf(sighting.latinName());
         return (pos >= 0 && pos < COLORS.length) ? COLORS[pos] : FALLBACK_COLOR;
     }
 }

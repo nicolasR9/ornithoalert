@@ -128,20 +128,19 @@ public class SpecificSpeciesMain {
 
         @Override
         public String getColor(Sighting sighting) {
-            if (!latinToColor.containsKey(sighting.getLatinName())) {
+            if (!latinToColor.containsKey(sighting.latinName())) {
                 if (COLORS.isEmpty()) {
                     COLORS.push("red");
                 }
-                latinToColor.put(sighting.getLatinName(), COLORS.pop());
+                latinToColor.put(sighting.latinName(), COLORS.pop());
             }
-            return latinToColor.get(sighting.getLatinName());
+            return latinToColor.get(sighting.latinName());
         }
     }
 }
 
 class Stats {
     private final int[] counts = new int[5];
-    private Species species;
 
     public void add(int v, int index) {
         counts[index] = v;

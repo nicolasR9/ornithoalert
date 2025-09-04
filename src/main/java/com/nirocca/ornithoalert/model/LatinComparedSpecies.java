@@ -39,7 +39,4 @@ public final class LatinComparedSpecies {
         } else
             return latinName.equals(other.latinName);
     }
-    
-    
-    
 }

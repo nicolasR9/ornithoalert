@@ -37,7 +37,7 @@ public class Main {
         System.out.println("Markdown list:");
         for (Sighting sighting : lastSightings) {
             System.out.println(sighting + "<br>");
-            maxSpecies.add(new LatinComparedSpecies(sighting.getGermanName(), sighting.getLatinName()));
+            maxSpecies.add(new LatinComparedSpecies(sighting.germanName(), sighting.latinName()));
         }
         
         System.out.println("\nMax:");
@@ -65,7 +65,7 @@ public class Main {
 
         lastSightings = SightingFilter.filterOutNonRelevantSightings(lastSightings);
         lastSightings = lastSightings.stream()
-            .filter(a -> !mySightedSpeciesLatin.contains(a.getLatinName()))
+            .filter(a -> !mySightedSpeciesLatin.contains(a.latinName()))
             .collect(Collectors.toList());
         lastSightings = sort(lastSightings, sortBy);
 
@@ -136,8 +136,8 @@ public class Main {
             case TIME -> {
                 return lastSightings;
             }
-            case REGION -> comparator = Comparator.comparing(Sighting::getLocationText);
-            case SPECIES -> comparator = Comparator.comparing(Sighting::getGermanName);
+            case REGION -> comparator = Comparator.comparing(Sighting::locationText);
+            case SPECIES -> comparator = Comparator.comparing(Sighting::germanName);
         }
         return lastSightings.stream().sorted(comparator).collect(Collectors.toList());
     }
