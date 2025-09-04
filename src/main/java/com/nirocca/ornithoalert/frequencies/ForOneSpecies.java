@@ -46,7 +46,7 @@ public class ForOneSpecies {
         String url = URL_TEMPLATE.replaceAll("%%DATE_FROM%%", FORMATTER.format(startDate));
         url = url.replaceAll("%%DATE_TO%%", FORMATTER.format(endDate));
         url = url.replaceAll("%%SPECIES_ID%%", String.valueOf(speciesId));
-        String html = pageReader.getHtmlForPage(url);
+        String html = pageReader.getPageContent(url);
 
         Pattern pattern = Pattern.compile(".*>(\\d+)&times;</div>.*", Pattern.DOTALL);
         Matcher matcher = pattern.matcher(html);

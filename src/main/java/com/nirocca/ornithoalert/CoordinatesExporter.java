@@ -83,7 +83,7 @@ public class CoordinatesExporter {
     
 
     public static Coordinates getCoordinates(String detailsUrl) throws IOException {
-        String html = ornithoPageReader.getHtmlForPage(detailsUrl);
+        String html = ornithoPageReader.getPageContent(detailsUrl);
         // for sightings with exact locations, the coordinates are directly on this page
         Pattern pattern = Pattern.compile(".*openlayerMap.addMovingMarker\\((\\d+\\.\\d+),(\\d+\\.\\d+).*", Pattern.DOTALL);
         Matcher matcher = pattern.matcher(html);
@@ -97,7 +97,7 @@ public class CoordinatesExporter {
         
         String locationPageUrl = topElement.selectFirst("a[href~=https://www.ornitho.de/index.php\\?m_id=52.*]").attr("href");
         
-        html = ornithoPageReader.getHtmlForPage(locationPageUrl);
+        html = ornithoPageReader.getPageContent(locationPageUrl);
         doc = Jsoup.parse(html);
         Element mainTable = doc.getElementById("td-main-table");
         if (mainTable == null) {
@@ -116,7 +116,7 @@ public class CoordinatesExporter {
     }
     
     public static void main(String[] args) throws IOException {
-        String html = ornithoPageReader.getHtmlForPage("http://www.ornitho.de/index.php?m_id=94&p_c=3&p_cc=206&sp_tg=1&sp_DFrom=23.02.2018&sp_DTo=23.02.2018&sp_DSeasonFromDay=1&sp_DSeasonFromMonth=1&sp_DSeasonToDay=31&sp_DSeasonToMonth=12&sp_DChoice=offset&sp_DOffset=15&speciesFilter=&sp_S=1197&sp_SChoice=category&sp_Cat%5Bnever%5D=1&sp_Cat%5Bveryrare%5D=1&sp_Cat%5Brare%5D=1&sp_Cat%5Bunusual%5D=1&sp_Cat%5Bescaped%5D=1&sp_Cat%5Bcommon%5D=1&sp_Cat%5Bverycommon%5D=1&sp_Family=1&sp_cC=0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000010000001100100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000&sp_cCO=001100000000000000000000000&sp_CommuneCounty=426&sp_Commune=13197&sp_Info=&sp_P=0&sp_PChoice=coord&sp_Coord%5BW%5D=13.033103&sp_Coord%5BS%5D=52.172652&sp_Coord%5BE%5D=13.176096&sp_Coord%5BN%5D=52.266145&sp_AltitudeFrom=-19&sp_AltitudeTo=2962&sp_CommentValue=&sp_OnlyAH=0&sp_Ats=-00000&sp_FChoice=list&sp_FDisplay=DATE_PLACE_SPECIES&sp_DFormat=DESC&sp_FOrderListSpecies=ALPHA&sp_FListSpeciesChoice=DATA&sp_DateSynth=16.06.2017&sp_FOrderSynth=ALPHA&sp_FGraphChoice=DATA&sp_FGraphFormat=auto&sp_FAltScale=250&sp_FAltChoice=DATA&sp_FMapFormat=none&submit=Abfrage+starten&mp_item_per_page=60&mp_current_page=1");
+        String html = ornithoPageReader.getPageContent("http://www.ornitho.de/index.php?m_id=94&p_c=3&p_cc=206&sp_tg=1&sp_DFrom=23.02.2018&sp_DTo=23.02.2018&sp_DSeasonFromDay=1&sp_DSeasonFromMonth=1&sp_DSeasonToDay=31&sp_DSeasonToMonth=12&sp_DChoice=offset&sp_DOffset=15&speciesFilter=&sp_S=1197&sp_SChoice=category&sp_Cat%5Bnever%5D=1&sp_Cat%5Bveryrare%5D=1&sp_Cat%5Brare%5D=1&sp_Cat%5Bunusual%5D=1&sp_Cat%5Bescaped%5D=1&sp_Cat%5Bcommon%5D=1&sp_Cat%5Bverycommon%5D=1&sp_Family=1&sp_cC=0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000010000001100100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000&sp_cCO=001100000000000000000000000&sp_CommuneCounty=426&sp_Commune=13197&sp_Info=&sp_P=0&sp_PChoice=coord&sp_Coord%5BW%5D=13.033103&sp_Coord%5BS%5D=52.172652&sp_Coord%5BE%5D=13.176096&sp_Coord%5BN%5D=52.266145&sp_AltitudeFrom=-19&sp_AltitudeTo=2962&sp_CommentValue=&sp_OnlyAH=0&sp_Ats=-00000&sp_FChoice=list&sp_FDisplay=DATE_PLACE_SPECIES&sp_DFormat=DESC&sp_FOrderListSpecies=ALPHA&sp_FListSpeciesChoice=DATA&sp_DateSynth=16.06.2017&sp_FOrderSynth=ALPHA&sp_FGraphChoice=DATA&sp_FGraphFormat=auto&sp_FAltScale=250&sp_FAltChoice=DATA&sp_FMapFormat=none&submit=Abfrage+starten&mp_item_per_page=60&mp_current_page=1");
         
         SightingsPageParser parser = new SightingsPageParser();
         List<Day> structure = parser.parseSightingStructure(html);

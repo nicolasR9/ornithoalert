@@ -18,7 +18,7 @@ public class OrnithoPageReader {
         client = HttpClientBuilder.create().build();
     }
 
-    public String getHtmlForPage(String ornithoUrl) throws IOException {
+    public String getPageContent(String ornithoUrl) throws IOException {
 
         final HttpGet request = new HttpGet(ornithoUrl);
         String cookies; // from chrome devtools (network, export request as curl)

@@ -1,22 +1,22 @@
 package com.nirocca.ornithoalert;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import com.nirocca.ornithoalert.model.Day;
 import com.nirocca.ornithoalert.model.Location;
 import com.nirocca.ornithoalert.model.Observation;
-import java.util.Collections;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.util.ArrayList;
-import java.util.List;
-
 
 public class SightingsPageParser {
     
-    public List<Day> parseSightingStructure(String html) {
-        Document doc = Jsoup.parse(html);
+    public List<Day> parseSightingStructure(String pageJson) {
+        Document doc = Jsoup.parse(pageJson);
         Element topElement = doc.selectFirst("div.listContainer");
         if (topElement == null) {
             return Collections.emptyList();

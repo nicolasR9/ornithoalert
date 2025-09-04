@@ -3,6 +3,9 @@ package com.nirocca.ornithoalert.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.nirocca.ornithoalert.model.ornitho.OrnithoData;
+import com.nirocca.ornithoalert.model.ornitho.Species;
+
 public class Sighting {
     
     private final String date;
@@ -17,17 +20,18 @@ public class Sighting {
         this(day.parseDay(), observation.parseGermanName(), observation.parseLatinName(), observation.parseSpeciesId(), observation.parseUrl(),
             location.getLocationText(), observation.parseCount());
     }
-    
-    public static List<Sighting> fromDays(List<Day> days) {
-        List<Sighting> sightings = new ArrayList<>();
-        for (Day day : days) {
-            for (Location location : day.getLocations()) {
-                for (Observation observation : location.getObservations()) {
-                    sightings.add(new Sighting(day, location, observation));
-                }
-            }
-        }
-        return sightings;
+
+    public static Sighting of(OrnithoData ornithoData) {
+        Species speciesArray = ornithoData.getSpeciesArray();
+        long idSighting = ornithoData.getOptObservers().get(0).getOptObserverInfo().get(0).getIdSighting();
+        return new Sighting(
+            ornithoData.getDate(),
+            speciesArray.getNamePlur(),
+            speciesArray.getLatinName(),
+            speciesArray.getId(),
+            String.format("https://www.ornitho.de/index.php?m_id=54&id=%s", idSighting),
+            ornithoData.getLat() + "," + ornithoData.getLon(),
+            ornithoData.getBirdsCount());
     }
 
     public Sighting(String date, String germanNamePlural, String latinName, int speciesId, String url, String location, String count) {
@@ -38,6 +42,18 @@ public class Sighting {
         this.url = url;
         this.location = location;
         this.count = count;
+    }
+
+    public static List<Sighting> fromDays(List<Day> days) {
+        List<Sighting> sightings = new ArrayList<>();
+        for (Day day : days) {
+            for (Location location : day.getLocations()) {
+                for (Observation observation : location.getObservations()) {
+                    sightings.add(new Sighting(day, location, observation));
+                }
+            }
+        }
+        return sightings;
     }
 
     public String getLatinName() {

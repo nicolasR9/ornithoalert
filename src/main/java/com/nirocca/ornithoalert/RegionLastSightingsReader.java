@@ -1,8 +1,5 @@
 package com.nirocca.ornithoalert;
 
-import com.nirocca.ornithoalert.model.Day;
-import com.nirocca.ornithoalert.model.Sighting;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,7 +10,14 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nirocca.ornithoalert.model.Sighting;
+import com.nirocca.ornithoalert.model.ornitho.DataWrapper;
 
 public class RegionLastSightingsReader {
 
@@ -24,7 +28,11 @@ public class RegionLastSightingsReader {
     private final OrnithoPageReader ornithoPageReader = new OrnithoPageReader();
     
 
-    public List<Sighting> read(String url) {
+    public List<Sighting> read(String url) throws IOException {
+        String html = ornithoPageReader.getPageContent(url);
+        String dataUrl = extractDataUrl(html);
+
+
         List<Sighting> result = new ArrayList<>();
         List<Sighting> currentSightings;
 
@@ -32,19 +40,32 @@ public class RegionLastSightingsReader {
         do {
             int toPage = fromPage + CHUNK_SIZE - 1;
             System.out.println("reading pages " + fromPage + "-" + toPage);
-            currentSightings = readPagesChunkParallel(url, fromPage, toPage);
+            currentSightings = readPagesChunkParallel(dataUrl, fromPage, toPage);
             result.addAll(currentSightings);
             fromPage += CHUNK_SIZE;
         } while (!currentSightings.isEmpty());
         return result;
     }
 
+    public static String extractDataUrl(String html) {
+        String regex = "\"(index\\.php\\?m_id=1351&content=observations_by_page[^\"]+)\"";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(html);
+
+        if (matcher.find()) {
+            return "https://www.ornitho.de/" + matcher.group(1);
+        }
+        throw new RuntimeException("Could not extract data url from html.");
+    }
+
     private List<Sighting> readPagesChunkParallel(String url, int fromPage, int toPage) {
         ExecutorService executor = Executors.newFixedThreadPool(toPage - fromPage + 1);
         List<Callable<List<Sighting>>> tasks = new ArrayList<>();
         for (int i = fromPage; i <= toPage; i++) {
-            int finalI = i;
-            tasks.add(() -> readPage(url.replace("current_page=1", "current_page=" + finalI)));
+            final String finalUrl = url.contains("current_page=1") ?
+                url.replace("current_page=1", "current_page=" + i)
+                : url + "&mp_current_page=" + i;
+            tasks.add(() -> readPage(finalUrl));
         }
 
         try {
@@ -64,13 +85,20 @@ public class RegionLastSightingsReader {
     }
     
     private List<Sighting> readPage(String url) throws IOException {
-        String html = ornithoPageReader.getHtmlForPage(url);
+        String dataJson = ornithoPageReader.getPageContent(url);
         
-        return parseSightings(html);
+        return parseSightings(dataJson);
     }
 
-    private List<Sighting> parseSightings(String html) {
-        List<Day> days = parser.parseSightingStructure(html);
-        return Sighting.fromDays(days);
+    private List<Sighting> parseSightings(String pageJson) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.readValue(pageJson, DataWrapper.class).
+            getData()
+            .stream()
+            .map(Sighting::of)
+            .toList();
+
+        // List<Day> days = parser.parseSightingStructure(pageJson);
+        // return Sighting.fromDays(days);
     }
 }
