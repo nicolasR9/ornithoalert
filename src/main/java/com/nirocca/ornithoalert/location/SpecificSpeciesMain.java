@@ -1,13 +1,22 @@
 package com.nirocca.ornithoalert.location;
 
 import static com.nirocca.ornithoalert.Species.ALPENBRAUNELLE;
+import static com.nirocca.ornithoalert.Species.ATLANTIKSTURMTAUCHER;
 import static com.nirocca.ornithoalert.Species.BARTGEIER;
+import static com.nirocca.ornithoalert.Species.DUNKLER_STURMTAUCHER;
 import static com.nirocca.ornithoalert.Species.GAENSEGEIER;
 import static com.nirocca.ornithoalert.Species.HASELHUHN;
+import static com.nirocca.ornithoalert.Species.KRABBENTAUCHER;
+import static com.nirocca.ornithoalert.Species.SCHWALBENMOEWE;
+import static com.nirocca.ornithoalert.Species.SKUA;
+import static com.nirocca.ornithoalert.Species.SPATELRAUBMOEWE;
+import static com.nirocca.ornithoalert.Species.SPORNAMMER;
+import static com.nirocca.ornithoalert.Species.SPORNPIEPER;
 import static com.nirocca.ornithoalert.Species.STEINADLER;
+import static com.nirocca.ornithoalert.Species.STURMSCHWALBE;
 import static com.nirocca.ornithoalert.Species.TANNENHAEHER;
-import static com.nirocca.ornithoalert.Species.WALDRAPP;
 import static com.nirocca.ornithoalert.Species.WEISSRUECKENSPECHT;
+import static com.nirocca.ornithoalert.Species.WELLENLAEUFER;
 import static com.nirocca.ornithoalert.Species.ZITRONENZEISIG;
 
 import java.io.FileOutputStream;
@@ -36,14 +45,14 @@ import com.nirocca.ornithoalert.model.Sighting;
 
 public class SpecificSpeciesMain {
 
-    //private static final String URL_TEMPLATE = "https://www.ornitho.de/index.php?m_id=94&p_c=duration&p_cc=206&sp_tg=1&sp_DFrom=02.07.2024&sp_DTo=02.07.2024&sp_DSeasonFromDay=1&sp_DSeasonFromMonth=1&sp_DSeasonToDay=31&sp_DSeasonToMonth=12&sp_DChoice=offset&sp_DOffset=30&sp_SChoice=species&speciesFilter=&sp_S=341&sp_Cat%5Bnever%5D=1&sp_Cat%5Bveryrare%5D=1&sp_Cat%5Brare%5D=1&sp_Cat%5Bunusual%5D=1&sp_Family=1&sp_PChoice=canton&sp_cC=0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000&p_cc=206&sp_CommuneCounty=356&sp_Commune=12332&sp_Info=&sp_Polygon=&sp_PolygonSaveName=&sp_PolygonSaveRestoreID=&sp_AltitudeFrom=-19&sp_AltitudeTo=2962&sp_CommentValue=&sp_OnlyAH=0&sp_Ats=-00000&sp_project=&sp_OnlyStoc=&sp_frmListType=&sp_FChoice=list&sp_FDisplay=DATE_PLACE_SPECIES&sp_DFormat=DESC&sp_FOrderListSpecies=COUNT&sp_FListSpeciesChoice=DATA&sp_DateSynth=02.07.2024&sp_FOrderSynth=ALPHA&sp_FGraphChoice=DATA&sp_FGraphFormat=auto&sp_FAltScale=250&sp_FAltChoice=DATA&sp_FMapFormat=none&submit=Abfrage+starten";
-    private static final String URL_TEMPLATE = "https://www.ornitho.de/index.php?m_id=94&p_c=places&p_cc=213&sp_tg=1&sp_DChoice=range&sp_DFrom=01.01.2022&sp_DTo=31.12.2024&sp_DSeasonFromDay=1&sp_DSeasonFromMonth=1&sp_DSeasonToDay=31&sp_DSeasonToMonth=12&sp_DOffset=5&sp_SChoice=species&speciesFilter=&sp_S=532&sp_Cat%5Bnever%5D=1&sp_Cat%5Bveryrare%5D=1&sp_Cat%5Brare%5D=1&sp_Cat%5Bunusual%5D=1&sp_Family=1&sp_PChoice=canton&sp_cC=000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000&p_cc=213&sp_CommuneCounty=356&sp_Commune=12332&sp_Info=&sp_Polygon=&sp_PolygonSaveName=&sp_PolygonSaveRestoreID=&sp_AltitudeFrom=-19&sp_AltitudeTo=2962&sp_CommentValue=&sp_OnlyAH=0&sp_Ats=-00000&sp_project=&sp_OnlyStoc=&sp_frmListType=&sp_FChoice=list&sp_FDisplay=DATE_PLACE_SPECIES&sp_DFormat=DESC&sp_FOrderListSpecies=ALPHA&sp_FListSpeciesChoice=DATA&sp_DateSynth=10.04.2025&sp_FOrderSynth=ALPHA&sp_FGraphChoice=DATA&sp_FGraphFormat=auto&sp_FAltScale=250&sp_FAltChoice=DATA&sp_FMapFormat=none&submit=Abfrage+starten";
-    private static final int[] yearsToCheck = {2021, 2022, 2023, 2024, 2025};
-    private static final String FROM_DATE = "01.03.";
-    private static final String TO_DATE = "31.07.";
+    private static final String URL_TEMPLATE = "https://www.ornitho.de/index.php?m_id=94&p_c=species&p_cc=203&sp_tg=1&sp_DChoice=range&sp_DFrom=15.09.2020&sp_DTo=20.10.2020&sp_DSeasonFromDay=1&sp_DSeasonFromMonth=1&sp_DSeasonToDay=31&sp_DSeasonToMonth=12&sp_DOffset=5&sp_SChoice=species&speciesFilter=spornammer&sp_S=532&sp_Cat%5Bnever%5D=1&sp_Cat%5Bveryrare%5D=1&sp_Cat%5Brare%5D=1&sp_Cat%5Bunusual%5D=1&sp_Family=1&sp_PChoice=canton&sp_cC=000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000&p_cc=203&sp_CommuneCounty=356&sp_Commune=12332&sp_Info=&sp_Polygon=&sp_PolygonSaveName=&sp_PolygonSaveRestoreID=&sp_AltitudeFrom=-19&sp_AltitudeTo=2962&sp_CommentValue=&sp_OnlyAH=0&sp_Ats=-00000&sp_project=&sp_OnlyStoc=&sp_frmListType=&sp_FChoice=list&sp_FDisplay=DATE_PLACE_SPECIES&sp_DFormat=DESC&sp_FOrderListSpecies=COUNT&sp_FListSpeciesChoice=DATA&sp_DateSynth=03.09.2025&sp_FOrderSynth=ALPHA&sp_FGraphChoice=DATA&sp_FGraphFormat=auto&sp_FAltScale=250&sp_FAltChoice=DATA&sp_FMapFormat=none&submit=Abfrage+starten";
+    private static final int[] yearsToCheck = {2020, 2021, 2022, 2023, 2024};
+    private static final String FROM_DATE = "15.09.";
+    private static final String TO_DATE = "20.10.";
 
     private static final Species[] SPECIES = {
-        WALDRAPP};
+        WELLENLAEUFER, STURMSCHWALBE, DUNKLER_STURMTAUCHER, SPORNAMMER, SPORNPIEPER, SPATELRAUBMOEWE, SKUA, KRABBENTAUCHER, SCHWALBENMOEWE, ATLANTIKSTURMTAUCHER
+        };
 
     private static final Species[] SPECIES1 = {
         WEISSRUECKENSPECHT,
@@ -57,7 +66,7 @@ public class SpecificSpeciesMain {
         GAENSEGEIER
     };
 
-    private static final boolean separateFiles = true;
+    private static final boolean separateFiles = false;
 
     private static final String PATH_TO_COORDS_DIR = Constants.OUTPUT_DIR + "specificSpecies/";
 
@@ -67,7 +76,9 @@ public class SpecificSpeciesMain {
 
         List<Sighting> sightings = new ArrayList<>();
 
+
         for (Species species: SPECIES) {
+            Stats stats = new Stats();
             if (separateFiles) {
                 sightings = new ArrayList<>();
             }
@@ -81,12 +92,14 @@ public class SpecificSpeciesMain {
 
                 List<Sighting> newSightings = Main.calcSightings(url, SortBy.TIME, FilterMySightedSpecies.NO);
                 System.out.printf("Added %d sightings.%n", newSightings.size());
+                stats.add(newSightings.size(), year - yearsToCheck[0]);
                 sightings.addAll(newSightings);
             }
+            System.out.printf("Stats: avg: %s, med: %s%n", stats.calculateAverage(), stats.calculateMedian());
 
             if (separateFiles) {
                 try (FileOutputStream out = new FileOutputStream(PATH_TO_COORDS_DIR  + species.name() + ".txt")) {
-                    coordinatesExporter.printCoordinates(new PrintParameters(sightings, false, out, colorProvider, true));
+                    coordinatesExporter.printCoordinates(new PrintParameters(sightings, true, out, colorProvider, true));
                 }
             }
         }
@@ -124,4 +137,34 @@ public class SpecificSpeciesMain {
             return latinToColor.get(sighting.getLatinName());
         }
     }
+}
+
+class Stats {
+    private final int[] counts = new int[5];
+    private Species species;
+
+    public void add(int v, int index) {
+        counts[index] = v;
+    }
+
+    public double calculateAverage() {
+        int sum = 0;
+        for (int count : counts) {
+            sum += count;
+        }
+        return (double) sum / counts.length;
+    }
+
+    public double calculateMedian() {
+        int[] sortedCounts = counts.clone();
+        Arrays.sort(sortedCounts);
+        int middle = sortedCounts.length / 2;
+        if (sortedCounts.length % 2 == 0) {
+            return (sortedCounts[middle - 1] + sortedCounts[middle]) / 2.0;
+        } else {
+            return sortedCounts[middle];
+        }
+    }
+
+
 }

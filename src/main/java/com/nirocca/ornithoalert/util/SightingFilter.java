@@ -42,7 +42,9 @@ public class SightingFilter {
         "Bachstelze (ssp. yarrellii), Trauerbachstelze",
         "Isländische Uferschnepfen",
         "Trottellummen / Tordalken",
-        "Hellbäuchige Ringelgänse"
+        "Hellbäuchige Ringelgänse",
+        "Schildrabe",
+        "Waldrapp"
     ));
 
     public static List<Sighting> filterOutNonRelevantSightings(List<Sighting> sightings) {

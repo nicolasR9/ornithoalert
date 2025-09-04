@@ -1,16 +1,17 @@
 package com.nirocca.ornithoalert;
 
-import com.nirocca.ornithoalert.Constants.FilterMySightedSpecies;
-import com.nirocca.ornithoalert.Constants.SortBy;
-import com.nirocca.ornithoalert.model.LatinComparedSpecies;
-import com.nirocca.ornithoalert.model.Sighting;
-import com.nirocca.ornithoalert.util.SightingFilter;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import com.nirocca.ornithoalert.Constants.FilterMySightedSpecies;
+import com.nirocca.ornithoalert.Constants.SortBy;
+import com.nirocca.ornithoalert.model.LatinComparedSpecies;
+import com.nirocca.ornithoalert.model.Sighting;
+import com.nirocca.ornithoalert.util.SightingFilter;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;

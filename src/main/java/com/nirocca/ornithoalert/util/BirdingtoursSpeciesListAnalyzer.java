@@ -10,11 +10,11 @@ import java.util.List;
 import org.apache.commons.io.IOUtils;
 
 public class BirdingtoursSpeciesListAnalyzer {
-  private static final String FILE = "/Users/nicolas.rocca/tmp/BRB02 Artenliste 2024.csv";
+  private static final String FILE = "/Users/nicolas.rocca/Downloads/UCK02 Artenliste 2025-ausgefuellt - Tabelle1.csv";
 
   public static void main(String[] args) throws IOException {
-    //analyze();
-    printSpeciesForDay(3);
+    analyze();
+    // printSpeciesForDay(1);
   }
 
   private static void printSpeciesForDay(int day) throws IOException {
