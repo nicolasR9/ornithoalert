@@ -8,8 +8,8 @@ public class Species {
     @JsonProperty("id")
     private int id;
 
-    @JsonProperty("name_plur")
-    private String namePlur;
+    @JsonProperty("name")
+    private String name;
 
     @JsonProperty("latin_name")
     private String latinName;
@@ -22,12 +22,12 @@ public class Species {
         this.id = id;
     }
 
-    public String getNamePlur() {
-        return namePlur;
+    public String getName() {
+        return name;
     }
 
-    public void setNamePlur(String namePlur) {
-        this.namePlur = namePlur;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getLatinName() {

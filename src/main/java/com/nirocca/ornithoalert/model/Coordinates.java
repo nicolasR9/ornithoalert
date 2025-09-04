@@ -1,18 +1,13 @@
 package com.nirocca.ornithoalert.model;
 
-import gov.nasa.worldwind.geom.Angle;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class Coordinates {
     private double latitude;
     private final double longitude;
     private final boolean exact;
     
-    public Coordinates(String latitude, String longitude, boolean exact) {
-        this.latitude = toDecimal(latitude);
-        this.longitude = toDecimal(longitude);
+    public Coordinates(double latitude, double longitude, boolean exact) {
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.exact = exact;
     }
     
@@ -22,23 +17,6 @@ public class Coordinates {
     
     public double getLongitude() {
         return longitude;
-    }
-    
-    private double toDecimal(String coordinate) {
-        try {
-            return Double.parseDouble(coordinate);
-        } catch (NumberFormatException ex) {
-            Pattern p = Pattern.compile("(\\d+)\u00B0(\\d+)'(\\d+)\\.\\d+'' [EN]");
-            Matcher m = p.matcher(coordinate);
-            if (!m.matches()) {
-                throw new RuntimeException("unexpected coordinate format: " + coordinate);
-            }
-            int degrees = Integer.parseInt(m.group(1));
-            int minutes = Integer.parseInt(m.group(2));
-            int seconds = Integer.parseInt(m.group(3));
-
-            return Angle.fromDMS(degrees, minutes, seconds).getDegrees();
-        }
     }
     
     public void shiftABit() {

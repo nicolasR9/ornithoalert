@@ -136,7 +136,7 @@ public class Main {
             case TIME -> {
                 return lastSightings;
             }
-            case REGION -> comparator = Comparator.comparing(Sighting::getLocation);
+            case REGION -> comparator = Comparator.comparing(Sighting::getLocationText);
             case SPECIES -> comparator = Comparator.comparing(Sighting::getGermanNamePlural);
         }
         return lastSightings.stream().sorted(comparator).collect(Collectors.toList());

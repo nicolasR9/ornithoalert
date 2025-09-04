@@ -90,7 +90,7 @@ public class GridMain {
     private static List<Sighting> filterByRectangle(List<Sighting> monthSightings, Rectangle rectangle) {
         return monthSightings
             .stream()
-            .filter(s -> rectangle.relate(toPoint(s.getLocation())) == SpatialRelation.CONTAINS)
+            .filter(s -> rectangle.relate(toPoint(s.getLocationText())) == SpatialRelation.CONTAINS)
             .collect(Collectors.toList());
     }
 
@@ -133,7 +133,8 @@ public class GridMain {
         List<Sighting> result = new ArrayList<>();
         for (String line : lines) {
             String[] fields = line.split(",");
-            result.add(new Sighting(fields[1], fields[0], null, Integer.parseInt(fields[6]), fields[5], fields[2] + "," + fields[3], "-1"));
+            // FIXME handle missing lat/lon
+            //result.add(new Sighting(fields[1], fields[0], null, Integer.parseInt(fields[6]), fields[5], fields[2] + "," + fields[3], "-1"));
         }
         List<String> sightedSpeciesIds = new MySightingsReader().readMySightedSpeciesIds();
         Set<Integer> ids = sightedSpeciesIds.stream().map(Integer::valueOf).collect(Collectors.toSet());

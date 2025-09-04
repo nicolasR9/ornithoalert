@@ -25,6 +25,9 @@ public class OrnithoData {
     @JsonProperty("date")
     private String date;
 
+    @JsonProperty
+    private ListSubmenu listSubmenu;
+
     @JsonProperty("opt_observers")
     private List<Observer> optObservers;
 
@@ -82,5 +85,13 @@ public class OrnithoData {
 
     public void setOptObservers(List<Observer> optObservers) {
         this.optObservers = optObservers;
+    }
+
+    public ListSubmenu getListSubmenu() {
+        return listSubmenu;
+    }
+
+    public void setListSubmenu(ListSubmenu listSubmenu) {
+        this.listSubmenu = listSubmenu;
     }
 }
