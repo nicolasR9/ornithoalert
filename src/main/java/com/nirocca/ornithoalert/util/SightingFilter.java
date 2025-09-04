@@ -50,8 +50,8 @@ public class SightingFilter {
     public static List<Sighting> filterOutNonRelevantSightings(List<Sighting> sightings) {
         return sightings.stream()
         .filter(a -> !"0".equals(a.getCount()))
-        .filter(a -> !isWithCommonFilterPattern(a.getGermanNamePlural()))
-        .filter(a -> !SPECIES_TO_EXCLUDE.contains(a.getGermanNamePlural()))
+        .filter(a -> !isWithCommonFilterPattern(a.getGermanName()))
+        .filter(a -> !SPECIES_TO_EXCLUDE.contains(a.getGermanName()))
         .collect(Collectors.toList());
     }
 

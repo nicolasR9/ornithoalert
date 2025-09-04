@@ -21,7 +21,7 @@ public class MostFrequentColorProvider implements ColorProvider {
     private List<String> createLatinNamesByFrequency(List<Sighting> sightings) {
         final List<String> latinNamesByFrequency;
         MaxNElementsCollector<LatinComparedSpecies> frequencies = new MaxNElementsCollector<>();
-        sightings.forEach(s -> frequencies.add(new LatinComparedSpecies(s.getGermanNamePlural(), s.getLatinName())));
+        sightings.forEach(s -> frequencies.add(new LatinComparedSpecies(s.getGermanName(), s.getLatinName())));
         List<ElementWithCount<LatinComparedSpecies>> maxElements = frequencies.getMaxElements(100);
         latinNamesByFrequency = maxElements.stream().map(s -> s.getElement().getLatinName()).collect(Collectors.toList());
         return latinNamesByFrequency;

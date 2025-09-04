@@ -23,7 +23,7 @@ public class RareMain {
         System.out.println("Markdown list:");
         for (Sighting sighting : sightings) {
             System.out.println(sighting + "<br>");
-            maxSpecies.add(new LatinComparedSpecies(sighting.getGermanNamePlural(), sighting.getLatinName()));
+            maxSpecies.add(new LatinComparedSpecies(sighting.getGermanName(), sighting.getLatinName()));
         }
 
         System.out.println("\nMax:");

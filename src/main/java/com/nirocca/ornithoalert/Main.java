@@ -37,7 +37,7 @@ public class Main {
         System.out.println("Markdown list:");
         for (Sighting sighting : lastSightings) {
             System.out.println(sighting + "<br>");
-            maxSpecies.add(new LatinComparedSpecies(sighting.getGermanNamePlural(), sighting.getLatinName()));
+            maxSpecies.add(new LatinComparedSpecies(sighting.getGermanName(), sighting.getLatinName()));
         }
         
         System.out.println("\nMax:");
@@ -137,7 +137,7 @@ public class Main {
                 return lastSightings;
             }
             case REGION -> comparator = Comparator.comparing(Sighting::getLocationText);
-            case SPECIES -> comparator = Comparator.comparing(Sighting::getGermanNamePlural);
+            case SPECIES -> comparator = Comparator.comparing(Sighting::getGermanName);
         }
         return lastSightings.stream().sorted(comparator).collect(Collectors.toList());
     }

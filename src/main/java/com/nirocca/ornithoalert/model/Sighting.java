@@ -9,7 +9,7 @@ public class Sighting {
     
     private final String date;
     private final String locationText;
-    private final String germanNamePlural;
+    private final String germanName;
     private final String latinName;
     private final int speciesId;
     private final String url;
@@ -51,7 +51,7 @@ public class Sighting {
                     String count,
                     Coordinates coordinates) {
         this.date = date;
-        this.germanNamePlural = germanNamePlural;
+        this.germanName = germanNamePlural;
         this.latinName = latinName;
         this.speciesId = speciesId;
         this.url = url;
@@ -72,8 +72,8 @@ public class Sighting {
         return locationText;
     }
     
-    public String getGermanNamePlural() {
-        return germanNamePlural;
+    public String getGermanName() {
+        return germanName;
     }
     
     public String getUrl() {
@@ -94,6 +94,6 @@ public class Sighting {
 
     @Override
     public String toString() {
-        return "[" + germanNamePlural + ", " +  date + ", " + locationText +"](" + url + ")";
+        return "[" + germanName + ", " + count + ", " +  date + ", " + locationText +"](" + url + ")";
     }
 }

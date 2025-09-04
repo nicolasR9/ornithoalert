@@ -44,7 +44,7 @@ public class CoordinatesExporter {
 
                 String latitude = String.valueOf(coordinates.getLatitude());
                 String longitude = String.valueOf(coordinates.getLongitude());
-                out.printf("%s,%s,%s,%s,%s,%s", sighting.getGermanNamePlural().replaceAll(",", ""),
+                out.printf("%s,%s,%s,%s,%s,%s", sighting.getGermanName().replaceAll(",", ""),
                     sighting.getDate().replaceAll(",", ""), latitude, longitude, getColor(sighting), sighting.getUrl());
                 if (printParameters.speciesIdToAppend() == null) {
                     out.printf("%n");

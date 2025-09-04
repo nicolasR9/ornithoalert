@@ -42,7 +42,7 @@ public class AllSpeciesMain {
 
         MaxNElementsCollector<LatinComparedSpecies> maxSpecies = new MaxNElementsCollector<>();
         for (Sighting sighting : sightings) {
-            maxSpecies.add(new LatinComparedSpecies(sighting.getGermanNamePlural(), sighting.getLatinName()));
+            maxSpecies.add(new LatinComparedSpecies(sighting.getGermanName(), sighting.getLatinName()));
         }
         System.out.println("\nMax:");
         maxSpecies.getMaxElements(30).forEach(System.out::println);
