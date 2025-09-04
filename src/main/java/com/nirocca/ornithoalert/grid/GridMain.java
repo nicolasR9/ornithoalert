@@ -133,7 +133,6 @@ public class GridMain {
         List<Sighting> result = new ArrayList<>();
         for (String line : lines) {
             String[] fields = line.split(",");
-            //result.add(new Sighting(fields[1], fields[0], null, Integer.parseInt(fields[6]), fields[5], fields[2] + "," + fields[3], "-1"));
             Coordinates coordinates = new Coordinates(Double.parseDouble(fields[2]), Double.parseDouble(fields[3]), true);
             result.add(new Sighting(fields[1], fields[0], null,  Integer.parseInt(fields[6]), fields[5], "", "-1", coordinates));
         }
