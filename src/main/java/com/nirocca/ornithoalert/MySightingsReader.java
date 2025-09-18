@@ -83,7 +83,7 @@ public class MySightingsReader {
     }
 
     private List<String> extractIds(String html) {
-        Pattern p = Pattern.compile("<a href=\"https://www.ornitho.de/index.php\\?m_id=15&amp;showback=stor&amp;backlink=skip&amp;frmSpecies=(\\d++)&amp;sp_tg=1\">");
+        Pattern p = Pattern.compile("<a href=\"https://www\\.ornitho\\.de/index\\.php\\?m_id=81&amp;showback=stor&amp;backlink=skip&amp;frmSpecies=(\\d+)&amp;sp_tg=1\">");
         ArrayList<String> result = new ArrayList<>();
         Matcher m = p.matcher(html);
         while (m.find()) {
