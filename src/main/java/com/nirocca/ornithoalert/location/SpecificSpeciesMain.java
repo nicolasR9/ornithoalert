@@ -1,22 +1,13 @@
 package com.nirocca.ornithoalert.location;
 
 import static com.nirocca.ornithoalert.Species.ALPENBRAUNELLE;
-import static com.nirocca.ornithoalert.Species.ATLANTIKSTURMTAUCHER;
 import static com.nirocca.ornithoalert.Species.BARTGEIER;
-import static com.nirocca.ornithoalert.Species.DUNKLER_STURMTAUCHER;
 import static com.nirocca.ornithoalert.Species.GAENSEGEIER;
 import static com.nirocca.ornithoalert.Species.HASELHUHN;
-import static com.nirocca.ornithoalert.Species.KRABBENTAUCHER;
-import static com.nirocca.ornithoalert.Species.SCHWALBENMOEWE;
-import static com.nirocca.ornithoalert.Species.SKUA;
-import static com.nirocca.ornithoalert.Species.SPATELRAUBMOEWE;
-import static com.nirocca.ornithoalert.Species.SPORNAMMER;
-import static com.nirocca.ornithoalert.Species.SPORNPIEPER;
-import static com.nirocca.ornithoalert.Species.STEINADLER;
-import static com.nirocca.ornithoalert.Species.STURMSCHWALBE;
-import static com.nirocca.ornithoalert.Species.TANNENHAEHER;
-import static com.nirocca.ornithoalert.Species.WEISSRUECKENSPECHT;
-import static com.nirocca.ornithoalert.Species.WELLENLAEUFER;
+import static com.nirocca.ornithoalert.Species.SAATGANS__SSP__FABALIS___WALDSAATGANS;
+import static com.nirocca.ornithoalert.Species.SCHLANGENADLER;
+import static com.nirocca.ornithoalert.Species.STEINHUHN;
+import static com.nirocca.ornithoalert.Species.STEINROETEL;
 import static com.nirocca.ornithoalert.Species.ZITRONENZEISIG;
 
 import java.io.FileOutputStream;
@@ -27,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Deque;
 import java.util.HashMap;
@@ -45,25 +37,33 @@ import com.nirocca.ornithoalert.model.Sighting;
 
 public class SpecificSpeciesMain {
 
-    private static final String URL_TEMPLATE = "https://www.ornitho.de/index.php?m_id=94&p_c=species&p_cc=203&sp_tg=1&sp_DChoice=range&sp_DFrom=15.09.2020&sp_DTo=20.10.2020&sp_DSeasonFromDay=1&sp_DSeasonFromMonth=1&sp_DSeasonToDay=31&sp_DSeasonToMonth=12&sp_DOffset=5&sp_SChoice=species&speciesFilter=spornammer&sp_S=532&sp_Cat%5Bnever%5D=1&sp_Cat%5Bveryrare%5D=1&sp_Cat%5Brare%5D=1&sp_Cat%5Bunusual%5D=1&sp_Family=1&sp_PChoice=canton&sp_cC=000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000&p_cc=203&sp_CommuneCounty=356&sp_Commune=12332&sp_Info=&sp_Polygon=&sp_PolygonSaveName=&sp_PolygonSaveRestoreID=&sp_AltitudeFrom=-19&sp_AltitudeTo=2962&sp_CommentValue=&sp_OnlyAH=0&sp_Ats=-00000&sp_project=&sp_OnlyStoc=&sp_frmListType=&sp_FChoice=list&sp_FDisplay=DATE_PLACE_SPECIES&sp_DFormat=DESC&sp_FOrderListSpecies=COUNT&sp_FListSpeciesChoice=DATA&sp_DateSynth=03.09.2025&sp_FOrderSynth=ALPHA&sp_FGraphChoice=DATA&sp_FGraphFormat=auto&sp_FAltScale=250&sp_FAltChoice=DATA&sp_FMapFormat=none&submit=Abfrage+starten";
-    private static final int[] yearsToCheck = {2020, 2021, 2022, 2023, 2024};
-    private static final String FROM_DATE = "15.09.";
-    private static final String TO_DATE = "20.10.";
+    private static final String URL_TEMPLATE = "https://www.ornitho.de/index.php?m_id=94&p_c=duration&p_cc=202&sp_tg=1&sp_DChoice=range&sp_DFrom=01.01.2024&sp_DTo=31.12.2024&sp_DSeasonFromDay=1&sp_DSeasonFromMonth=1&sp_DSeasonToDay=31&sp_DSeasonToMonth=12&sp_DOffset=5&sp_SChoice=species&speciesFilter=&sp_S=53&sp_Cat%5Bnever%5D=1&sp_Cat%5Bveryrare%5D=1&sp_Cat%5Brare%5D=1&sp_Cat%5Bunusual%5D=1&sp_Family=1&sp_PChoice=canton&sp_cC=000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000&p_cc=202&sp_CommuneCounty=356&sp_Commune=12332&sp_Info=&sp_Polygon=&sp_PolygonSaveName=&sp_PolygonSaveRestoreID=&sp_AltitudeFrom=-19&sp_AltitudeTo=2962&sp_CommentValue=&sp_OnlyAH=0&sp_Ats=-00000&sp_project=&sp_OnlyStoc=&sp_frmListType=&sp_FChoice=list&sp_FDisplay=DATE_PLACE_SPECIES&sp_DFormat=DESC&sp_FOrderListSpecies=COUNT&sp_FListSpeciesChoice=DATA&sp_DateSynth=04.11.2024&sp_FOrderSynth=ALPHA&sp_FGraphChoice=DATA&sp_FGraphFormat=auto&sp_FAltScale=250&sp_FAltChoice=DATA&sp_FMapFormat=none&submit=Abfrage+starten";
+    private static final int[] yearsToCheck = {2020, 2021, 2022, 2023, 2024, 2024};
+    private static final String FROM_DATE = "01.12.";
+    private static final String TO_DATE = "31.01.";
 
     private static final Species[] SPECIES = {
-        WELLENLAEUFER, STURMSCHWALBE, DUNKLER_STURMTAUCHER, SPORNAMMER, SPORNPIEPER, SPATELRAUBMOEWE, SKUA, KRABBENTAUCHER, SCHWALBENMOEWE, ATLANTIKSTURMTAUCHER
+        /*PRACHTEIDERENTE,
+        BERGHAENFLING,
+        ZWERGSCHWAN,
+        OHRENTAUCHER,
+        PRACHTTAUCHER,
+        WALDKAUZ,
+        SAMTENTE,
+        EISENTE,
+        SEIDENSCHWANZ*/
+        SAATGANS__SSP__FABALIS___WALDSAATGANS
         };
 
     private static final Species[] SPECIES1 = {
-        WEISSRUECKENSPECHT,
-        TANNENHAEHER,
         HASELHUHN,
         ALPENBRAUNELLE,
-        STEINADLER,
         GAENSEGEIER,
         BARTGEIER,
         ZITRONENZEISIG,
-        GAENSEGEIER
+        STEINHUHN,
+        STEINROETEL,
+        SCHLANGENADLER
     };
 
     private static final boolean separateFiles = false;
@@ -118,6 +118,13 @@ public class SpecificSpeciesMain {
         DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         Date td = dateFormat.parse(toDate);
         if (td.after(new Date())) {td = new Date();}
+        var fd = dateFormat.parse(FROM_DATE + year);
+        if (fd.after(td)) {  // over year end - add one year
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(td);
+            cal.add(Calendar.YEAR, 1);
+            td = cal.getTime();
+        }
         return dateFormat.format(td);
     }
 
