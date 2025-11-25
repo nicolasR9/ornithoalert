@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 import com.nirocca.ornithoalert.Species;
 import com.nirocca.ornithoalert.model.Sighting;
-import com.spatial4j.core.shape.Rectangle;
+import org.locationtech.spatial4j.shape.Rectangle;
 
 public class Hotspot implements Comparable<Hotspot> {
 

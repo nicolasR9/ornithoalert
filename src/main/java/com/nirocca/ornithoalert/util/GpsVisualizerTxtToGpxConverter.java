@@ -1,9 +1,5 @@
 package com.nirocca.ornithoalert.util;
 
-import com.nirocca.ornithoalert.Constants;
-import io.jenetics.jpx.GPX;
-import io.jenetics.jpx.GPX.Builder;
-import io.jenetics.jpx.WayPoint;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -13,6 +9,12 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.util.Objects;
+
+import com.nirocca.ornithoalert.Constants;
+import io.jenetics.jpx.GPX;
+import io.jenetics.jpx.GPX.Builder;
+import io.jenetics.jpx.GPX.Writer;
+import io.jenetics.jpx.WayPoint;
 import org.apache.commons.io.IOUtils;
 
 public class GpsVisualizerTxtToGpxConverter {
@@ -26,7 +28,7 @@ public class GpsVisualizerTxtToGpxConverter {
         }
     }
 
-    private static GPX createGpx(InputStream inputStream) throws IOException {
+    private static GPX createGpx(InputStream inputStream) {
         final Builder gpxBuilder = GPX.builder();
         java.util.List<String> lines = IOUtils.readLines(inputStream, StandardCharsets.UTF_8);
         lines.remove(0);
@@ -44,7 +46,7 @@ public class GpsVisualizerTxtToGpxConverter {
     public static String toGpx(String txtCoords) throws IOException {
         GPX gpx = createGpx(new ByteArrayInputStream(txtCoords.getBytes(StandardCharsets.UTF_8)));
         ByteArrayOutputStream output = new ByteArrayOutputStream();
-        GPX.write(gpx, output);
-        return output.toString();
+        Writer.DEFAULT.write(gpx, output);
+        return output.toString(StandardCharsets.UTF_8);
     }
 }

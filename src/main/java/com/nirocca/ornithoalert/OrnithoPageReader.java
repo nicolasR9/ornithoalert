@@ -4,11 +4,10 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.util.EntityUtils;
+import org.apache.hc.client5.http.classic.HttpClient;
+import org.apache.hc.client5.http.classic.methods.HttpGet;
+import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
+import org.apache.hc.core5.http.io.entity.EntityUtils;
 
 public class OrnithoPageReader {
 
@@ -30,9 +29,7 @@ public class OrnithoPageReader {
         }
         request.setHeader("Cookie", cookies);
 
-        HttpResponse response = client.execute(request);
-
-        return EntityUtils.toString(response.getEntity(), "UTF-8");
+        return client.execute(request, response -> EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8));
     }
 
 }

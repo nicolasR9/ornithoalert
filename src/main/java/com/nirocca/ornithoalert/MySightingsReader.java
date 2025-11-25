@@ -12,11 +12,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.util.EntityUtils;
+import org.apache.hc.client5.http.classic.HttpClient;
+import org.apache.hc.client5.http.classic.methods.HttpGet;
+import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
+import org.apache.hc.core5.http.io.entity.EntityUtils;
 
 public class MySightingsReader {
 
@@ -64,11 +63,10 @@ public class MySightingsReader {
                         StandardCharsets.UTF_8);
         request.setHeader("Cookie", cookies);
 
-        HttpResponse response = client.execute(request);
-
-        String html = EntityUtils.toString(response.getEntity(), "UTF-8");
-
-        return valueExtractor.apply(html);
+        return client.execute(request, response -> {
+            String html = EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8);
+            return valueExtractor.apply(html);
+        });
     }
 
     List<String> extractBirdNames(String html) {
