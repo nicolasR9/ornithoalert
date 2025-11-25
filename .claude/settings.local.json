@@ -13,7 +13,9 @@
       "Bash(python3 -m json.tool src/test/resources/mock-ornitho-data-page1.json)",
       "Bash(pkill -f maven)",
       "Bash(mvn test -Dtest=MainIntegrationTest -X)",
-      "Bash(mvn test -Dtest=MainIntegrationTest -q)"
+      "Bash(mvn test -Dtest=MainIntegrationTest -q)",
+      "Bash(mvn clean compile)",
+      "Bash(mvn test -q)"
     ],
     "deny": [],
     "ask": []
