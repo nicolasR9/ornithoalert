@@ -1,0 +1,100 @@
+{
+    "data": [
+        {
+            "lat": 52.5200,
+            "lon": 13.4050,
+            "place_type": "precise",
+            "species_array": {
+                "id": 12345,
+                "name": "Amsel",
+                "latin_name": "Turdus merula"
+            },
+            "birds_count": "2",
+            "date": "<span title=\"2024-11-24 08:30\">24.11.2024</span>",
+            "listSubmenu": {
+                "title": "Berlin Mitte"
+            },
+            "opt_observers": [
+                {
+                    "opt_observer_info": [
+                        {
+                            "id_sighting": 987654
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "lat": 52.5100,
+            "lon": 13.3950,
+            "place_type": "approximate",
+            "species_array": {
+                "id": 12346,
+                "name": "Rotkehlchen",
+                "latin_name": "Erithacus rubecula"
+            },
+            "birds_count": "1",
+            "date": "<span title=\"2024-11-24 09:15\">24.11.2024</span>",
+            "listSubmenu": {
+                "title": "Berlin Tiergarten"
+            },
+            "opt_observers": [
+                {
+                    "opt_observer_info": [
+                        {
+                            "id_sighting": 987655
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "lat": 52.5200,
+            "lon": 13.4050,
+            "place_type": "precise",
+            "species_array": {
+                "id": 12348,
+                "name": "Kohlmeise",
+                "latin_name": "Parus major"
+            },
+            "birds_count": "1",
+            "date": "<span title=\"2024-11-24 11:00\">24.11.2024</span>",
+            "listSubmenu": {
+                "title": "Berlin Mitte"
+            },
+            "opt_observers": [
+                {
+                    "opt_observer_info": [
+                        {
+                            "id_sighting": 987657
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "lat": 52.5000,
+            "lon": 13.4000,
+            "place_type": "precise",
+            "species_array": {
+                "id": 12347,
+                "name": "Keine Art",
+                "latin_name": "Unknown"
+            },
+            "birds_count": "0",
+            "date": "<span title=\"2024-11-24 10:00\">24.11.2024</span>",
+            "listSubmenu": {
+                "title": "Berlin"
+            },
+            "opt_observers": [
+                {
+                    "opt_observer_info": [
+                        {
+                            "id_sighting": 987656
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

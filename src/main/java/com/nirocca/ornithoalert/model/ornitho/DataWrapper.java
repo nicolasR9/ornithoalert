@@ -10,6 +10,9 @@ public class DataWrapper {
     @JsonProperty("data")
     private List<OrnithoData> data;
 
+    public DataWrapper() {
+    }
+
     public List<OrnithoData> getData() {
         return data;
     }

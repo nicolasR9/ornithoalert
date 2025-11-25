@@ -22,13 +22,21 @@ import com.nirocca.ornithoalert.model.ornitho.DataWrapper;
 public class RegionLastSightingsReader {
 
     private static final int CHUNK_SIZE = 5;
-    
+
     private final OrnithoPageReader ornithoPageReader = new OrnithoPageReader();
-    
+    private final String baseUrl;
+
+    public RegionLastSightingsReader() {
+        this.baseUrl = "https://www.ornitho.de";
+    }
+
+    public RegionLastSightingsReader(String baseUrl) {
+        this.baseUrl = baseUrl;
+    }
 
     public List<Sighting> read(String url) throws IOException {
         String html = ornithoPageReader.getPageContent(url);
-        String dataUrl = extractDataUrl(html);
+        String dataUrl = extractDataUrl(html, baseUrl);
 
 
         List<Sighting> result = new ArrayList<>();
@@ -45,13 +53,13 @@ public class RegionLastSightingsReader {
         return result;
     }
 
-    public static String extractDataUrl(String html) {
-        String regex = "\"(index\\.php\\?m_id=1351&content=observations_by_page[^\"]+)\"";
+    public static String extractDataUrl(String html, String baseUrl) {
+        String regex = "\"(index\\.php\\?m_id=\\d+&content=observations_by_page[^\"]+)\"";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(html);
 
         if (matcher.find()) {
-            return "https://www.ornitho.de/" + matcher.group(1);
+            return baseUrl + "/" + matcher.group(1);
         }
         throw new RuntimeException("Could not extract data url from html.");
     }
@@ -84,7 +92,7 @@ public class RegionLastSightingsReader {
     
     private List<Sighting> readPage(String url) throws IOException {
         String dataJson = ornithoPageReader.getPageContent(url);
-        
+
         return parseSightings(dataJson);
     }
 

@@ -71,7 +71,7 @@ public class MySightingsReader {
         return valueExtractor.apply(html);
     }
 
-    private List<String> extractBirdNames(String html) {
+    List<String> extractBirdNames(String html) {
         Pattern p = Pattern.compile("<span class=\"sci_name\">\\(([^<]+)\\)</span>");
         ArrayList<String> result = new ArrayList<>();
         Matcher m = p.matcher(html);

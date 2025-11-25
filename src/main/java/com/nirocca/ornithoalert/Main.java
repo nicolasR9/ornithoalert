@@ -56,10 +56,14 @@ public class Main {
 
     //must remain public (accessed by ornitho-service)
     public static List<Sighting> calcSightings(String url, SortBy sortBy, FilterMySightedSpecies filterOnlyThisYearParam) throws IOException {
-        MySightingsReader mySightingsReader = new MySightingsReader();
+        return calcSightings(url, sortBy, filterOnlyThisYearParam, new MySightingsReader(), new RegionLastSightingsReader());
+    }
+
+    //must remain public (accessed by ornitho-service and tests)
+    public static List<Sighting> calcSightings(String url, SortBy sortBy, FilterMySightedSpecies filterOnlyThisYearParam,
+                                              MySightingsReader mySightingsReader, RegionLastSightingsReader regionLastSightingsReader) throws IOException {
         List<String> mySightedSpeciesLatin = readMySightings(filterOnlyThisYearParam, mySightingsReader);
 
-        RegionLastSightingsReader regionLastSightingsReader = new RegionLastSightingsReader();
         url = sanitizeUrl(url);
         List<Sighting> lastSightings = regionLastSightingsReader.read(url);
 

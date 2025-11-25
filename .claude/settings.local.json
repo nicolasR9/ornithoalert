@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git checkout master)",
+      "Bash(git pull origin master)",
+      "Bash(git merge new_design)",
+      "Bash(git push origin master)",
+      "Bash(mkdir -p src/test/java/com/nirocca/ornithoalert)",
+      "Bash(mkdir -p src/test/java/com/nirocca/ornithoalert/model src/test/java/com/nirocca/ornithoalert/util)",
+      "Bash(mvn test)",
+      "Bash(mvn compile)",
+      "Bash(mvn test -Dtest=MainIntegrationTest)",
+      "Bash(python3 -m json.tool src/test/resources/mock-ornitho-data-page1.json)",
+      "Bash(pkill -f maven)",
+      "Bash(mvn test -Dtest=MainIntegrationTest -X)",
+      "Bash(mvn test -Dtest=MainIntegrationTest -q)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
