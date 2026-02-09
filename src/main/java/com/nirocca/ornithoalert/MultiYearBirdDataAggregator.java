@@ -9,8 +9,21 @@ import java.util.regex.Pattern;
 
 public class MultiYearBirdDataAggregator {
 
+    // Year range configuration - SINGLE SOURCE OF TRUTH
+    private static final int START_YEAR = 2020;
+    private static final int END_YEAR = 2022;
+    private static final int[] YEARS = generateYearRange(START_YEAR, END_YEAR);
+
     private final OrnithoPageReader ornithoPageReader = new OrnithoPageReader();
     private static final String BASE_URL_TEMPLATE = "https://www.ornitho.de/index.php?m_id=94&p_c=duration&p_cc=206&sp_tg=1&sp_DChoice=range&sp_DFrom=START_DATE&sp_DTo=END_DATE&sp_DSeasonFromDay=1&sp_DSeasonFromMonth=1&sp_DSeasonToDay=31&sp_DSeasonToMonth=12&sp_DOffset=5&speciesFilter=&sp_S=1148&sp_SChoice=category&sp_Cat%5Bnever%5D=1&sp_Cat%5Bveryrare%5D=1&sp_Cat%5Brare%5D=1&sp_Family=1&sp_PChoice=canton&sp_cC=000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000111111111111111111000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000&p_cc=206&sp_CommuneCounty=356&sp_Commune=12332&sp_Info=&sp_Polygon=&sp_PolygonSaveName=&sp_PolygonSaveRestoreID=&sp_AltitudeFrom=-19&sp_AltitudeTo=2962&sp_CommentValue=&sp_OnlyAH=0&sp_Ats=-00000&sp_project=&sp_OnlyStoc=&sp_frmListType=&sp_FDisplay=DATE_PLACE_SPECIES&sp_DFormat=DESC&sp_FChoice=species&sp_FOrderListSpecies=COUNT&sp_FListSpeciesChoice=DATA&sp_DateSynth=08.02.2026&sp_FOrderSynth=ALPHA&sp_FGraphChoice=DATA&sp_FGraphFormat=auto&sp_FAltScale=250&sp_FAltChoice=DATA&sp_FMapFormat=none&submit=Abfrage+starten";
+
+    private static int[] generateYearRange(int startYear, int endYear) {
+        int[] years = new int[endYear - startYear + 1];
+        for (int i = 0; i < years.length; i++) {
+            years[i] = startYear + i;
+        }
+        return years;
+    }
 
     // Month data: [days in month, month name]
     private static final int[][] MONTH_DAYS = {
@@ -53,12 +66,11 @@ public class MultiYearBirdDataAggregator {
 
     public Map<Integer, YearlyData> aggregateMultiYearData() throws IOException {
         Map<Integer, YearlyData> yearlyResults = new HashMap<>();
-        int[] years = {2023, 2024, 2025};
 
-        System.out.println("Starting multi-year bird data aggregation (2023-2025)...");
+        System.out.println("Starting multi-year bird data aggregation (" + START_YEAR + "-" + END_YEAR + ")...");
         System.out.println("=".repeat(80));
 
-        for (int year : years) {
+        for (int year : YEARS) {
             System.out.println("\nProcessing year " + year + "...");
             Map<String, Integer> yearlyAggregation = aggregateYearData(year);
             yearlyResults.put(year, new YearlyData(year, yearlyAggregation));
@@ -188,7 +200,7 @@ public class MultiYearBirdDataAggregator {
 
     public void printResults(Map<Integer, YearlyData> yearlyResults) {
         System.out.println("\n" + "=".repeat(100));
-        System.out.println("MULTI-YEAR BIRD SPECIES COUNT AGGREGATION (2023-2025)");
+        System.out.println("MULTI-YEAR BIRD SPECIES COUNT AGGREGATION (" + START_YEAR + "-" + END_YEAR + ")");
         System.out.println("=".repeat(100));
 
         if (yearlyResults.isEmpty()) {
@@ -199,7 +211,7 @@ public class MultiYearBirdDataAggregator {
         // Print yearly summaries
         System.out.println("\nYEARLY SUMMARIES:");
         System.out.println("-".repeat(60));
-        for (int year = 2023; year <= 2025; year++) {
+        for (int year : YEARS) {
             YearlyData data = yearlyResults.get(year);
             if (data != null) {
                 System.out.printf("%d: %,d species, %,d total sightings%n",
@@ -235,7 +247,13 @@ public class MultiYearBirdDataAggregator {
         // Print detailed results - ALL SPECIES
         System.out.println("\nDETAILED RESULTS (ALL SPECIES sorted by total count):");
         System.out.println("-".repeat(100));
-        System.out.printf("%-50s %8s %8s %8s %8s %10s%n", "Species", "2023", "2024", "2025", "Total", "Avg/Year");
+
+        // Build header - simpler approach
+        System.out.printf("%-50s", "Species");
+        for (int year : YEARS) {
+            System.out.printf("%9d", year);
+        }
+        System.out.printf("%9s%11s%n", "Total", "Avg/Year");
         System.out.println("-".repeat(100));
 
         for (Map.Entry<String, Integer> entry : sortedEntries) {
@@ -243,14 +261,14 @@ public class MultiYearBirdDataAggregator {
             int total = entry.getValue();
 
             Map<Integer, Integer> yearCounts = speciesByYear.get(species);
-            int count2023 = yearCounts.getOrDefault(2023, 0);
-            int count2024 = yearCounts.getOrDefault(2024, 0);
-            int count2025 = yearCounts.getOrDefault(2025, 0);
-            double average = total / 3.0;
+            double average = total / (double) YEARS.length;
 
-            System.out.printf("%-50s %8d %8d %8d %8d %10.1f%n",
-                species.length() > 50 ? species.substring(0, 47) + "..." : species,
-                count2023, count2024, count2025, total, average);
+            // Print row - simpler approach
+            System.out.printf("%-50s", species.length() > 50 ? species.substring(0, 47) + "..." : species);
+            for (int year : YEARS) {
+                System.out.printf("%9d", yearCounts.getOrDefault(year, 0));
+            }
+            System.out.printf("%9d%11.1f%n", total, average);
         }
 
         // Summary statistics
@@ -258,21 +276,32 @@ public class MultiYearBirdDataAggregator {
         int totalSpecies = totalAggregation.size();
         int totalSightings = totalAggregation.values().stream().mapToInt(Integer::intValue).sum();
 
-        System.out.printf("%-50s %8s %8s %8s %8d %10s%n", "GRAND TOTALS:", "", "", "", totalSightings, "");
-        System.out.printf("%-50s %8s %8s %8s %8d %10.1f%n", "UNIQUE SPECIES:", "", "", "", totalSpecies, totalSpecies / 3.0);
+        // Print totals row - simpler approach
+        System.out.print("GRAND TOTALS:");
+        for (int i = 0; i < YEARS.length; i++) {
+            System.out.print("         "); // 9 spaces
+        }
+        System.out.printf("%9d%11s%n", totalSightings, "");
+
+        // Print species row
+        System.out.print("UNIQUE SPECIES:");
+        for (int i = 0; i < YEARS.length; i++) {
+            System.out.print("         "); // 9 spaces
+        }
+        System.out.printf("%9d%11.1f%n", totalSpecies, totalSpecies / (double) YEARS.length);
 
         // Species appearing in all years
         long speciesInAllYears = speciesByYear.values().stream()
-            .filter(yearMap -> yearMap.size() == 3)
+            .filter(yearMap -> yearMap.size() == YEARS.length)
             .count();
 
         System.out.println();
         System.out.println("ADDITIONAL STATISTICS:");
         System.out.println("-".repeat(50));
-        System.out.printf("Species appearing in all 3 years: %d%n", speciesInAllYears);
+        System.out.printf("Species appearing in all %d years: %d%n", YEARS.length, speciesInAllYears);
         System.out.printf("Species appearing only once: %d%n",
             speciesByYear.values().stream().mapToInt(Map::size).filter(size -> size == 1).count());
-        System.out.printf("Average sightings per year: %,.1f%n", totalSightings / 3.0);
+        System.out.printf("Average sightings per year: %,.1f%n", totalSightings / (double) YEARS.length);
         System.out.println("=".repeat(100));
     }
 
