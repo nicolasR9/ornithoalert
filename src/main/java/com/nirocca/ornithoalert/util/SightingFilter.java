@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.nirocca.ornithoalert.model.Sighting;
+import com.nirocca.ornithoalert.model.SpeciesStatistic;
 
 public class SightingFilter {
     static final Set<String> SPECIES_TO_EXCLUDE = new HashSet<>(Arrays.asList(
@@ -63,6 +64,13 @@ public class SightingFilter {
             .collect(Collectors.toList());
     }
 
+    public static List<SpeciesStatistic> filterOutNonRelevantStatistics(List<SpeciesStatistic> statistics) {
+        return statistics.stream()
+            .filter(s -> s.count() > 0)
+            .filter(s -> !isWithCommonFilterPattern(s.germanName()))
+            .filter(s -> !SPECIES_TO_EXCLUDE.contains(s.germanName()))
+            .collect(Collectors.toList());
+    }
 
     private static boolean isWithCommonFilterPattern(String name) {
         return name.contains("unbestimmt")
