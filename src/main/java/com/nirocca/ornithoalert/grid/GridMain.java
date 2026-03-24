@@ -31,7 +31,7 @@ public class GridMain {
     private static final double LONGITUDE_DELTA_20_KM = 0.295272;
     private static final String SIGHTINGS_FILE ="/allDe.txt";
 
-    private static final int[] YEARS_IN_SIGHTINGS_FILE = {2022, 2023, 2024};
+    private static final int[] YEARS_IN_SIGHTINGS_FILE = {2023, 2024, 2025};
 
     public static void main(String[] args) throws IOException {
         List<Sighting> sightings = readSightings();
