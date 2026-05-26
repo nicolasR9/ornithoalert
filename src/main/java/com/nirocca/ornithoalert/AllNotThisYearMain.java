@@ -36,8 +36,12 @@ public class AllNotThisYearMain {
     }
 
     public List<SpeciesStatistic> readFilteredStatistics() throws IOException {
+        return readFilteredStatistics(STATISTICS_URL);
+    }
+
+    public List<SpeciesStatistic> readFilteredStatistics(String statisticsUrl) throws IOException {
         List<String> mySightedSpecies = mySightingsReader.readMySightedSpeciesLatinThisYear();
-        String html = pageReader.getPageContent(STATISTICS_URL);
+        String html = pageReader.getPageContent(statisticsUrl);
         List<SpeciesStatistic> allStatistics = parseStatistics(html);
 
         List<SpeciesStatistic> relevantStatistics = SightingFilter.filterOutNonRelevantStatistics(allStatistics);
