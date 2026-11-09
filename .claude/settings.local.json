@@ -15,7 +15,10 @@
       "Bash(mvn test -Dtest=MainIntegrationTest -X)",
       "Bash(mvn test -Dtest=MainIntegrationTest -q)",
       "Bash(mvn clean compile)",
-      "Bash(mvn test -q)"
+      "Bash(mvn test -q)",
+      "WebFetch(domain:www.ornitho.de)",
+      "Bash(mvn compile exec:java -Dexec.mainClass=\"com.nirocca.ornithoalert.MonthlyBirdDataAggregator\")",
+      "Bash(mvn compile exec:java -Dexec.mainClass=\"com.nirocca.ornithoalert.MultiYearBirdDataAggregator\")"
     ],
     "deny": [],
     "ask": []

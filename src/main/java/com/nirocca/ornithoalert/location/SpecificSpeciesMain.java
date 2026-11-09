@@ -1,14 +1,6 @@
 package com.nirocca.ornithoalert.location;
 
-import static com.nirocca.ornithoalert.Species.ALPENBRAUNELLE;
-import static com.nirocca.ornithoalert.Species.BARTGEIER;
-import static com.nirocca.ornithoalert.Species.GAENSEGEIER;
-import static com.nirocca.ornithoalert.Species.HASELHUHN;
 import static com.nirocca.ornithoalert.Species.SAATGANS__SSP__FABALIS___WALDSAATGANS;
-import static com.nirocca.ornithoalert.Species.SCHLANGENADLER;
-import static com.nirocca.ornithoalert.Species.STEINHUHN;
-import static com.nirocca.ornithoalert.Species.STEINROETEL;
-import static com.nirocca.ornithoalert.Species.ZITRONENZEISIG;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -37,12 +29,12 @@ import com.nirocca.ornithoalert.model.Sighting;
 
 public class SpecificSpeciesMain {
 
-    private static final String URL_TEMPLATE = "https://www.ornitho.de/index.php?m_id=94&p_c=duration&p_cc=202&sp_tg=1&sp_DChoice=range&sp_DFrom=01.01.2024&sp_DTo=31.12.2024&sp_DSeasonFromDay=1&sp_DSeasonFromMonth=1&sp_DSeasonToDay=31&sp_DSeasonToMonth=12&sp_DOffset=5&sp_SChoice=species&speciesFilter=&sp_S=53&sp_Cat%5Bnever%5D=1&sp_Cat%5Bveryrare%5D=1&sp_Cat%5Brare%5D=1&sp_Cat%5Bunusual%5D=1&sp_Family=1&sp_PChoice=canton&sp_cC=000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000&p_cc=202&sp_CommuneCounty=356&sp_Commune=12332&sp_Info=&sp_Polygon=&sp_PolygonSaveName=&sp_PolygonSaveRestoreID=&sp_AltitudeFrom=-19&sp_AltitudeTo=2962&sp_CommentValue=&sp_OnlyAH=0&sp_Ats=-00000&sp_project=&sp_OnlyStoc=&sp_frmListType=&sp_FChoice=list&sp_FDisplay=DATE_PLACE_SPECIES&sp_DFormat=DESC&sp_FOrderListSpecies=COUNT&sp_FListSpeciesChoice=DATA&sp_DateSynth=04.11.2024&sp_FOrderSynth=ALPHA&sp_FGraphChoice=DATA&sp_FGraphFormat=auto&sp_FAltScale=250&sp_FAltChoice=DATA&sp_FMapFormat=none&submit=Abfrage+starten";
-    private static final int[] yearsToCheck = {2020, 2021, 2022, 2023, 2024, 2024};
-    private static final String FROM_DATE = "01.12.";
-    private static final String TO_DATE = "31.01.";
+    private static final String URL_TEMPLATE = "https://www.ornitho.de/index.php?m_id=94&p_c=places&p_cc=217&sp_tg=1&sp_DChoice=range&sp_DFrom=02.06.2020&sp_DTo=02.06.2026&sp_DSeasonFromDay=1&sp_DSeasonFromMonth=1&sp_DSeasonToDay=31&sp_DSeasonToMonth=12&sp_DOffset=5&sp_SChoice=species&plan-vertical=AUTO&sp_S=19&sp_Cat%5Bnever%5D=1&sp_Cat%5Bveryrare%5D=1&sp_Cat%5Brare%5D=1&sp_Cat%5Bunusual%5D=1&sp_Family=1&sp_PChoice=canton&sp_cC=000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000&p_cc=217&sp_CommuneCounty=356&sp_Commune=12332&sp_Info=&sp_Polygon=&sp_PolygonSaveName=&sp_PolygonSaveRestoreID=&sp_AltitudeFrom=-19&sp_AltitudeTo=2962&sp_CommentValue=&sp_OnlyAH=0&sp_Ats=-00000&sp_project=&sp_OnlyStoc=&sp_frmListType=&sp_FChoice=list&sp_FDisplay=DATE_PLACE_SPECIES&sp_DFormat=DESC&sp_FOrderListSpecies=ALPHA&sp_FListSpeciesChoice=DATA&sp_DateSynth=02.06.2026&sp_FOrderSynth=ALPHA&sp_FGraphChoice=DATA&sp_FGraphFormat=auto&sp_FAltScale=250&sp_FAltChoice=DATA&sp_FMapFormat=none&submit=Abfrage+starten";
+    private static final int[] yearsToCheck = {2020, 2021, 2022, 2023, 2024, 2025};
+    private static final String FROM_DATE = "19.10.";
+    private static final String TO_DATE = "10.11.";
 
-    private static final Species[] SPECIES = {
+    private static final Species[] SPECIES1 = {
         /*PRACHTEIDERENTE,
         BERGHAENFLING,
         ZWERGSCHWAN,
@@ -55,18 +47,16 @@ public class SpecificSpeciesMain {
         SAATGANS__SSP__FABALIS___WALDSAATGANS
         };
 
-    private static final Species[] SPECIES1 = {
-        HASELHUHN,
-        ALPENBRAUNELLE,
-        GAENSEGEIER,
-        BARTGEIER,
-        ZITRONENZEISIG,
-        STEINHUHN,
-        STEINROETEL,
-        SCHLANGENADLER
+    private static final Species[] SPECIES = {
+        Species.SPORNAMMER,
+        Species.GOLDHAEHNCHEN_LAUBSAENGER,
+        Species.TIENSCHAN_LAUBSAENGER,
+        Species.WALDPIEPER,
+        Species.SPORNPIEPER,
+        Species.DUNKELLAUBSAENGER
     };
 
-    private static final boolean separateFiles = false;
+    private static final boolean separateFiles = true;
 
     private static final String PATH_TO_COORDS_DIR = Constants.OUTPUT_DIR + "specificSpecies/";
 
@@ -78,7 +68,7 @@ public class SpecificSpeciesMain {
 
 
         for (Species species: SPECIES) {
-            Stats stats = new Stats();
+            Stats stats = new Stats(yearsToCheck.length);
             if (separateFiles) {
                 sightings = new ArrayList<>();
             }
@@ -147,7 +137,11 @@ public class SpecificSpeciesMain {
 }
 
 class Stats {
-    private final int[] counts = new int[5];
+    private final int[] counts;
+
+    public Stats(int count) {
+        counts = new int[count];
+    }
 
     public void add(int v, int index) {
         counts[index] = v;

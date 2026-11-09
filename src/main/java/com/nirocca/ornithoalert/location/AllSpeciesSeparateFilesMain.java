@@ -23,11 +23,11 @@ import com.nirocca.ornithoalert.model.Sighting;
 
 public class AllSpeciesSeparateFilesMain {
 
-    private static final String URL_TEMPLATE = "https://www.ornitho.de/index.php?m_id=94&p_c=places&p_cc=200&sp_tg=1&sp_DChoice=range&sp_DFrom=01.08.2025&sp_DTo=01.08.2025&sp_DSeasonFromDay=1&sp_DSeasonFromMonth=1&sp_DSeasonToDay=31&sp_DSeasonToMonth=12&sp_DOffset=5&sp_SChoice=all&speciesFilter=&sp_S=1148&sp_Cat%5Bnever%5D=1&sp_Cat%5Bveryrare%5D=1&sp_Cat%5Brare%5D=1&sp_Cat%5Bunusual%5D=1&sp_Family=1&sp_PChoice=canton&sp_cC=000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100010000000000000000000000000000000000000000000&p_cc=200&sp_CommuneCounty=356&sp_Commune=12332&sp_Info=&sp_Polygon=&sp_PolygonSaveName=&sp_PolygonSaveRestoreID=&sp_AltitudeFrom=-19&sp_AltitudeTo=2962&sp_CommentValue=&sp_OnlyAH=0&sp_Ats=-00000&sp_project=&sp_OnlyStoc=&sp_frmListType=&sp_FChoice=list&sp_FDisplay=DATE_PLACE_SPECIES&sp_DFormat=DESC&sp_FOrderListSpecies=ALPHA&sp_FListSpeciesChoice=DATA&sp_DateSynth=02.06.2025&sp_FOrderSynth=ALPHA&sp_FGraphChoice=DATA&sp_FGraphFormat=auto&sp_FAltScale=250&sp_FAltChoice=DATA&sp_FMapFormat=none&submit=Abfrage+starten";
-    private static final int[] yearsToCheck = {2022, 2023, 2024};
-    private static final String FROM_DATE = "20.10.";
+    private static final String URL_TEMPLATE = "https://www.ornitho.de/index.php?m_id=94&p_c=places&p_cc=217&sp_tg=1&sp_DChoice=range&sp_DFrom=01.08.2025&sp_DTo=01.08.2025&sp_DSeasonFromDay=1&sp_DSeasonFromMonth=1&sp_DSeasonToDay=31&sp_DSeasonToMonth=12&sp_DOffset=5&sp_SChoice=all&plan-vertical=AUTO&sp_S=%28items%29+%3D%3E+items.length+%3E+0+%3F+items%5B0%5D.id+%3A+undefined&sp_Cat%5Bnever%5D=1&sp_Cat%5Bveryrare%5D=1&sp_Cat%5Brare%5D=1&sp_Cat%5Bunusual%5D=1&sp_Family=1&sp_PChoice=canton&sp_cC=000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000&p_cc=217&sp_CommuneCounty=356&sp_Commune=12332&sp_Info=&sp_Polygon=&sp_PolygonSaveName=&sp_PolygonSaveRestoreID=&sp_AltitudeFrom=-19&sp_AltitudeTo=2962&sp_CommentValue=&sp_OnlyAH=0&sp_Ats=-00000&sp_project=&sp_OnlyStoc=&sp_frmListType=&sp_FChoice=list&sp_FDisplay=DATE_PLACE_SPECIES&sp_DFormat=DESC&sp_FOrderListSpecies=ALPHA&sp_FListSpeciesChoice=DATA&sp_DateSynth=02.06.2025&sp_FOrderSynth=ALPHA&sp_FGraphChoice=DATA&sp_FGraphFormat=auto&sp_FAltScale=250&sp_FAltChoice=DATA&sp_FMapFormat=none&submit=Abfrage+starten";
+    private static final int[] yearsToCheck = {2021, 2022, 2023, 2024, 2025};
+    private static final String FROM_DATE = "19.10.";
     //private static final String FROM_DATE = "01.08.";
-    private static final String TO_DATE = "02.11.";
+    private static final String TO_DATE = "10.11.";
 
     private static final String PATH_TO_COORDS_DIR = Constants.OUTPUT_DIR + "/allSpeciesSeparateFiles/";
 
@@ -35,12 +35,12 @@ public class AllSpeciesSeparateFilesMain {
         CoordinatesExporter coordinatesExporter = new CoordinatesExporter();
 
         Set<Species> exclude = Set.of(
-            Species.HERINGSMOEWE,
-            Species.SILBERMOEWE,
-            Species.ALPENSTRANDLAEUFER,
-            Species.AUSTERNFISCHER,
-            Species.ROTSCHENKEL,
-            Species.PFUHLSCHNEPFE
+            Species.SPORNAMMER,
+            Species.GOLDHAEHNCHEN_LAUBSAENGER,
+            Species.TIENSCHAN_LAUBSAENGER,
+            Species.WALDPIEPER,
+            Species.SPORNPIEPER,
+            Species.DUNKELLAUBSAENGER
         );
 
         List<Sighting> sightings = new ArrayList<>();
