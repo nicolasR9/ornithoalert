@@ -14,6 +14,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.nirocca.ornithoalert.model.SpeciesStatistic;
 import com.nirocca.ornithoalert.util.SightingFilter;
 import org.apache.commons.io.IOUtils;
 
@@ -21,6 +22,16 @@ public class StatisticsCalculator {
 
     private static final int MY_FIRST_SIGHTING_YEAR = 2017;
     private static final int MAX_SPECIES_PRINT = 25;
+
+    public static List<SpeciesStatistic> filterOutAlreadySightedSpecies(List<SpeciesStatistic> statistics)
+        throws IOException {
+        Set<String> mySightedLatinNames = readMySightings().stream()
+            .map(s -> s.getSpecies().getLatinName())
+            .collect(Collectors.toSet());
+        return statistics.stream()
+            .filter(s -> !mySightedLatinNames.contains(s.latinName()))
+            .collect(Collectors.toList());
+    }
 
     public static List<Sighting> readMySightings() throws IOException {
         List<String> lines = IOUtils.readLines(

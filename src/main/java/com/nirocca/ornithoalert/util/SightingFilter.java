@@ -12,6 +12,7 @@ import com.nirocca.ornithoalert.model.SpeciesStatistic;
 public class SightingFilter {
     static final Set<String> SPECIES_TO_EXCLUDE = new HashSet<>(Arrays.asList(
         "Keine Art",
+        "Art nicht in der Liste",
         "Gimpel (ssp. pyrrhula), Trompetergimpel",
         "Bläss- / Saatgänse",
         "Bläss-_oder_Saatgans",
@@ -56,6 +57,12 @@ public class SightingFilter {
         .collect(Collectors.toList());
     }
 
+    public static List<SpeciesStatistic> filterOutSubSpecies(List<SpeciesStatistic> statistics) {
+        return statistics.stream()
+        .filter(s -> !s.germanName().contains("ssp."))
+        .collect(Collectors.toList());
+    }
+
     public static List<com.nirocca.ornithoalert.statistics.Sighting> filterOutNonRelevantSightingsStats(List<com.nirocca.ornithoalert.statistics.Sighting> sightings) {
         return sightings.stream()
             .filter(a -> !a.isZeroCount())
@@ -74,6 +81,8 @@ public class SightingFilter {
 
     private static boolean isWithCommonFilterPattern(String name) {
         return name.contains("unbestimmt")
+            || name.endsWith(" sp.")
+            || name.contains(" / ")
             || name.contains("- / ")
             || name.contains("_oder_")
             || name.contains("_x_")

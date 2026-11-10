@@ -41,14 +41,16 @@ public class AllNotThisYearMain {
 
     public List<SpeciesStatistic> readFilteredStatistics(String statisticsUrl) throws IOException {
         List<String> mySightedSpecies = mySightingsReader.readMySightedSpeciesLatinThisYear();
-        String html = pageReader.getPageContent(statisticsUrl);
-        List<SpeciesStatistic> allStatistics = parseStatistics(html);
-
-        List<SpeciesStatistic> relevantStatistics = SightingFilter.filterOutNonRelevantStatistics(allStatistics);
+        List<SpeciesStatistic> relevantStatistics = SightingFilter.filterOutNonRelevantStatistics(readStatistics(statisticsUrl));
 
         return relevantStatistics.stream()
             .filter(stat -> !mySightedSpecies.contains(stat.latinName()))
             .toList();
+    }
+
+    public List<SpeciesStatistic> readStatistics(String statisticsUrl) throws IOException {
+        String html = pageReader.getPageContent(statisticsUrl);
+        return parseStatistics(html);
     }
 
     private List<SpeciesStatistic> parseStatistics(String html) {

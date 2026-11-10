@@ -1,56 +1,6 @@
 package com.nirocca.ornithoalert.grid;
 
-import static com.nirocca.ornithoalert.Species.ADLERBUSSARD;
-import static com.nirocca.ornithoalert.Species.ATLANTIKSTURMTAUCHER;
-import static com.nirocca.ornithoalert.Species.BARTGEIER;
-import static com.nirocca.ornithoalert.Species.BINDENKREUZSCHNABEL;
-import static com.nirocca.ornithoalert.Species.BLAURACKE;
-import static com.nirocca.ornithoalert.Species.BLAUSCHWANZ;
-import static com.nirocca.ornithoalert.Species.BRILLENGRASMUECKE;
-import static com.nirocca.ornithoalert.Species.BUSCHROHRSAENGER;
-import static com.nirocca.ornithoalert.Species.DOPPELSCHNEPFE;
-import static com.nirocca.ornithoalert.Species.DUNKELLAUBSAENGER;
-import static com.nirocca.ornithoalert.Species.EISMOEWE;
-import static com.nirocca.ornithoalert.Species.GAENSEGEIER;
-import static com.nirocca.ornithoalert.Species.GELBSCHNABELTAUCHER;
-import static com.nirocca.ornithoalert.Species.GOLDHAEHNCHEN_LAUBSAENGER;
-import static com.nirocca.ornithoalert.Species.GRASLAEUFER;
-import static com.nirocca.ornithoalert.Species.HABICHTSKAUZ;
-import static com.nirocca.ornithoalert.Species.HASELHUHN;
-import static com.nirocca.ornithoalert.Species.ISABELLSTEINSCHMAETZER;
-import static com.nirocca.ornithoalert.Species.ISABELLWUERGER;
-import static com.nirocca.ornithoalert.Species.KANADAPFEIFENTE;
-import static com.nirocca.ornithoalert.Species.KIEFERNKREUZSCHNABEL;
-import static com.nirocca.ornithoalert.Species.PAPAGEITAUCHER;
-import static com.nirocca.ornithoalert.Species.PRACHTEIDERENTE;
-import static com.nirocca.ornithoalert.Species.RALLENREIHER;
-import static com.nirocca.ornithoalert.Species.RINGSCHNABELMOEWE;
-import static com.nirocca.ornithoalert.Species.ROETELSCHWALBE;
-import static com.nirocca.ornithoalert.Species.ROSENSTAR;
-import static com.nirocca.ornithoalert.Species.ROTFLUEGEL_BRACHSCHWALBE;
-import static com.nirocca.ornithoalert.Species.SCHELLADLER;
-import static com.nirocca.ornithoalert.Species.SCHLANGENADLER;
-import static com.nirocca.ornithoalert.Species.SCHWALBENMOEWE;
-import static com.nirocca.ornithoalert.Species.SCHWARZFLUEGEL_BRACHSCHWALBE;
-import static com.nirocca.ornithoalert.Species.SEGGENROHRSAENGER;
-import static com.nirocca.ornithoalert.Species.SPATELRAUBMOEWE;
-import static com.nirocca.ornithoalert.Species.SPERBEREULE;
-import static com.nirocca.ornithoalert.Species.SPORNAMMER;
-import static com.nirocca.ornithoalert.Species.SPORNPIEPER;
-import static com.nirocca.ornithoalert.Species.STEINHUHN;
-import static com.nirocca.ornithoalert.Species.STEINROETEL;
-import static com.nirocca.ornithoalert.Species.TEREKWASSERLAEUFER;
-import static com.nirocca.ornithoalert.Species.TIENSCHAN_LAUBSAENGER;
-import static com.nirocca.ornithoalert.Species.TRIEL;
-import static com.nirocca.ornithoalert.Species.WALDPIEPER;
-import static com.nirocca.ornithoalert.Species.WEISSKOPF_RUDERENTE;
-import static com.nirocca.ornithoalert.Species.WELLENLAEUFER;
-import static com.nirocca.ornithoalert.Species.ZISTENSAENGER;
-import static com.nirocca.ornithoalert.Species.ZITRONENSTELZE;
-import static com.nirocca.ornithoalert.Species.ZWERGADLER;
-import static com.nirocca.ornithoalert.Species.ZWERGKANADAGANS;
-import static com.nirocca.ornithoalert.Species.ZWERGOHREULE;
-import static com.nirocca.ornithoalert.Species.ZWERGSUMPFHUHN;
+import static com.nirocca.ornithoalert.Species.*;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -68,62 +18,173 @@ import org.apache.commons.io.FileUtils;
 
 public class CreateAllDeFile {
 
-    private static final String URL_TEMPLATE = "https://www.ornitho.de/index.php?m_id=94&p_c=places&p_cc=216&sp_tg=1&sp_DChoice=range&sp_DFrom=18.10.2022&sp_DTo=18.10.2022&sp_DSeasonFromDay=1&sp_DSeasonFromMonth=1&sp_DSeasonToDay=31&sp_DSeasonToMonth=12&sp_DOffset=5&sp_SChoice=species&speciesFilter=Fichtenkr&sp_S=515&sp_Cat%5Bnever%5D=1&sp_Cat%5Bveryrare%5D=1&sp_Cat%5Brare%5D=1&sp_Cat%5Bunusual%5D=1&sp_Cat%5Bescaped%5D=1&sp_Cat%5Bcommon%5D=1&sp_Family=1&sp_PChoice=canton&sp_cC=1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111110000000000&p_cc=216&sp_CommuneCounty=356&sp_Commune=12332&sp_Info=&sp_Polygon=&sp_PolygonSaveName=&sp_PolygonSaveRestoreID=&sp_AltitudeFrom=-19&sp_AltitudeTo=2962&sp_CommentValue=&sp_OnlyAH=0&sp_Ats=-00000&sp_project=&sp_OnlyStoc=&sp_frmListType=&sp_FChoice=list&sp_FDisplay=DATE_PLACE_SPECIES&sp_DFormat=DESC&sp_FOrderListSpecies=ALPHA&sp_FListSpeciesChoice=DATA&sp_DateSynth=24.08.2022&sp_FOrderSynth=ALPHA&sp_FGraphChoice=DATA&sp_FGraphFormat=auto&sp_FAltScale=250&sp_FAltChoice=DATA&sp_FMapFormat=none&submit=Abfrage+starten";
+    private static final String URL_TEMPLATE = "https://www.ornitho.de/index.php?m_id=94&p_c=places&p_cc=216&sp_tg=1&sp_DChoice=range&sp_DFrom=18.10.2022&sp_DTo=18.10.2022&sp_DSeasonFromDay=1&sp_DSeasonFromMonth=1&sp_DSeasonToDay=31&sp_DSeasonToMonth=12&sp_DOffset=5&sp_SChoice=species&speciesFilter=Fichtenkr&sp_S=515&sp_Cat%5Bnever%5D=1&sp_Cat%5Bveryrare%5D=1&sp_Cat%5Brare%5D=1&sp_Cat%5Bunusual%5D=1&sp_Cat%5Bescaped%5D=1&sp_Cat%5Bcommon%5D=1&sp_Family=1&sp_PChoice=canton&sp_cC=1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111110000000000&p_cc=216&sp_CommuneCounty=356&sp_Commune=12332&sp_Info=&sp_Polygon=&sp_PolygonSaveName=&sp_PolygonSaveRestoreID=&sp_AltitudeFrom=-19&sp_AltitudeTo=2962&sp_CommentValue=&sp_OnlyAH=0&sp_Ats=-00000&sp_project=&sp_OnlyStoc=&sp_frmListType=&sp_FChoice=list&sp_FDisplay=DATE_PLACE_SPECIES&sp_DFormat=DESC&sp_FOrderListSpecies=ALPHA&sp_FListSpeciesChoice=DATA&sp_DateSynth=24.08.2022&sp_FOrderSynth=ALPHA&sp_FGraphChoice=DATA&sp_FGraphFormat=auto&sp_FAltScale=250&sp_FAltChoice=DATA&sp_FMapFormat=none&submit=Abfrage+starten";
     private static final String FROM_DATE = "01.01.2023";
     private static final String TO_DATE = "31.08.2026";
     private static final File OUT_FILE = new File("src/main/resources/allDe_new.txt");
 
+    //Generated by RareSpeciesAnalysisMain: rare species not yet sighted, sorted alphabetically.
+    //The comment is the sighting count of the last 5 years in Germany (categories never/veryrare/rare)
+    //and in how many of the last 5 calendar years the species was sighted.
     private static final Species[] SPECIES = {
-            ADLERBUSSARD,
-            ATLANTIKSTURMTAUCHER,
-            BARTGEIER,
-            BINDENKREUZSCHNABEL,
-            BLAURACKE,
-            BRILLENGRASMUECKE,
-            BUSCHROHRSAENGER,
-            DOPPELSCHNEPFE,
-            DUNKELLAUBSAENGER,
-            EISMOEWE,
-            GAENSEGEIER,
-            GELBSCHNABELTAUCHER,
-            GOLDHAEHNCHEN_LAUBSAENGER,
-            GRASLAEUFER,
-            HABICHTSKAUZ,
-            HASELHUHN,
-            ISABELLSTEINSCHMAETZER,
-            ISABELLWUERGER,
-            KANADAPFEIFENTE,
-            KIEFERNKREUZSCHNABEL,
-            PAPAGEITAUCHER,
-            PRACHTEIDERENTE,
-            RALLENREIHER,
-            RINGSCHNABELMOEWE,
-            ROETELSCHWALBE,
-            ROSENSTAR,
-            SCHWARZFLUEGEL_BRACHSCHWALBE,
-            ROTFLUEGEL_BRACHSCHWALBE,
-            SCHELLADLER,
-            SCHLANGENADLER,
-            SEGGENROHRSAENGER,
-            SPATELRAUBMOEWE,
-            SPERBEREULE,
-            SPORNAMMER,
-            SPORNPIEPER,
-            STEINHUHN,
-            STEINROETEL,
-            TEREKWASSERLAEUFER,
-            TIENSCHAN_LAUBSAENGER,
-            TRIEL,
-            WALDPIEPER,
-            WEISSKOPF_RUDERENTE,
-            WELLENLAEUFER,
-            ZISTENSAENGER,
-            ZITRONENSTELZE,
-            ZWERGADLER,
-            ZWERGKANADAGANS,
-            ZWERGOHREULE,
-            ZWERGSUMPFHUHN,
+            ADLERBUSSARD, // 615, 5/5 years
+            ATLANTIKSTURMTAUCHER, // 319, 5/5 years
+            BAIRDSTRANDLAEUFER, // 164, 1/5 years
+            BALEARENSTURMTAUCHER, // 18, 4/5 years
+            BALKANSTEINSCHMAETZER, // 28, 2/5 years
+            BARTGEIER, // 631, 5/5 years
+            BARTLAUBSAENGER, // 111, 4/5 years
+            BINDENKREUZSCHNABEL, // 17, 1/5 years
+            BLASSSPOETTER, // 49, 1/5 years
+            BLAUFLUEGELENTE, // 165, 4/5 years
+            BLAURACKE, // 363, 5/5 years
+            BONAPARTEMOEWE, // 93, 4/5 years
+            BRILLENENTE, // 114, 4/5 years
+            BUSCHROHRSAENGER, // 1296, 5/5 years
+            BUSCHSPOETTER, // 53, 3/5 years
+            CAROLINAKRICKENTE, // 733, 5/5 years
+            DOPPELSCHNEPFE, // 357, 5/5 years
+            DUENNSCHNABELMOEWE, // 111, 2/5 years
+            DUNKELLAUBSAENGER, // 448, 5/5 years
+            EISMOEWE, // 689, 5/5 years
+            FAHLSEGLER, // 272, 5/5 years
+            FELDROHRSAENGER, // 35, 4/5 years
+            FICHTENAMMER, // 143, 2/5 years
+            FISCHMOEWE, // 14, 3/5 years
+            GAENSEGEIER, // 904, 5/5 years
+            GARTENSPOTTDROSSEL, // 734, 2/5 years
+            GELBSCHNABELTAUCHER, // 391, 5/5 years
+            GERFALKE, // 17, 4/5 years
+            GLUCKENTE, // 60, 4/5 years
+            GOLDHAEHNCHEN_LAUBSAENGER, // 1558, 5/5 years
+            GRASLAEUFER, // 436, 5/5 years
+            HABICHTSADLER, // 22, 1/5 years
+            HASELHUHN, // 284, 5/5 years
+            HOECKERGANS, // 3235, 5/5 years (all categories)
+            HOECKERSAMTENTE, // 90, 1/5 years
+            IBERIEN_BARTGRASMUECKE, // 181, 4/5 years
+            ISABELLSPOETTER, // 81, 1/5 years
+            ISABELLSTEINSCHMAETZER, // 456, 4/5 years
+            ISABELLWUERGER, // 331, 4/5 years
+            JUNGFERNKRANICH, // 18, 3/5 years
+            KALANDERLERCHE, // 133, 1/5 years
+            KAMTSCHATKASAMTENTE, // 19, 2/5 years
+            KANADAPFEIFENTE, // 338, 4/5 years
+            KAPPENAMMER, // 141, 3/5 years
+            KIEFERNKREUZSCHNABEL, // 497, 5/5 years
+            KLEINER_GELBSCHENKEL, // 556, 4/5 years
+            KLEINE_BERGENTE, // 1078, 5/5 years
+            KORALLENMOEWE, // 38, 5/5 years
+            MARISKENROHRSAENGER, // 370, 4/5 years
+            MARMELENTE, // 177, 4/5 years
+            MOENCHSGEIER, // 329, 4/5 years
+            NONNENSTEINSCHMAETZER, // 136, 4/5 years
+            ORIENTBRACHSCHWALBE, // 278, 0/5 years
+            ORIENTTURTELTAUBE, // 182, 2/5 years
+            ORPHEUSGRASMUECKE, // 404, 1/5 years
+            PALLASSCHWARZKEHLCHEN, // 144, 5/5 years
+            PAPAGEITAUCHER, // 404, 5/5 years
+            PAZIFIKTRAUERENTE, // 215, 5/5 years
+            POLARBIRKENZEISIG, // 25, 3/5 years
+            PRACHTEIDERENTE, // 372, 5/5 years
+            PRAERIEMOEWE, // 146, 2/5 years
+            PRAERIE_GOLDREGENPFEIFER, // 33, 4/5 years
+            PURPURHUHN, // 94, 0/5 years
+            RALLENREIHER, // 1000, 5/5 years
+            RINGSCHNABELMOEWE, // 134, 5/5 years
+            ROETELSCHWALBE, // 241, 5/5 years
+            ROSAPELIKAN, // 148, 5/5 years
+            ROSENMOEWE, // 160, 2/5 years
+            ROSENSTAR, // 502, 5/5 years
+            ROTBRUSTKLEIBER, // 314, 1/5 years
+            ROTFLUEGEL_BRACHSCHWALBE, // 417, 5/5 years
+            RUBINKEHLCHEN, // 317, 1/5 years
+            SAMTKOPF_GRASMUECKE, // 211, 3/5 years
+            SANDSTRANDLAEUFER, // 18, 1/5 years
+            SCHECKENTE, // 172, 2/5 years
+            SCHELLADLER, // 111, 4/5 years
+            SCHLANGENADLER, // 1684, 5/5 years
+            SCHWARZBRAUENALBATROS, // 11, 2/5 years
+            SCHWARZFLUEGEL_BRACHSCHWALBE, // 686, 5/5 years
+            SCHWARZSTIRNWUERGER, // 111, 4/5 years
+            SEGGENROHRSAENGER, // 50, 5/5 years
+            SICHELENTE, // 623, 3/5 years
+            SPATELRAUBMOEWE, // 977, 5/5 years
+            SPERBEREULE, // 394, 1/5 years
+            SPITZSCHWANZ_STRANDLAEUFER, // 140, 1/5 years
+            SPORNAMMER, // 775, 5/5 years
+            SPORNPIEPER, // 822, 5/5 years
+            STEINHUHN, // sensitive species, sightings not public (all-time: 3)
+            STEINROETEL, // 105, 4/5 years
+            STEJNEGERSCHWARZKEHLCHEN, // 395, 1/5 years
+            STEPPENPIEPER, // 341, 2/5 years
+            STREIFENSCHWIRL, // 54, 3/5 years
+            STURMSCHWALBE, // 24, 5/5 years
+            TAIGASCHNAEPFER, // 219, 1/5 years
+            TEREKWASSERLAEUFER, // 266, 5/5 years
+            TIENSCHAN_LAUBSAENGER, // 1371, 5/5 years
+            TRIEL, // 359, 5/5 years
+            TRUTHUHN, // 83, 5/5 years (all categories)
+            TSCHUKTSCHENSTELZE, // 355, 2/5 years
+            TUNDRA_GOLDREGENPFEIFER, // 361, 5/5 years
+            WACHOLDERLAUBSAENGER, // 12, 1/5 years
+            WALDAMMER, // 753, 4/5 years
+            WALDPIEPER, // 2065, 5/5 years
+            WANDERLAUBSAENGER, // 87, 2/5 years
+            WEISSBUERZEL_STRANDLAEUFER, // 343, 4/5 years
+            WEISSKOPF_RUDERENTE, // 471, 5/5 years
+            WEISSSCHWANZKIEBITZ, // 70, 1/5 years
+            WELLENLAEUFER, // 477, 5/5 years
+            WUESTENREGENPFEIFER, // 94, 3/5 years
+            WUESTENSTEINSCHMAETZER, // 500, 5/5 years
+            ZISTENSAENGER, // 641, 5/5 years
+            ZITRONENSTELZE, // 940, 5/5 years
+            ZWERGADLER, // 194, 5/5 years
+            ZWERGKANADAGANS, // 1582, 5/5 years
+            ZWERGOHREULE, // sensitive species, sightings not public (all-time: 40)
+            ZWERGSCHNEEGANS, // 115, 3/5 years
+            ZWERGSUMPFHUHN, // 243, 4/5 years
     };
+
+    //Unsighted rare species with fewer than 10:
+        // AZTEKENMOEWE: 4, 3/5 years
+        // BALKANLAUBSAENGER: 7, 0/5 years
+        // BERGBRAUNELLE: 2, 0/5 years
+        // BINDENSTRANDLAEUFER: 8, 2/5 years
+        // BLAUWANGENSPINT: 2, 1/5 years
+        // BRAUNKOPF_KUHSTAERLING: 1, 1/5 years
+        // BRAUNWUERGER: 1, 0/5 years
+        // BUNTFUSS_STURMSCHWALBE: 1, 1/5 years
+        // ELEONORENFALKE: 3, 1/5 years
+        // ERDDROSSEL: 1, 1/5 years
+        // FELSENTAUBE: 2, 1/5 years
+        // GROSSER_KNUTT: 1, 1/5 years
+        // HAEHERKUCKUCK: 5, 1/5 years
+        // HAUSSEGLER: 1, 0/5 years
+        // ISABELLWUERGER__SSP__PHOENICUROIDES___ROTSCHWANZWUERGER: 3, 1/5 years
+        // KRAUSKOPFPELIKAN: 6, 2/5 years
+        // MAURENSTEINSCHMAETZER: 1, 0/5 years
+        // MIDDENDORFFLAUBSAENGER: 1, 1/5 years
+        // PAZIFIKSEGLER: 2, 1/5 years
+        // PETSCHORAPIEPER: 4, 1/5 years
+        // ROETELFALKE: 8, 3/5 years
+        // ROETELPELIKAN: 3, 1/5 years
+        // ROSENSEESCHWALBE: 2, 1/5 years
+        // ROTAUGENVIREO: 5, 0/5 years
+        // SCHMUTZGEIER: 6, 3/5 years
+        // SCHNEEEULE: 4, 2/5 years
+        // SCHWARZKEHLDROSSEL: 2, 1/5 years
+        // SEPIASTURMTAUCHER: 3, 2/5 years
+        // STEPPENADLER: 4, 1/5 years
+        // WEIDENMEISE: 1, 1/5 years
+        // WEIDENSPERLING: 2, 1/5 years
+        // WEISSBAUCHTOELPEL: 7, 1/5 years
+        // WEISSBRAUENDROSSEL: 2, 1/5 years
+        // WEISSBUERZELSEGLER: 3, 1/5 years
+        // WUESTENGIMPEL: 1, 1/5 years
+        // ZWERGDROSSEL: 1, 1/5 years
+        // ZWERGKANADAGANS: 1582, 5/5 years
+        // ZWERGTRAPPE: 3, 2/5 years
 
 
 
