@@ -2,8 +2,10 @@ package com.nirocca.ornithoalert;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Properties;
 
 import com.nirocca.ornithoalert.model.Sighting;
 import com.nirocca.ornithoalert.util.GpsVisualizerUploader;
@@ -27,17 +29,29 @@ public class LiferMapMain {
         String mapUrl = new GpsVisualizerUploader().upload(output.toString(StandardCharsets.UTF_8));
         System.out.println("Map URL: " + mapUrl);
 
-        if (!Constants.LIFER_MAP_UPDATE_URL.isEmpty() && !Constants.LIFER_MAP_AUTH_TOKEN.isEmpty()) {
-            pushMapUrl(mapUrl);
+        if (!Constants.LIFER_MAP_UPDATE_URL.isEmpty() && !authToken().isEmpty()) {
+            pushMapUrl(mapUrl, authToken());
         } else {
-            System.out.println("Constants.LIFER_MAP_UPDATE_URL / LIFER_MAP_AUTH_TOKEN not set, skipping push to ornitho-service.");
+            System.out.println("Constants.LIFER_MAP_UPDATE_URL or lifermap.properties token not set, skipping push to ornitho-service.");
         }
     }
 
-    private static void pushMapUrl(String mapUrl) throws IOException {
+    // token lives in the gitignored classpath file lifermap.properties (like cookies.txt)
+    private static String authToken() throws IOException {
+        try (InputStream in = LiferMapMain.class.getResourceAsStream("/lifermap.properties")) {
+            if (in == null) {
+                return "";
+            }
+            Properties properties = new Properties();
+            properties.load(in);
+            return properties.getProperty("lifermap.auth.token", "");
+        }
+    }
+
+    private static void pushMapUrl(String mapUrl, String authToken) throws IOException {
         HttpClient client = HttpClientBuilder.create().build();
         ClassicHttpRequest request = ClassicRequestBuilder.post(Constants.LIFER_MAP_UPDATE_URL)
-                .setHeader("X-Auth-Token", Constants.LIFER_MAP_AUTH_TOKEN)
+                .setHeader("X-Auth-Token", authToken)
                 .setEntity(new StringEntity(mapUrl, ContentType.TEXT_PLAIN))
                 .build();
         String response = client.execute(request, r -> EntityUtils.toString(r.getEntity(), StandardCharsets.UTF_8));

@@ -16,3 +16,5 @@ log/
 target/
 
 src/main/resources/cookies.txt
+
+src/main/resources/lifermap.properties
