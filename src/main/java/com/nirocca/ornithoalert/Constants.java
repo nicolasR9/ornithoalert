@@ -6,6 +6,9 @@ import java.util.Map;
 public class Constants {
 
     public static final String OUTPUT_DIR = "/Users/nicolas.rocca/tmp/ornithoalert/";
+    // endpoint of ornitho-service that stores the current lifer map url, empty to skip the push
+    public static final String LIFER_MAP_UPDATE_URL = "";
+    public static final String LIFER_MAP_AUTH_TOKEN = "";
     static final SortBy DEFAULT_SORT_ORDER = SortBy.SPECIES;
     static final OrnithoUrl DEFAULT_URL = OrnithoUrl.GROSSRAUM_LAST_8_DAYS;
     
